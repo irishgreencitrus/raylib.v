@@ -45,7 +45,8 @@ fn main(){
 - [x] Support most common raylib.h functions
 - [ ] Support all raylib.h functions
 - [x] Support all raylib.h types
-- [ ] Support all raylib.h enums
+- [x] Support all raylib.h enums
+- [ ] Add in #defines
 - [ ] Fully complete raylib.h wrapper
 - [ ] raylib.v documentation
 - [ ] All core examples

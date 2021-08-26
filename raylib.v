@@ -1,5 +1,347 @@
 module raylibv
 
+pub enum ConfigFlags {
+	flag_vsync_hint = 0x00000040
+	flag_fullscreen_mode = 0x00000002
+	flag_window_resizable = 0x00000004
+	flag_window_undecorated = 0x00000008
+	flag_window_hidden = 0x00000080
+	flag_window_minimized = 0x00000200
+	flag_window_maximized = 0x00000400
+	flag_window_unfocused = 0x00000800
+	flag_window_topmost = 0x00001000
+	flag_window_always_run = 0x00000100
+	flag_window_transparent = 0x00000010
+	flag_window_highdpi = 0x00002000
+	flag_msaa_4x_hint = 0x00000020
+	flag_interlaced_hint = 0x00010000
+}
+
+pub enum TraceLogLevel {
+	log_all = 0
+	log_trace
+	log_debug
+	log_info
+	log_warning
+	log_error
+	log_fatal
+	log_none
+}
+
+pub enum KeyboardKey {
+	key_null = 0
+	key_apostrophe = 39
+	key_comma = 44
+	key_minus = 45
+	key_period = 46
+	key_slash = 47
+	key_zero = 48
+	key_one = 49
+	key_two = 50
+	key_three = 51
+	key_four = 52
+	key_five = 53
+	key_six = 54
+	key_seven = 55
+	key_eight = 56
+	key_nine = 57
+	key_semicolon = 59
+	key_equal = 61
+	key_a = 65
+	key_b = 66
+	key_c = 67
+	key_d = 68
+	key_e = 69
+	key_f = 70
+	key_g = 71
+	key_h = 72
+	key_i = 73
+	key_j = 74
+	key_k = 75
+	key_l = 76
+	key_m = 77
+	key_n = 78
+	key_o = 79
+	key_p = 80
+	key_q = 81
+	key_r = 82
+	key_s = 83
+	key_t = 84
+	key_u = 85
+	key_v = 86
+	key_w = 87
+	key_x = 88
+	key_y = 89
+	key_z = 90
+	key_space = 32
+	key_escape = 256
+	key_enter = 257
+	key_tab = 258
+	key_backspace = 259
+	key_insert = 260
+	key_delete = 261
+	key_right = 262
+	key_left = 263
+	key_down = 264
+	key_up = 265
+	key_page_up = 266
+	key_page_down = 267
+	key_home = 268
+	key_end = 269
+	key_caps_lock = 280
+	key_scroll_lock = 281
+	key_num_lock = 282
+	key_print_screen = 283
+	key_pause = 284
+	key_f1 = 290
+	key_f2 = 291
+	key_f3 = 292
+	key_f4 = 293
+	key_f5 = 294
+	key_f6 = 295
+	key_f7 = 296
+	key_f8 = 297
+	key_f9 = 298
+	key_f10 = 299
+	key_f11 = 300
+	key_f12 = 301
+	key_left_shift = 340
+	key_left_control = 341
+	key_left_alt = 342
+	key_left_super = 343
+	key_right_shift = 344
+	key_right_control = 345
+	key_right_alt = 346
+	key_right_super = 347
+	key_kb_menu = 348
+	key_left_bracket = 91
+	key_backslash = 92
+	key_right_bracket = 93
+	key_grave = 96
+	key_kp_0 = 320
+	key_kp_1 = 321
+	key_kp_2 = 322
+	key_kp_3 = 323
+	key_kp_4 = 324
+	key_kp_5 = 325
+	key_kp_6 = 326
+	key_kp_7 = 327
+	key_kp_8 = 328
+	key_kp_9 = 329
+	key_kp_decimal = 330
+	key_kp_divide = 331
+	key_kp_multiply = 332
+	key_kp_subtract = 333
+	key_kp_add = 334
+	key_kp_enter = 335
+	key_kp_equal = 336
+	key_back = 4
+	key_volume_up = 24
+	key_volume_down = 25
+}
+
+pub enum MouseButton {
+	mouse_left_button = 0
+	mouse_right_button = 1
+	mouse_middle_button = 2
+}
+
+pub enum MouseCursor {
+	mouse_cursor_default = 0
+	mouse_cursor_arrow = 1
+	mouse_cursor_ibeam = 2
+	mouse_cursor_crosshair = 3
+	mouse_cursor_pointing_hand = 4
+	mouse_cursor_resize_ew = 5
+	mouse_cursor_resize_ns = 6
+	mouse_cursor_resize_nwse = 7
+	mouse_cursor_resize_nesw = 8
+	mouse_cursor_resize_all = 9
+	mouse_cursor_not_allowed = 10
+}
+
+pub enum GamepadButton {
+	gamepad_button_unknown = 0
+	gamepad_button_left_face_up
+	gamepad_button_left_face_right
+	gamepad_button_left_face_down
+	gamepad_button_left_face_left
+	gamepad_button_right_face_up
+	gamepad_button_right_face_right
+	gamepad_button_right_face_down
+	gamepad_button_right_face_left
+	gamepad_button_left_trigger_1
+	gamepad_button_left_trigger_2
+	gamepad_button_right_trigger_1
+	gamepad_button_right_trigger_2
+	gamepad_button_middle_left
+	gamepad_button_middle
+	gamepad_button_middle_right
+	gamepad_button_left_thumb
+	gamepad_button_right_thumb
+}
+
+pub enum GamepadAxis {
+	gamepad_axis_left_x = 0
+	gamepad_axis_left_y = 1
+	gamepad_axis_right_x = 2
+	gamepad_axis_right_y = 3
+	gamepad_axis_left_trigger = 4
+	gamepad_axis_right_trigger = 5
+}
+
+pub enum MaterialMapIndex {
+	material_map_albedo = 0
+	material_map_metalness = 1
+	material_map_normal = 2
+	material_map_roughness = 3
+	material_map_occlusion
+	material_map_emission
+	material_map_height
+	material_map_brdg
+	material_map_cubemap
+	material_map_irradiance
+	material_map_prefilter
+}
+
+pub enum ShaderLocationIndex {
+	shader_loc_vertex_position = 0
+	shader_loc_vertex_texcoord01
+	shader_loc_vertex_texcoord02
+	shader_loc_vertex_normal
+	shader_loc_vertex_tangent
+	shader_loc_vertex_color
+	shader_loc_matrix_mvp
+	shader_loc_matrix_view
+	shader_loc_matrix_projection
+	shader_loc_matrix_model
+	shader_loc_matrix_normal
+	shader_loc_vector_view
+	shader_loc_color_diffuse
+	shader_loc_color_specular
+	shader_loc_color_ambient
+	shader_loc_map_albedo
+	shader_loc_map_metalness
+	shader_loc_map_normal
+	shader_loc_map_roughness
+	shader_loc_map_occlusion
+	shader_loc_map_emission
+	shader_loc_map_height
+	shader_loc_map_cubemap
+	shader_loc_map_irradiance
+	shader_loc_map_prefilter
+	shader_loc_map_brdf
+}
+
+pub enum ShaderUniformDataType {
+	shader_uniform_float = 0
+	shader_uniform_vec2
+	shader_uniform_vec3
+	shader_uniform_vec4
+	shader_uniform_int
+	shader_uniform_ivec2
+	shader_uniform_ivec3
+	shader_uniform_ivec4
+	shader_uniform_sampler2d
+}
+
+pub enum PixelFormat {
+	pixelformat_uncompressed_grayscale = 1
+	pixelformat_uncompressed_gray_alpha
+	pixelformat_uncompressed_r5g6b5
+	pixelformat_uncompressed_r8g8b8
+	pixelformat_uncompressed_r5g5b5a1
+	pixelformat_uncompressed_r4g4b4a4
+	pixelformat_uncompressed_r8g8b8a8
+	pixelformat_uncompressed_r32
+	pixelformat_uncompressed_r32g32b32
+	pixelformat_uncompressed_r32g32b32a32
+	pixelformat_compressed_dxt1_rgb
+	pixelformat_compressed_dxt1_rgba
+	pixelformat_compressed_dxt3_rgba
+	pixelformat_compressed_dxt5_rgba
+	pixelformat_compressed_etc1_rgb
+	pixelformat_compressed_etc2_rgb
+	pixelformat_compressed_etc2_eac_rgba
+	pixelformat_compressed_pvrt_rgb
+	pixelformat_compressed_pvrt_rgba
+	pixelformat_compressed_astc_4x4_rgba
+	pixelformat_compressed_astc_8x8_rgba
+}
+
+pub enum TextureFilter {
+	texture_filter_point = 0
+	texture_filter_bilinear
+	texture_filter_trilinear
+	texture_filter_anisotropic_4x
+	texture_filter_anisotropic_8x
+	texture_filter_anisotropic_16x
+}
+
+pub enum TextureWrap {
+	texture_wrap_repeat = 0
+	texture_wrap_clamp
+	texture_wrap_mirror_repeat
+	texture_wrap_mirror_clamp
+}
+
+pub enum CubemapLayout {
+	cubemap_layout_auto_detect = 0
+	cubemap_layout_line_vertical
+	cubemap_layout_line_horizontal
+	cubemap_layout_cross_three_by_four
+	cubemap_layout_cross_four_by_three
+	cubemap_layout_panorama
+}
+
+pub enum FontType {
+	font_default = 0
+	font_bitmap
+	font_sdf
+}
+
+pub enum BlendMode {
+	blend_alpha = 0
+	blend_additive
+	blend_multiplied
+	blend_add_colors
+	blend_subtract_colors
+	blend_custom
+}
+
+pub enum Gestures {
+	gesture_none = 0
+	gesture_tap = 1
+	gesture_doubletap = 2
+	gesture_hold = 4
+	gesture_drag = 8
+	gesture_swipe_right = 16
+	gesture_swipe_left = 32
+	gesture_swipe_up = 64
+	gesture_swipe_down = 128
+	gesture_pinch_in = 256
+	gesture_pinch_out = 512
+}
+
+pub enum CameraMode {
+	camera_custom = 0
+	camera_free
+	camera_orbital
+	camera_first_person
+	camera_third_person
+}
+
+pub enum CameraProjection {
+	camera_perspective = 0
+	camera_orthographic
+}
+
+pub enum NPatchLayout {
+	npatch_nine_patch = 0
+	npatch_three_patch_vertical
+	npatch_three_patch_horizontal
+}
+
 [typedef]
 struct C.Vector2 {
 pub mut:
@@ -908,13 +1250,6 @@ pub fn set_config_flags(flags u32) {
 	C.SetConfigFlags(flags)
 }
 
-/*
-fn C.TraceLog(int, &char, ...&char)
-[inline]
-pub fn trace_log(logLevel int, text &char, x ...&char) {
-	 C.TraceLog(logLevel, text, x)
-}
-*/
 fn C.SetTraceLogLevel(int)
 [inline]
 pub fn set_trace_log_level(logLevel int) {
@@ -939,33 +1274,6 @@ pub fn mem_free(ptr voidptr) {
 	C.MemFree(ptr)
 }
 
-/*
-fn C.SetTraceLogCallback(TraceLogCallback)
-[inline]
-pub fn set_trace_log_callback(callback TraceLogCallback) {
-	 C.SetTraceLogCallback(callback)
-}
-fn C.SetLoadFileDataCallback(LoadFileDataCallback)
-[inline]
-pub fn set_load_file_data_callback(callback LoadFileDataCallback) {
-	 C.SetLoadFileDataCallback(callback)
-}
-fn C.SetSaveFileDataCallback(SaveFileDataCallback)
-[inline]
-pub fn set_save_file_data_callback(callback SaveFileDataCallback) {
-	 C.SetSaveFileDataCallback(callback)
-}
-fn C.SetLoadFileTextCallback(LoadFileTextCallback)
-[inline]
-pub fn set_load_file_text_callback(callback LoadFileTextCallback) {
-	 C.SetLoadFileTextCallback(callback)
-}
-fn C.SetSaveFileTextCallback(SaveFileTextCallback)
-[inline]
-pub fn set_save_file_text_callback(callback SaveFileTextCallback) {
-	 C.SetSaveFileTextCallback(callback)
-}
-*/
 fn C.LoadFileData(&char, &u32) &byte
 [inline]
 pub fn load_file_data(fileName &char, bytesRead &u32) &byte {
@@ -2372,13 +2680,6 @@ pub fn text_length(text &char) u32 {
 	return C.TextLength(text)
 }
 
-/*
-fn C.TextFormat(&char, ...&char) &char
-[inline]
-pub fn text_format(text &char, x ...&char) &char{
-	return  C.TextFormat(text, x)
-}
-*/
 fn C.TextSubtext(&char, int, int) &char
 [inline]
 pub fn text_subtext(text &char, position int, length int) &char {
