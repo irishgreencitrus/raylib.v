@@ -1,4 +1,4 @@
-module raylib
+module irishgreencitrus.raylibv
 [typedef]
 struct C.Vector2 {
 x f32
