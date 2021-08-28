@@ -1,11 +1,10 @@
 module raylibv
 
-#flag -lraylib
 $if x64 {
-	#flag -DPLATFORM_DESKTOP
+	#flag -lraylib
 	$if !override_default_lib ? {
 		#include "@VMODROOT/include/raylib.h"
-		#flag -I@VMODROOT/include/libraylib.a
+		#flag -I"@VMODROOT/include/"
 	}
 	$if prod {
 		#flag -O2
@@ -17,8 +16,7 @@ $if x64 {
 		#flag -lwinmm
 		#flag -static
 		#flag -lpthread
-	}
-	$if linux {
+	} $else $if linux {
 		#flag -lGL
 		#flag -lm
 		#flag -lpthread
@@ -33,7 +31,9 @@ $if x64 {
 			#flag -lX11
 		}
 	}
+	#flag -DPLATFORM_DESKTOP
 } $else $if arm64 {
+	#flag -lraylib
 	#flag -DPLATFORM_RPI
 	$if linux {
 		#flag -lbrcmGLESv2
