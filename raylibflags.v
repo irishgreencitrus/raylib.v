@@ -5,7 +5,7 @@ $if x64 {
 	#flag -DPLATFORM_DESKTOP
 	$if !override_default_lib ? {
 		#include "@VMODROOT/include/raylib.h"
-		#flag -I@VMODROOT/include/raylib.a
+		#flag -I@VMODROOT/include/libraylib.a
 	}
 	$if prod {
 		#flag -O2
