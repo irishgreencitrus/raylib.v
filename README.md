@@ -7,22 +7,26 @@ This isn't a replacement for [vraylib](https://github.com/waotzi/vraylib) just y
 Just do `v install irishgreencitrus.raylibv`
 ## Example Program
 ```v
+/********************************************************\
+
+Example raylibv program.
+Feel free to use this as a starting point for your game.
+If you want to change the location of the raylib included,
+pass -d override_default_lib and add these lines, obviously
+paths replacing as appropriate
+---
+#include "/replace/this/path/raylib.h"
+#flag -I/replace/this/path/libraylib.a
+---
+
+If you want to compile for the wayland windowing system,
+pass -d wayland.
+
+\********************************************************/
 module main
 
 import irishgreencitrus.raylibv as r
 
-// Replace these two lines if your header and library are in a different location
-#include "/usr/local/include/raylib.h"
-#flag -I/usr/local/lib/libraylib.a
-//
-#flag -lraylib
-#flag -lGL
-#flag -lm
-#flag -lpthread
-#flag -ldl
-#flag -lrt
-#flag -lX11
-#flag -DPLATFORM_DESKTOP
 
 const (
 		screen_width = 800
