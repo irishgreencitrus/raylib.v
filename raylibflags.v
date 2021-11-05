@@ -5,6 +5,7 @@ $if x64 {
 	$if !override_default_lib ? {
 		#include "@VMODROOT/include/raylib.h"
 		#flag -I"@VMODROOT/include/"
+		#flag -L"@VMODROOT/include/"
 	}
 	$if prod {
 		#flag -O2
@@ -16,6 +17,7 @@ $if x64 {
 		#flag -lwinmm
 		#flag -static
 		#flag -lpthread
+		#flag -DPLATFORM_DESKTOP
 	} $else $if linux {
 		#flag -lGL
 		#flag -lm

@@ -1,377 +1,301 @@
 module raylibv
-
+// CONSTANTS //
 pub const (
-	lightgray  = Color{200, 200, 200, 255}
-	gray       = Color{130, 130, 130, 255}
-	darkgray   = Color{80, 80, 80, 255}
-	yellow     = Color{253, 249, 0, 255}
-	gold       = Color{255, 203, 0, 255}
-	orange     = Color{255, 161, 0, 255}
-	pink       = Color{255, 109, 194, 255}
-	red        = Color{230, 41, 55, 255}
-	maroon     = Color{190, 33, 55, 255}
-	green      = Color{0, 228, 48, 255}
-	lime       = Color{0, 158, 47, 255}
-	darkgreen  = Color{0, 117, 44, 255}
-	skyblue    = Color{102, 191, 255, 255}
-	blue       = Color{0, 121, 241, 255}
-	darkblue   = Color{0, 82, 172, 255}
-	purple     = Color{200, 122, 255, 255}
-	violet     = Color{135, 60, 190, 255}
-	darkpurple = Color{112, 31, 126, 255}
-	beige      = Color{211, 176, 131, 255}
-	brown      = Color{127, 106, 79, 255}
-	darkbrown  = Color{76, 63, 47, 255}
-	white      = Color{255, 255, 255, 255}
-	black      = Color{0, 0, 0, 255}
-	blank      = Color{0, 0, 0, 0}
-	magenta    = Color{255, 0, 255, 255}
-	raywhite   = Color{245, 245, 245, 255}
+	raylib_version                        = 4.0
+	flag_vsync_hint                       = 64
+	flag_fullscreen_mode                  = 2
+	flag_window_resizable                 = 4
+	flag_window_undecorated               = 8
+	flag_window_hidden                    = 128
+	flag_window_minimized                 = 512
+	flag_window_maximized                 = 1024
+	flag_window_unfocused                 = 2048
+	flag_window_topmost                   = 4096
+	flag_window_always_run                = 256
+	flag_window_transparent               = 16
+	flag_window_highdpi                   = 8192
+	flag_msaa_4x_hint                     = 32
+	flag_interlaced_hint                  = 65536
+	log_all                               = 0
+	log_trace                             = 1
+	log_debug                             = 2
+	log_info                              = 3
+	log_warning                           = 4
+	log_error                             = 5
+	log_fatal                             = 6
+	log_none                              = 7
+	key_null                              = 0
+	key_apostrophe                        = 39
+	key_comma                             = 44
+	key_minus                             = 45
+	key_period                            = 46
+	key_slash                             = 47
+	key_zero                              = 48
+	key_one                               = 49
+	key_two                               = 50
+	key_three                             = 51
+	key_four                              = 52
+	key_five                              = 53
+	key_six                               = 54
+	key_seven                             = 55
+	key_eight                             = 56
+	key_nine                              = 57
+	key_semicolon                         = 59
+	key_equal                             = 61
+	key_a                                 = 65
+	key_b                                 = 66
+	key_c                                 = 67
+	key_d                                 = 68
+	key_e                                 = 69
+	key_f                                 = 70
+	key_g                                 = 71
+	key_h                                 = 72
+	key_i                                 = 73
+	key_j                                 = 74
+	key_k                                 = 75
+	key_l                                 = 76
+	key_m                                 = 77
+	key_n                                 = 78
+	key_o                                 = 79
+	key_p                                 = 80
+	key_q                                 = 81
+	key_r                                 = 82
+	key_s                                 = 83
+	key_t                                 = 84
+	key_u                                 = 85
+	key_v                                 = 86
+	key_w                                 = 87
+	key_x                                 = 88
+	key_y                                 = 89
+	key_z                                 = 90
+	key_left_bracket                      = 91
+	key_backslash                         = 92
+	key_right_bracket                     = 93
+	key_grave                             = 96
+	key_space                             = 32
+	key_escape                            = 256
+	key_enter                             = 257
+	key_tab                               = 258
+	key_backspace                         = 259
+	key_insert                            = 260
+	key_delete                            = 261
+	key_right                             = 262
+	key_left                              = 263
+	key_down                              = 264
+	key_up                                = 265
+	key_page_up                           = 266
+	key_page_down                         = 267
+	key_home                              = 268
+	key_end                               = 269
+	key_caps_lock                         = 280
+	key_scroll_lock                       = 281
+	key_num_lock                          = 282
+	key_print_screen                      = 283
+	key_pause                             = 284
+	key_f1                                = 290
+	key_f2                                = 291
+	key_f3                                = 292
+	key_f4                                = 293
+	key_f5                                = 294
+	key_f6                                = 295
+	key_f7                                = 296
+	key_f8                                = 297
+	key_f9                                = 298
+	key_f10                               = 299
+	key_f11                               = 300
+	key_f12                               = 301
+	key_left_shift                        = 340
+	key_left_control                      = 341
+	key_left_alt                          = 342
+	key_left_super                        = 343
+	key_right_shift                       = 344
+	key_right_control                     = 345
+	key_right_alt                         = 346
+	key_right_super                       = 347
+	key_kb_menu                           = 348
+	key_kp_0                              = 320
+	key_kp_1                              = 321
+	key_kp_2                              = 322
+	key_kp_3                              = 323
+	key_kp_4                              = 324
+	key_kp_5                              = 325
+	key_kp_6                              = 326
+	key_kp_7                              = 327
+	key_kp_8                              = 328
+	key_kp_9                              = 329
+	key_kp_decimal                        = 330
+	key_kp_divide                         = 331
+	key_kp_multiply                       = 332
+	key_kp_subtract                       = 333
+	key_kp_add                            = 334
+	key_kp_enter                          = 335
+	key_kp_equal                          = 336
+	key_back                              = 4
+	key_menu                              = 82
+	key_volume_up                         = 24
+	key_volume_down                       = 25
+	mouse_button_left                     = 0
+	mouse_button_right                    = 1
+	mouse_button_middle                   = 2
+	mouse_button_side                     = 3
+	mouse_button_extra                    = 4
+	mouse_button_forward                  = 5
+	mouse_button_back                     = 6
+	mouse_cursor_default                  = 0
+	mouse_cursor_arrow                    = 1
+	mouse_cursor_ibeam                    = 2
+	mouse_cursor_crosshair                = 3
+	mouse_cursor_pointing_hand            = 4
+	mouse_cursor_resize_ew                = 5
+	mouse_cursor_resize_ns                = 6
+	mouse_cursor_resize_nwse              = 7
+	mouse_cursor_resize_nesw              = 8
+	mouse_cursor_resize_all               = 9
+	mouse_cursor_not_allowed              = 10
+	gamepad_button_unknown                = 0
+	gamepad_button_left_face_up           = 1
+	gamepad_button_left_face_right        = 2
+	gamepad_button_left_face_down         = 3
+	gamepad_button_left_face_left         = 4
+	gamepad_button_right_face_up          = 5
+	gamepad_button_right_face_right       = 6
+	gamepad_button_right_face_down        = 7
+	gamepad_button_right_face_left        = 8
+	gamepad_button_left_trigger_1         = 9
+	gamepad_button_left_trigger_2         = 10
+	gamepad_button_right_trigger_1        = 11
+	gamepad_button_right_trigger_2        = 12
+	gamepad_button_middle_left            = 13
+	gamepad_button_middle                 = 14
+	gamepad_button_middle_right           = 15
+	gamepad_button_left_thumb             = 16
+	gamepad_button_right_thumb            = 17
+	gamepad_axis_left_x                   = 0
+	gamepad_axis_left_y                   = 1
+	gamepad_axis_right_x                  = 2
+	gamepad_axis_right_y                  = 3
+	gamepad_axis_left_trigger             = 4
+	gamepad_axis_right_trigger            = 5
+	material_map_albedo                   = 0
+	material_map_metalness                = 1
+	material_map_normal                   = 2
+	material_map_roughness                = 3
+	material_map_occlusion                = 4
+	material_map_emission                 = 5
+	material_map_height                   = 6
+	material_map_cubemap                  = 7
+	material_map_irradiance               = 8
+	material_map_prefilter                = 9
+	material_map_brdf                     = 10
+	shader_loc_vertex_position            = 0
+	shader_loc_vertex_texcoord01          = 1
+	shader_loc_vertex_texcoord02          = 2
+	shader_loc_vertex_normal              = 3
+	shader_loc_vertex_tangent             = 4
+	shader_loc_vertex_color               = 5
+	shader_loc_matrix_mvp                 = 6
+	shader_loc_matrix_view                = 7
+	shader_loc_matrix_projection          = 8
+	shader_loc_matrix_model               = 9
+	shader_loc_matrix_normal              = 10
+	shader_loc_vector_view                = 11
+	shader_loc_color_diffuse              = 12
+	shader_loc_color_specular             = 13
+	shader_loc_color_ambient              = 14
+	shader_loc_map_albedo                 = 15
+	shader_loc_map_metalness              = 16
+	shader_loc_map_normal                 = 17
+	shader_loc_map_roughness              = 18
+	shader_loc_map_occlusion              = 19
+	shader_loc_map_emission               = 20
+	shader_loc_map_height                 = 21
+	shader_loc_map_cubemap                = 22
+	shader_loc_map_irradiance             = 23
+	shader_loc_map_prefilter              = 24
+	shader_loc_map_brdf                   = 25
+	shader_uniform_float                  = 0
+	shader_uniform_vec2                   = 1
+	shader_uniform_vec3                   = 2
+	shader_uniform_vec4                   = 3
+	shader_uniform_int                    = 4
+	shader_uniform_ivec2                  = 5
+	shader_uniform_ivec3                  = 6
+	shader_uniform_ivec4                  = 7
+	shader_uniform_sampler2d              = 8
+	shader_attrib_float                   = 0
+	shader_attrib_vec2                    = 1
+	shader_attrib_vec3                    = 2
+	shader_attrib_vec4                    = 3
+	pixelformat_uncompressed_grayscale    = 1
+	pixelformat_uncompressed_gray_alpha   = 2
+	pixelformat_uncompressed_r5g6b5       = 3
+	pixelformat_uncompressed_r8g8b8       = 4
+	pixelformat_uncompressed_r5g5b5a1     = 5
+	pixelformat_uncompressed_r4g4b4a4     = 6
+	pixelformat_uncompressed_r8g8b8a8     = 7
+	pixelformat_uncompressed_r32          = 8
+	pixelformat_uncompressed_r32g32b32    = 9
+	pixelformat_uncompressed_r32g32b32a32 = 10
+	pixelformat_compressed_dxt1_rgb       = 11
+	pixelformat_compressed_dxt1_rgba      = 12
+	pixelformat_compressed_dxt3_rgba      = 13
+	pixelformat_compressed_dxt5_rgba      = 14
+	pixelformat_compressed_etc1_rgb       = 15
+	pixelformat_compressed_etc2_rgb       = 16
+	pixelformat_compressed_etc2_eac_rgba  = 17
+	pixelformat_compressed_pvrt_rgb       = 18
+	pixelformat_compressed_pvrt_rgba      = 19
+	pixelformat_compressed_astc_4x4_rgba  = 20
+	pixelformat_compressed_astc_8x8_rgba  = 21
+	texture_filter_point                  = 0
+	texture_filter_bilinear               = 1
+	texture_filter_trilinear              = 2
+	texture_filter_anisotropic_4x         = 3
+	texture_filter_anisotropic_8x         = 4
+	texture_filter_anisotropic_16x        = 5
+	texture_wrap_repeat                   = 0
+	texture_wrap_clamp                    = 1
+	texture_wrap_mirror_repeat            = 2
+	texture_wrap_mirror_clamp             = 3
+	cubemap_layout_auto_detect            = 0
+	cubemap_layout_line_vertical          = 1
+	cubemap_layout_line_horizontal        = 2
+	cubemap_layout_cross_three_by_four    = 3
+	cubemap_layout_cross_four_by_three    = 4
+	cubemap_layout_panorama               = 5
+	font_default                          = 0
+	font_bitmap                           = 1
+	font_sdf                              = 2
+	blend_alpha                           = 0
+	blend_additive                        = 1
+	blend_multiplied                      = 2
+	blend_add_colors                      = 3
+	blend_subtract_colors                 = 4
+	blend_custom                          = 5
+	gesture_none                          = 0
+	gesture_tap                           = 1
+	gesture_doubletap                     = 2
+	gesture_hold                          = 4
+	gesture_drag                          = 8
+	gesture_swipe_right                   = 16
+	gesture_swipe_left                    = 32
+	gesture_swipe_up                      = 64
+	gesture_swipe_down                    = 128
+	gesture_pinch_in                      = 256
+	gesture_pinch_out                     = 512
+	camera_custom                         = 0
+	camera_free                           = 1
+	camera_orbital                        = 2
+	camera_first_person                   = 3
+	camera_third_person                   = 4
+	camera_perspective                    = 0
+	camera_orthographic                   = 1
+	npatch_nine_patch                     = 0
+	npatch_three_patch_vertical           = 1
+	npatch_three_patch_horizontal         = 2
 )
 
-pub enum ConfigFlags {
-	flag_vsync_hint = 0x00000040
-	flag_fullscreen_mode = 0x00000002
-	flag_window_resizable = 0x00000004
-	flag_window_undecorated = 0x00000008
-	flag_window_hidden = 0x00000080
-	flag_window_minimized = 0x00000200
-	flag_window_maximized = 0x00000400
-	flag_window_unfocused = 0x00000800
-	flag_window_topmost = 0x00001000
-	flag_window_always_run = 0x00000100
-	flag_window_transparent = 0x00000010
-	flag_window_highdpi = 0x00002000
-	flag_msaa_4x_hint = 0x00000020
-	flag_interlaced_hint = 0x00010000
-}
-
-pub enum TraceLogLevel {
-	log_all = 0
-	log_trace
-	log_debug
-	log_info
-	log_warning
-	log_error
-	log_fatal
-	log_none
-}
-
-pub enum KeyboardKey {
-	key_null = 0
-	key_apostrophe = 39
-	key_comma = 44
-	key_minus = 45
-	key_period = 46
-	key_slash = 47
-	key_zero = 48
-	key_one = 49
-	key_two = 50
-	key_three = 51
-	key_four = 52
-	key_five = 53
-	key_six = 54
-	key_seven = 55
-	key_eight = 56
-	key_nine = 57
-	key_semicolon = 59
-	key_equal = 61
-	key_a = 65
-	key_b = 66
-	key_c = 67
-	key_d = 68
-	key_e = 69
-	key_f = 70
-	key_g = 71
-	key_h = 72
-	key_i = 73
-	key_j = 74
-	key_k = 75
-	key_l = 76
-	key_m = 77
-	key_n = 78
-	key_o = 79
-	key_p = 80
-	key_q = 81
-	key_r = 82
-	key_s = 83
-	key_t = 84
-	key_u = 85
-	key_v = 86
-	key_w = 87
-	key_x = 88
-	key_y = 89
-	key_z = 90
-	key_space = 32
-	key_escape = 256
-	key_enter = 257
-	key_tab = 258
-	key_backspace = 259
-	key_insert = 260
-	key_delete = 261
-	key_right = 262
-	key_left = 263
-	key_down = 264
-	key_up = 265
-	key_page_up = 266
-	key_page_down = 267
-	key_home = 268
-	key_end = 269
-	key_caps_lock = 280
-	key_scroll_lock = 281
-	key_num_lock = 282
-	key_print_screen = 283
-	key_pause = 284
-	key_f1 = 290
-	key_f2 = 291
-	key_f3 = 292
-	key_f4 = 293
-	key_f5 = 294
-	key_f6 = 295
-	key_f7 = 296
-	key_f8 = 297
-	key_f9 = 298
-	key_f10 = 299
-	key_f11 = 300
-	key_f12 = 301
-	key_left_shift = 340
-	key_left_control = 341
-	key_left_alt = 342
-	key_left_super = 343
-	key_right_shift = 344
-	key_right_control = 345
-	key_right_alt = 346
-	key_right_super = 347
-	key_kb_menu = 348
-	key_left_bracket = 91
-	key_backslash = 92
-	key_right_bracket = 93
-	key_grave = 96
-	key_kp_0 = 320
-	key_kp_1 = 321
-	key_kp_2 = 322
-	key_kp_3 = 323
-	key_kp_4 = 324
-	key_kp_5 = 325
-	key_kp_6 = 326
-	key_kp_7 = 327
-	key_kp_8 = 328
-	key_kp_9 = 329
-	key_kp_decimal = 330
-	key_kp_divide = 331
-	key_kp_multiply = 332
-	key_kp_subtract = 333
-	key_kp_add = 334
-	key_kp_enter = 335
-	key_kp_equal = 336
-	//    key_back = 4
-	//    key_menu = 82
-	//    key_volume_up = 24
-	//    key_volume_down = 25
-}
-
-pub enum MouseButton {
-	mouse_left_button = 0
-	mouse_right_button = 1
-	mouse_middle_button = 2
-}
-
-pub enum MouseCursor {
-	mouse_cursor_default = 0
-	mouse_cursor_arrow = 1
-	mouse_cursor_ibeam = 2
-	mouse_cursor_crosshair = 3
-	mouse_cursor_pointing_hand = 4
-	mouse_cursor_resize_ew = 5
-	mouse_cursor_resize_ns = 6
-	mouse_cursor_resize_nwse = 7
-	mouse_cursor_resize_nesw = 8
-	mouse_cursor_resize_all = 9
-	mouse_cursor_not_allowed = 10
-}
-
-pub enum GamepadButton {
-	gamepad_button_unknown = 0
-	gamepad_button_left_face_up
-	gamepad_button_left_face_right
-	gamepad_button_left_face_down
-	gamepad_button_left_face_left
-	gamepad_button_right_face_up
-	gamepad_button_right_face_right
-	gamepad_button_right_face_down
-	gamepad_button_right_face_left
-	gamepad_button_left_trigger_1
-	gamepad_button_left_trigger_2
-	gamepad_button_right_trigger_1
-	gamepad_button_right_trigger_2
-	gamepad_button_middle_left
-	gamepad_button_middle
-	gamepad_button_middle_right
-	gamepad_button_left_thumb
-	gamepad_button_right_thumb
-}
-
-pub enum GamepadAxis {
-	gamepad_axis_left_x = 0
-	gamepad_axis_left_y = 1
-	gamepad_axis_right_x = 2
-	gamepad_axis_right_y = 3
-	gamepad_axis_left_trigger = 4
-	gamepad_axis_right_trigger = 5
-}
-
-pub enum MaterialMapIndex {
-	material_map_albedo = 0
-	material_map_metalness = 1
-	material_map_normal = 2
-	material_map_roughness = 3
-	material_map_occlusion
-	material_map_emission
-	material_map_height
-	material_map_brdg
-	material_map_cubemap
-	material_map_irradiance
-	material_map_prefilter
-}
-
-pub enum ShaderLocationIndex {
-	shader_loc_vertex_position = 0
-	shader_loc_vertex_texcoord01
-	shader_loc_vertex_texcoord02
-	shader_loc_vertex_normal
-	shader_loc_vertex_tangent
-	shader_loc_vertex_color
-	shader_loc_matrix_mvp
-	shader_loc_matrix_view
-	shader_loc_matrix_projection
-	shader_loc_matrix_model
-	shader_loc_matrix_normal
-	shader_loc_vector_view
-	shader_loc_color_diffuse
-	shader_loc_color_specular
-	shader_loc_color_ambient
-	shader_loc_map_albedo
-	shader_loc_map_metalness
-	shader_loc_map_normal
-	shader_loc_map_roughness
-	shader_loc_map_occlusion
-	shader_loc_map_emission
-	shader_loc_map_height
-	shader_loc_map_cubemap
-	shader_loc_map_irradiance
-	shader_loc_map_prefilter
-	shader_loc_map_brdf
-}
-
-pub enum ShaderUniformDataType {
-	shader_uniform_float = 0
-	shader_uniform_vec2
-	shader_uniform_vec3
-	shader_uniform_vec4
-	shader_uniform_int
-	shader_uniform_ivec2
-	shader_uniform_ivec3
-	shader_uniform_ivec4
-	shader_uniform_sampler2d
-}
-
-pub enum PixelFormat {
-	pixelformat_uncompressed_grayscale = 1
-	pixelformat_uncompressed_gray_alpha
-	pixelformat_uncompressed_r5g6b5
-	pixelformat_uncompressed_r8g8b8
-	pixelformat_uncompressed_r5g5b5a1
-	pixelformat_uncompressed_r4g4b4a4
-	pixelformat_uncompressed_r8g8b8a8
-	pixelformat_uncompressed_r32
-	pixelformat_uncompressed_r32g32b32
-	pixelformat_uncompressed_r32g32b32a32
-	pixelformat_compressed_dxt1_rgb
-	pixelformat_compressed_dxt1_rgba
-	pixelformat_compressed_dxt3_rgba
-	pixelformat_compressed_dxt5_rgba
-	pixelformat_compressed_etc1_rgb
-	pixelformat_compressed_etc2_rgb
-	pixelformat_compressed_etc2_eac_rgba
-	pixelformat_compressed_pvrt_rgb
-	pixelformat_compressed_pvrt_rgba
-	pixelformat_compressed_astc_4x4_rgba
-	pixelformat_compressed_astc_8x8_rgba
-}
-
-pub enum TextureFilter {
-	texture_filter_point = 0
-	texture_filter_bilinear
-	texture_filter_trilinear
-	texture_filter_anisotropic_4x
-	texture_filter_anisotropic_8x
-	texture_filter_anisotropic_16x
-}
-
-pub enum TextureWrap {
-	texture_wrap_repeat = 0
-	texture_wrap_clamp
-	texture_wrap_mirror_repeat
-	texture_wrap_mirror_clamp
-}
-
-pub enum CubemapLayout {
-	cubemap_layout_auto_detect = 0
-	cubemap_layout_line_vertical
-	cubemap_layout_line_horizontal
-	cubemap_layout_cross_three_by_four
-	cubemap_layout_cross_four_by_three
-	cubemap_layout_panorama
-}
-
-pub enum FontType {
-	font_default = 0
-	font_bitmap
-	font_sdf
-}
-
-pub enum BlendMode {
-	blend_alpha = 0
-	blend_additive
-	blend_multiplied
-	blend_add_colors
-	blend_subtract_colors
-	blend_custom
-}
-
-pub enum Gestures {
-	gesture_none = 0
-	gesture_tap = 1
-	gesture_doubletap = 2
-	gesture_hold = 4
-	gesture_drag = 8
-	gesture_swipe_right = 16
-	gesture_swipe_left = 32
-	gesture_swipe_up = 64
-	gesture_swipe_down = 128
-	gesture_pinch_in = 256
-	gesture_pinch_out = 512
-}
-
-pub enum CameraMode {
-	camera_custom = 0
-	camera_free
-	camera_orbital
-	camera_first_person
-	camera_third_person
-}
-
-pub enum CameraProjection {
-	camera_perspective = 0
-	camera_orthographic
-}
-
-pub enum NPatchLayout {
-	npatch_nine_patch = 0
-	npatch_three_patch_vertical
-	npatch_three_patch_horizontal
-}
-
+// STRUCTS //
 [typedef]
 struct C.Vector2 {
 pub mut:
@@ -401,8 +325,6 @@ pub mut:
 }
 
 pub type Vector4 = C.Vector4
-
-pub type Quaternion = C.Vector4
 
 [typedef]
 struct C.Matrix {
@@ -473,10 +395,6 @@ pub mut:
 
 pub type Texture = C.Texture
 
-pub type Texture2D = C.Texture
-
-pub type TextureCubemap = C.Texture
-
 [typedef]
 struct C.RenderTexture {
 pub mut:
@@ -486,8 +404,6 @@ pub mut:
 }
 
 pub type RenderTexture = C.RenderTexture
-
-pub type RenderTexture2D = C.RenderTexture
 
 [typedef]
 struct C.NPatchInfo {
@@ -503,7 +419,7 @@ pub mut:
 pub type NPatchInfo = C.NPatchInfo
 
 [typedef]
-struct C.CharInfo {
+struct C.GlyphInfo {
 pub mut:
 	value    int
 	offsetX  int
@@ -512,17 +428,17 @@ pub mut:
 	image    Image
 }
 
-pub type CharInfo = C.CharInfo
+pub type GlyphInfo = C.GlyphInfo
 
 [typedef]
 struct C.Font {
 pub mut:
 	baseSize     int
-	charsCount   int
-	charsPadding int
+	glyphCount   int
+	glyphPadding int
 	texture      Texture2D
 	recs         &Rectangle
-	chars        &CharInfo
+	glyphs       &GlyphInfo
 }
 
 pub type Font = C.Font
@@ -538,8 +454,6 @@ pub mut:
 }
 
 pub type Camera3D = C.Camera3D
-
-pub type Camera = C.Camera3D
 
 [typedef]
 struct C.Camera2D {
@@ -566,7 +480,7 @@ pub mut:
 	indices       &u16
 	animVertices  &f32
 	animNormals   &f32
-	boneIds       &int
+	boneIds       &byte
 	boneWeights   &f32
 	vaoId         u32
 	vboId         &u32
@@ -616,7 +530,7 @@ pub type Transform = C.Transform
 [typedef]
 struct C.BoneInfo {
 pub mut:
-	name   [32]char
+	name   [32]i8
 	parent int
 }
 
@@ -659,15 +573,15 @@ pub mut:
 pub type Ray = C.Ray
 
 [typedef]
-struct C.RayHitInfo {
+struct C.RayCollision {
 pub mut:
 	hit      bool
 	distance f32
-	position Vector3
+	point    Vector3
 	normal   Vector3
 }
 
-pub type RayHitInfo = C.RayHitInfo
+pub type RayCollision = C.RayCollision
 
 [typedef]
 struct C.BoundingBox {
@@ -681,16 +595,18 @@ pub type BoundingBox = C.BoundingBox
 [typedef]
 struct C.Wave {
 pub mut:
-	sampleCount u32
-	sampleRate  u32
-	sampleSize  u32
-	channels    u32
-	data        voidptr
+	frameCount u32
+	sampleRate u32
+	sampleSize u32
+	channels   u32
+	data       voidptr
 }
 
 pub type Wave = C.Wave
 
-struct C.rAudioBuffer {}
+[typedef]
+struct C.rAudioBuffer {
+}
 
 pub type RAudioBuffer = C.rAudioBuffer
 
@@ -708,8 +624,8 @@ pub type AudioStream = C.AudioStream
 [typedef]
 struct C.Sound {
 pub mut:
-	stream      AudioStream
-	sampleCount u32
+	stream     AudioStream
+	frameCount u32
 }
 
 pub type Sound = C.Sound
@@ -717,11 +633,11 @@ pub type Sound = C.Sound
 [typedef]
 struct C.Music {
 pub mut:
-	stream      AudioStream
-	sampleCount u32
-	looping     bool
-	ctxType     int
-	ctxData     voidptr
+	stream     AudioStream
+	frameCount u32
+	looping    bool
+	ctxType    int
+	ctxData    voidptr
 }
 
 pub type Music = C.Music
@@ -758,9 +674,18 @@ pub mut:
 
 pub type VrStereoConfig = C.VrStereoConfig
 
-fn C.InitWindow(int, int, &char)
+// ALIASES //
+pub type Quaternion = C.Vector4
+pub type Texture2D = C.Texture
+pub type TextureCubemap = C.Texture
+pub type RenderTexture2D = C.RenderTexture
+pub type Camera = C.Camera3D
+
+// FUNCTIONS //
+
+fn C.InitWindow(int, int, &i8)
 [inline]
-pub fn init_window(width int, height int, title &char) {
+pub fn init_window(width int, height int, title &i8) {
 	C.InitWindow(width, height, title)
 }
 
@@ -866,9 +791,9 @@ pub fn set_window_icon(image Image) {
 	C.SetWindowIcon(image)
 }
 
-fn C.SetWindowTitle(&char)
+fn C.SetWindowTitle(&i8)
 [inline]
-pub fn set_window_title(title &char) {
+pub fn set_window_title(title &i8) {
 	C.SetWindowTitle(title)
 }
 
@@ -974,22 +899,40 @@ pub fn get_window_scale_dpi() Vector2 {
 	return C.GetWindowScaleDPI()
 }
 
-fn C.GetMonitorName(int) &char
+fn C.GetMonitorName(int) &i8
 [inline]
-pub fn get_monitor_name(monitor int) &char {
+pub fn get_monitor_name(monitor int) &i8 {
 	return C.GetMonitorName(monitor)
 }
 
-fn C.SetClipboardText(&char)
+fn C.SetClipboardText(&i8)
 [inline]
-pub fn set_clipboard_text(text &char) {
+pub fn set_clipboard_text(text &i8) {
 	C.SetClipboardText(text)
 }
 
-fn C.GetClipboardText() &char
+fn C.GetClipboardText() &i8
 [inline]
-pub fn get_clipboard_text() &char {
+pub fn get_clipboard_text() &i8 {
 	return C.GetClipboardText()
+}
+
+fn C.SwapScreenBuffer()
+[inline]
+pub fn swap_screen_buffer() {
+	C.SwapScreenBuffer()
+}
+
+fn C.PollInputEvents()
+[inline]
+pub fn poll_input_events() {
+	C.PollInputEvents()
+}
+
+fn C.WaitTime(f32)
+[inline]
+pub fn wait_time(ms f32) {
+	C.WaitTime(ms)
 }
 
 fn C.ShowCursor()
@@ -1142,27 +1085,27 @@ pub fn unload_vr_stereo_config(config VrStereoConfig) {
 	C.UnloadVrStereoConfig(config)
 }
 
-fn C.LoadShader(&char, &char) Shader
+fn C.LoadShader(&i8, &i8) Shader
 [inline]
-pub fn load_shader(vsFileName &char, fsFileName &char) Shader {
+pub fn load_shader(vsFileName &i8, fsFileName &i8) Shader {
 	return C.LoadShader(vsFileName, fsFileName)
 }
 
-fn C.LoadShaderFromMemory(&char, &char) Shader
+fn C.LoadShaderFromMemory(&i8, &i8) Shader
 [inline]
-pub fn load_shader_from_memory(vsCode &char, fsCode &char) Shader {
+pub fn load_shader_from_memory(vsCode &i8, fsCode &i8) Shader {
 	return C.LoadShaderFromMemory(vsCode, fsCode)
 }
 
-fn C.GetShaderLocation(Shader, &char) int
+fn C.GetShaderLocation(Shader, &i8) int
 [inline]
-pub fn get_shader_location(shader Shader, uniformName &char) int {
+pub fn get_shader_location(shader Shader, uniformName &i8) int {
 	return C.GetShaderLocation(shader, uniformName)
 }
 
-fn C.GetShaderLocationAttrib(Shader, &char) int
+fn C.GetShaderLocationAttrib(Shader, &i8) int
 [inline]
-pub fn get_shader_location_attrib(shader Shader, attribName &char) int {
+pub fn get_shader_location_attrib(shader Shader, attribName &i8) int {
 	return C.GetShaderLocationAttrib(shader, attribName)
 }
 
@@ -1268,9 +1211,15 @@ pub fn get_random_value(min int, max int) int {
 	return C.GetRandomValue(min, max)
 }
 
-fn C.TakeScreenshot(&char)
+fn C.SetRandomSeed(u32)
 [inline]
-pub fn take_screenshot(fileName &char) {
+pub fn set_random_seed(seed u32) {
+	C.SetRandomSeed(seed)
+}
+
+fn C.TakeScreenshot(&i8)
+[inline]
+pub fn take_screenshot(fileName &i8) {
 	C.TakeScreenshot(fileName)
 }
 
@@ -1278,12 +1227,6 @@ fn C.SetConfigFlags(u32)
 [inline]
 pub fn set_config_flags(flags u32) {
 	C.SetConfigFlags(flags)
-}
-
-fn C.TraceLog(int, &char, ...&char)
-[inline]
-pub fn trace_log(logLevel int, text &char, variadic ...&char) {
-	C.TraceLog(logLevel, text, ...variadic)
 }
 
 fn C.SetTraceLogLevel(int)
@@ -1310,9 +1253,9 @@ pub fn mem_free(ptr voidptr) {
 	C.MemFree(ptr)
 }
 
-fn C.LoadFileData(&char, &u32) &byte
+fn C.LoadFileData(&i8, &u32) &byte
 [inline]
-pub fn load_file_data(fileName &char, bytesRead &u32) &byte {
+pub fn load_file_data(fileName &i8, bytesRead &u32) &byte {
 	return C.LoadFileData(fileName, bytesRead)
 }
 
@@ -1322,87 +1265,87 @@ pub fn unload_file_data(data &byte) {
 	C.UnloadFileData(data)
 }
 
-fn C.SaveFileData(&char, voidptr, u32) bool
+fn C.SaveFileData(&i8, voidptr, u32) bool
 [inline]
-pub fn save_file_data(fileName &char, data voidptr, bytesToWrite u32) bool {
+pub fn save_file_data(fileName &i8, data voidptr, bytesToWrite u32) bool {
 	return C.SaveFileData(fileName, data, bytesToWrite)
 }
 
-fn C.LoadFileText(&char) &char
+fn C.LoadFileText(&i8) &i8
 [inline]
-pub fn load_file_text(fileName &char) &char {
+pub fn load_file_text(fileName &i8) &i8 {
 	return C.LoadFileText(fileName)
 }
 
-fn C.UnloadFileText(&byte)
+fn C.UnloadFileText(&i8)
 [inline]
-pub fn unload_file_text(text &byte) {
+pub fn unload_file_text(text &i8) {
 	C.UnloadFileText(text)
 }
 
-fn C.SaveFileText(&char, &char) bool
+fn C.SaveFileText(&i8, &i8) bool
 [inline]
-pub fn save_file_text(fileName &char, text &char) bool {
+pub fn save_file_text(fileName &i8, text &i8) bool {
 	return C.SaveFileText(fileName, text)
 }
 
-fn C.FileExists(&char) bool
+fn C.FileExists(&i8) bool
 [inline]
-pub fn file_exists(fileName &char) bool {
+pub fn file_exists(fileName &i8) bool {
 	return C.FileExists(fileName)
 }
 
-fn C.DirectoryExists(&char) bool
+fn C.DirectoryExists(&i8) bool
 [inline]
-pub fn directory_exists(dirPath &char) bool {
+pub fn directory_exists(dirPath &i8) bool {
 	return C.DirectoryExists(dirPath)
 }
 
-fn C.IsFileExtension(&char, &char) bool
+fn C.IsFileExtension(&i8, &i8) bool
 [inline]
-pub fn is_file_extension(fileName &char, ext &char) bool {
+pub fn is_file_extension(fileName &i8, ext &i8) bool {
 	return C.IsFileExtension(fileName, ext)
 }
 
-fn C.GetFileExtension(&char) &char
+fn C.GetFileExtension(&i8) &i8
 [inline]
-pub fn get_file_extension(fileName &char) &char {
+pub fn get_file_extension(fileName &i8) &i8 {
 	return C.GetFileExtension(fileName)
 }
 
-fn C.GetFileName(&char) &char
+fn C.GetFileName(&i8) &i8
 [inline]
-pub fn get_file_name(filePath &char) &char {
+pub fn get_file_name(filePath &i8) &i8 {
 	return C.GetFileName(filePath)
 }
 
-fn C.GetFileNameWithoutExt(&char) &char
+fn C.GetFileNameWithoutExt(&i8) &i8
 [inline]
-pub fn get_file_name_without_ext(filePath &char) &char {
+pub fn get_file_name_without_ext(filePath &i8) &i8 {
 	return C.GetFileNameWithoutExt(filePath)
 }
 
-fn C.GetDirectoryPath(&char) &char
+fn C.GetDirectoryPath(&i8) &i8
 [inline]
-pub fn get_directory_path(filePath &char) &char {
+pub fn get_directory_path(filePath &i8) &i8 {
 	return C.GetDirectoryPath(filePath)
 }
 
-fn C.GetPrevDirectoryPath(&char) &char
+fn C.GetPrevDirectoryPath(&i8) &i8
 [inline]
-pub fn get_prev_directory_path(dirPath &char) &char {
+pub fn get_prev_directory_path(dirPath &i8) &i8 {
 	return C.GetPrevDirectoryPath(dirPath)
 }
 
-fn C.GetWorkingDirectory() &char
+fn C.GetWorkingDirectory() &i8
 [inline]
-pub fn get_working_directory() &char {
+pub fn get_working_directory() &i8 {
 	return C.GetWorkingDirectory()
 }
 
-fn C.GetDirectoryFiles(&char, &int) &&char
+fn C.GetDirectoryFiles(&i8, &int) &&i8
 [inline]
-pub fn get_directory_files(dirPath &char, count &int) &&char {
+pub fn get_directory_files(dirPath &i8, count &int) &&i8 {
 	return C.GetDirectoryFiles(dirPath, count)
 }
 
@@ -1412,9 +1355,9 @@ pub fn clear_directory_files() {
 	C.ClearDirectoryFiles()
 }
 
-fn C.ChangeDirectory(&char) bool
+fn C.ChangeDirectory(&i8) bool
 [inline]
-pub fn change_directory(dir &char) bool {
+pub fn change_directory(dir &i8) bool {
 	return C.ChangeDirectory(dir)
 }
 
@@ -1424,9 +1367,9 @@ pub fn is_file_dropped() bool {
 	return C.IsFileDropped()
 }
 
-fn C.GetDroppedFiles(&int) &&char
+fn C.GetDroppedFiles(&int) &&i8
 [inline]
-pub fn get_dropped_files(count &int) &&char {
+pub fn get_dropped_files(count &int) &&i8 {
 	return C.GetDroppedFiles(count)
 }
 
@@ -1436,9 +1379,9 @@ pub fn clear_dropped_files() {
 	C.ClearDroppedFiles()
 }
 
-fn C.GetFileModTime(&char) i64
+fn C.GetFileModTime(&i8) i64
 [inline]
-pub fn get_file_mod_time(fileName &char) i64 {
+pub fn get_file_mod_time(fileName &i8) i64 {
 	return C.GetFileModTime(fileName)
 }
 
@@ -1454,6 +1397,18 @@ pub fn decompress_data(compData &byte, compDataLength int, dataLength &int) &byt
 	return C.DecompressData(compData, compDataLength, dataLength)
 }
 
+fn C.EncodeDataBase64(&byte, int, &int) &i8
+[inline]
+pub fn encode_data_base64(data &byte, dataLength int, outputLength &int) &i8 {
+	return C.EncodeDataBase64(data, dataLength, outputLength)
+}
+
+fn C.DecodeDataBase64(&byte, &int) &byte
+[inline]
+pub fn decode_data_base64(data &byte, outputLength &int) &byte {
+	return C.DecodeDataBase64(data, outputLength)
+}
+
 fn C.SaveStorageValue(u32, int) bool
 [inline]
 pub fn save_storage_value(position u32, value int) bool {
@@ -1466,9 +1421,9 @@ pub fn load_storage_value(position u32) int {
 	return C.LoadStorageValue(position)
 }
 
-fn C.OpenURL(&char)
+fn C.OpenURL(&i8)
 [inline]
-pub fn open_url(url &char) {
+pub fn open_url(url &i8) {
 	C.OpenURL(url)
 }
 
@@ -1520,15 +1475,9 @@ pub fn is_gamepad_available(gamepad int) bool {
 	return C.IsGamepadAvailable(gamepad)
 }
 
-fn C.IsGamepadName(int, &char) bool
+fn C.GetGamepadName(int) &i8
 [inline]
-pub fn is_gamepad_name(gamepad int, name &char) bool {
-	return C.IsGamepadName(gamepad, name)
-}
-
-fn C.GetGamepadName(int) &char
-[inline]
-pub fn get_gamepad_name(gamepad int) &char {
+pub fn get_gamepad_name(gamepad int) &i8 {
 	return C.GetGamepadName(gamepad)
 }
 
@@ -1574,9 +1523,9 @@ pub fn get_gamepad_axis_movement(gamepad int, axis int) f32 {
 	return C.GetGamepadAxisMovement(gamepad, axis)
 }
 
-fn C.SetGamepadMappings(&char) int
+fn C.SetGamepadMappings(&i8) int
 [inline]
-pub fn set_gamepad_mappings(mappings &char) int {
+pub fn set_gamepad_mappings(mappings &i8) int {
 	return C.SetGamepadMappings(mappings)
 }
 
@@ -1620,6 +1569,12 @@ fn C.GetMousePosition() Vector2
 [inline]
 pub fn get_mouse_position() Vector2 {
 	return C.GetMousePosition()
+}
+
+fn C.GetMouseDelta() Vector2
+[inline]
+pub fn get_mouse_delta() Vector2 {
+	return C.GetMouseDelta()
 }
 
 fn C.SetMousePosition(int, int)
@@ -1670,6 +1625,18 @@ pub fn get_touch_position(index int) Vector2 {
 	return C.GetTouchPosition(index)
 }
 
+fn C.GetTouchPointId(int) int
+[inline]
+pub fn get_touch_point_id(index int) int {
+	return C.GetTouchPointId(index)
+}
+
+fn C.GetTouchPointCount() int
+[inline]
+pub fn get_touch_point_count() int {
+	return C.GetTouchPointCount()
+}
+
 fn C.SetGesturesEnabled(u32)
 [inline]
 pub fn set_gestures_enabled(flags u32) {
@@ -1686,12 +1653,6 @@ fn C.GetGestureDetected() int
 [inline]
 pub fn get_gesture_detected() int {
 	return C.GetGestureDetected()
-}
-
-fn C.GetTouchPointsCount() int
-[inline]
-pub fn get_touch_points_count() int {
-	return C.GetTouchPointsCount()
 }
 
 fn C.GetGestureHoldDuration() f32
@@ -1808,10 +1769,16 @@ pub fn draw_line_bezier_quad(startPos Vector2, endPos Vector2, controlPos Vector
 	C.DrawLineBezierQuad(startPos, endPos, controlPos, thick, color)
 }
 
+fn C.DrawLineBezierCubic(Vector2, Vector2, Vector2, Vector2, f32, Color)
+[inline]
+pub fn draw_line_bezier_cubic(startPos Vector2, endPos Vector2, startControlPos Vector2, endControlPos Vector2, thick f32, color Color) {
+	C.DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color)
+}
+
 fn C.DrawLineStrip(&Vector2, int, Color)
 [inline]
-pub fn draw_line_strip(points &Vector2, pointsCount int, color Color) {
-	C.DrawLineStrip(points, pointsCount, color)
+pub fn draw_line_strip(points &Vector2, pointCount int, color Color) {
+	C.DrawLineStrip(points, pointCount, color)
 }
 
 fn C.DrawCircle(int, int, f32, Color)
@@ -1923,9 +1890,9 @@ pub fn draw_rectangle_lines(posX int, posY int, width int, height int, color Col
 	C.DrawRectangleLines(posX, posY, width, height, color)
 }
 
-fn C.DrawRectangleLinesEx(Rectangle, int, Color)
+fn C.DrawRectangleLinesEx(Rectangle, f32, Color)
 [inline]
-pub fn draw_rectangle_lines_ex(rec Rectangle, lineThick int, color Color) {
+pub fn draw_rectangle_lines_ex(rec Rectangle, lineThick f32, color Color) {
 	C.DrawRectangleLinesEx(rec, lineThick, color)
 }
 
@@ -1935,9 +1902,9 @@ pub fn draw_rectangle_rounded(rec Rectangle, roundness f32, segments int, color 
 	C.DrawRectangleRounded(rec, roundness, segments, color)
 }
 
-fn C.DrawRectangleRoundedLines(Rectangle, f32, int, int, Color)
+fn C.DrawRectangleRoundedLines(Rectangle, f32, int, f32, Color)
 [inline]
-pub fn draw_rectangle_rounded_lines(rec Rectangle, roundness f32, segments int, lineThick int, color Color) {
+pub fn draw_rectangle_rounded_lines(rec Rectangle, roundness f32, segments int, lineThick f32, color Color) {
 	C.DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color)
 }
 
@@ -1955,14 +1922,14 @@ pub fn draw_triangle_lines(v1 Vector2, v2 Vector2, v3 Vector2, color Color) {
 
 fn C.DrawTriangleFan(&Vector2, int, Color)
 [inline]
-pub fn draw_triangle_fan(points &Vector2, pointsCount int, color Color) {
-	C.DrawTriangleFan(points, pointsCount, color)
+pub fn draw_triangle_fan(points &Vector2, pointCount int, color Color) {
+	C.DrawTriangleFan(points, pointCount, color)
 }
 
 fn C.DrawTriangleStrip(&Vector2, int, Color)
 [inline]
-pub fn draw_triangle_strip(points &Vector2, pointsCount int, color Color) {
-	C.DrawTriangleStrip(points, pointsCount, color)
+pub fn draw_triangle_strip(points &Vector2, pointCount int, color Color) {
+	C.DrawTriangleStrip(points, pointCount, color)
 }
 
 fn C.DrawPoly(Vector2, int, f32, f32, Color)
@@ -1975,6 +1942,12 @@ fn C.DrawPolyLines(Vector2, int, f32, f32, Color)
 [inline]
 pub fn draw_poly_lines(center Vector2, sides int, radius f32, rotation f32, color Color) {
 	C.DrawPolyLines(center, sides, radius, rotation, color)
+}
+
+fn C.DrawPolyLinesEx(Vector2, int, f32, f32, f32, Color)
+[inline]
+pub fn draw_poly_lines_ex(center Vector2, sides int, radius f32, rotation f32, lineThick f32, color Color) {
+	C.DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)
 }
 
 fn C.CheckCollisionRecs(Rectangle, Rectangle) bool
@@ -2019,34 +1992,52 @@ pub fn check_collision_lines(startPos1 Vector2, endPos1 Vector2, startPos2 Vecto
 	return C.CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint)
 }
 
+fn C.CheckCollisionPointLine(Vector2, Vector2, Vector2, int) bool
+[inline]
+pub fn check_collision_point_line(point Vector2, p1 Vector2, p2 Vector2, threshold int) bool {
+	return C.CheckCollisionPointLine(point, p1, p2, threshold)
+}
+
 fn C.GetCollisionRec(Rectangle, Rectangle) Rectangle
 [inline]
 pub fn get_collision_rec(rec1 Rectangle, rec2 Rectangle) Rectangle {
 	return C.GetCollisionRec(rec1, rec2)
 }
 
-fn C.LoadImage(&char) Image
+fn C.LoadImage(&i8) Image
 [inline]
-pub fn load_image(fileName &char) Image {
+pub fn load_image(fileName &i8) Image {
 	return C.LoadImage(fileName)
 }
 
-fn C.LoadImageRaw(&char, int, int, int, int) Image
+fn C.LoadImageRaw(&i8, int, int, int, int) Image
 [inline]
-pub fn load_image_raw(fileName &char, width int, height int, format int, headerSize int) Image {
+pub fn load_image_raw(fileName &i8, width int, height int, format int, headerSize int) Image {
 	return C.LoadImageRaw(fileName, width, height, format, headerSize)
 }
 
-fn C.LoadImageAnim(&char, &int) Image
+fn C.LoadImageAnim(&i8, &int) Image
 [inline]
-pub fn load_image_anim(fileName &char, frames &int) Image {
+pub fn load_image_anim(fileName &i8, frames &int) Image {
 	return C.LoadImageAnim(fileName, frames)
 }
 
-fn C.LoadImageFromMemory(&char, &byte, int) Image
+fn C.LoadImageFromMemory(&i8, &byte, int) Image
 [inline]
-pub fn load_image_from_memory(fileType &char, fileData &byte, dataSize int) Image {
+pub fn load_image_from_memory(fileType &i8, fileData &byte, dataSize int) Image {
 	return C.LoadImageFromMemory(fileType, fileData, dataSize)
+}
+
+fn C.LoadImageFromTexture(Texture2D) Image
+[inline]
+pub fn load_image_from_texture(texture Texture2D) Image {
+	return C.LoadImageFromTexture(texture)
+}
+
+fn C.LoadImageFromScreen() Image
+[inline]
+pub fn load_image_from_screen() Image {
+	return C.LoadImageFromScreen()
 }
 
 fn C.UnloadImage(Image)
@@ -2055,15 +2046,15 @@ pub fn unload_image(image Image) {
 	C.UnloadImage(image)
 }
 
-fn C.ExportImage(Image, &char) bool
+fn C.ExportImage(Image, &i8) bool
 [inline]
-pub fn export_image(image Image, fileName &char) bool {
+pub fn export_image(image Image, fileName &i8) bool {
 	return C.ExportImage(image, fileName)
 }
 
-fn C.ExportImageAsCode(Image, &char) bool
+fn C.ExportImageAsCode(Image, &i8) bool
 [inline]
-pub fn export_image_as_code(image Image, fileName &char) bool {
+pub fn export_image_as_code(image Image, fileName &i8) bool {
 	return C.ExportImageAsCode(image, fileName)
 }
 
@@ -2103,12 +2094,6 @@ pub fn gen_image_white_noise(width int, height int, factor f32) Image {
 	return C.GenImageWhiteNoise(width, height, factor)
 }
 
-fn C.GenImagePerlinNoise(int, int, int, int, f32) Image
-[inline]
-pub fn gen_image_perlin_noise(width int, height int, offsetX int, offsetY int, scale f32) Image {
-	return C.GenImagePerlinNoise(width, height, offsetX, offsetY, scale)
-}
-
 fn C.GenImageCellular(int, int, int) Image
 [inline]
 pub fn gen_image_cellular(width int, height int, tileSize int) Image {
@@ -2127,15 +2112,15 @@ pub fn image_from_image(image Image, rec Rectangle) Image {
 	return C.ImageFromImage(image, rec)
 }
 
-fn C.ImageText(&char, int, Color) Image
+fn C.ImageText(&i8, int, Color) Image
 [inline]
-pub fn image_text(text &char, fontSize int, color Color) Image {
+pub fn image_text(text &i8, fontSize int, color Color) Image {
 	return C.ImageText(text, fontSize, color)
 }
 
-fn C.ImageTextEx(Font, &char, f32, f32, Color) Image
+fn C.ImageTextEx(Font, &i8, f32, f32, Color) Image
 [inline]
-pub fn image_text_ex(font Font, text &char, fontSize f32, spacing f32, tint Color) Image {
+pub fn image_text_ex(font Font, text &i8, fontSize f32, spacing f32, tint Color) Image {
 	return C.ImageTextEx(font, text, fontSize, spacing, tint)
 }
 
@@ -2279,8 +2264,8 @@ pub fn load_image_colors(image Image) &Color {
 
 fn C.LoadImagePalette(Image, int, &int) &Color
 [inline]
-pub fn load_image_palette(image Image, maxPaletteSize int, colorsCount &int) &Color {
-	return C.LoadImagePalette(image, maxPaletteSize, colorsCount)
+pub fn load_image_palette(image Image, maxPaletteSize int, colorCount &int) &Color {
+	return C.LoadImagePalette(image, maxPaletteSize, colorCount)
 }
 
 fn C.UnloadImageColors(&Color)
@@ -2299,6 +2284,12 @@ fn C.GetImageAlphaBorder(Image, f32) Rectangle
 [inline]
 pub fn get_image_alpha_border(image Image, threshold f32) Rectangle {
 	return C.GetImageAlphaBorder(image, threshold)
+}
+
+fn C.GetImageColor(Image, int, int) Color
+[inline]
+pub fn get_image_color(image Image, x int, y int) Color {
+	return C.GetImageColor(image, x, y)
 }
 
 fn C.ImageClearBackground(&Image, Color)
@@ -2373,21 +2364,21 @@ pub fn image_draw(dst &Image, src Image, srcRec Rectangle, dstRec Rectangle, tin
 	C.ImageDraw(dst, src, srcRec, dstRec, tint)
 }
 
-fn C.ImageDrawText(&Image, &char, int, int, int, Color)
+fn C.ImageDrawText(&Image, &i8, int, int, int, Color)
 [inline]
-pub fn image_draw_text(dst &Image, text &char, posX int, posY int, fontSize int, color Color) {
+pub fn image_draw_text(dst &Image, text &i8, posX int, posY int, fontSize int, color Color) {
 	C.ImageDrawText(dst, text, posX, posY, fontSize, color)
 }
 
-fn C.ImageDrawTextEx(&Image, Font, &char, Vector2, f32, f32, Color)
+fn C.ImageDrawTextEx(&Image, Font, &i8, Vector2, f32, f32, Color)
 [inline]
-pub fn image_draw_text_ex(dst &Image, font Font, text &char, position Vector2, fontSize f32, spacing f32, tint Color) {
+pub fn image_draw_text_ex(dst &Image, font Font, text &i8, position Vector2, fontSize f32, spacing f32, tint Color) {
 	C.ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint)
 }
 
-fn C.LoadTexture(&char) Texture2D
+fn C.LoadTexture(&i8) Texture2D
 [inline]
-pub fn load_texture(fileName &char) Texture2D {
+pub fn load_texture(fileName &i8) Texture2D {
 	return C.LoadTexture(fileName)
 }
 
@@ -2431,18 +2422,6 @@ fn C.UpdateTextureRec(Texture2D, Rectangle, voidptr)
 [inline]
 pub fn update_texture_rec(texture Texture2D, rec Rectangle, pixels voidptr) {
 	C.UpdateTextureRec(texture, rec, pixels)
-}
-
-fn C.GetTextureData(Texture2D) Image
-[inline]
-pub fn get_texture_data(texture Texture2D) Image {
-	return C.GetTextureData(texture)
-}
-
-fn C.GetScreenData() Image
-[inline]
-pub fn get_screen_data() Image {
-	return C.GetScreenData()
 }
 
 fn C.GenTextureMipmaps(&Texture2D)
@@ -2513,8 +2492,8 @@ pub fn draw_texture_n_patch(texture Texture2D, nPatchInfo NPatchInfo, dest Recta
 
 fn C.DrawTexturePoly(Texture2D, Vector2, &Vector2, &Vector2, int, Color)
 [inline]
-pub fn draw_texture_poly(texture Texture2D, center Vector2, points &Vector2, texcoords &Vector2, pointsCount int, tint Color) {
-	C.DrawTexturePoly(texture, center, points, texcoords, pointsCount, tint)
+pub fn draw_texture_poly(texture Texture2D, center Vector2, points &Vector2, texcoords &Vector2, pointCount int, tint Color) {
+	C.DrawTexturePoly(texture, center, points, texcoords, pointCount, tint)
 }
 
 fn C.Fade(Color, f32) Color
@@ -2565,9 +2544,9 @@ pub fn color_alpha_blend(dst Color, src Color, tint Color) Color {
 	return C.ColorAlphaBlend(dst, src, tint)
 }
 
-fn C.GetColor(int) Color
+fn C.GetColor(u32) Color
 [inline]
-pub fn get_color(hexValue int) Color {
+pub fn get_color(hexValue u32) Color {
 	return C.GetColor(hexValue)
 }
 
@@ -2595,16 +2574,16 @@ pub fn get_font_default() Font {
 	return C.GetFontDefault()
 }
 
-fn C.LoadFont(&char) Font
+fn C.LoadFont(&i8) Font
 [inline]
-pub fn load_font(fileName &char) Font {
+pub fn load_font(fileName &i8) Font {
 	return C.LoadFont(fileName)
 }
 
-fn C.LoadFontEx(&char, int, &int, int) Font
+fn C.LoadFontEx(&i8, int, &int, int) Font
 [inline]
-pub fn load_font_ex(fileName &char, fontSize int, fontChars &int, charsCount int) Font {
-	return C.LoadFontEx(fileName, fontSize, fontChars, charsCount)
+pub fn load_font_ex(fileName &i8, fontSize int, fontChars &int, glyphCount int) Font {
+	return C.LoadFontEx(fileName, fontSize, fontChars, glyphCount)
 }
 
 fn C.LoadFontFromImage(Image, Color, int) Font
@@ -2613,28 +2592,28 @@ pub fn load_font_from_image(image Image, key Color, firstChar int) Font {
 	return C.LoadFontFromImage(image, key, firstChar)
 }
 
-fn C.LoadFontFromMemory(&char, &byte, int, int, &int, int) Font
+fn C.LoadFontFromMemory(&i8, &byte, int, int, &int, int) Font
 [inline]
-pub fn load_font_from_memory(fileType &char, fileData &byte, dataSize int, fontSize int, fontChars &int, charsCount int) Font {
-	return C.LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, charsCount)
+pub fn load_font_from_memory(fileType &i8, fileData &byte, dataSize int, fontSize int, fontChars &int, glyphCount int) Font {
+	return C.LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, glyphCount)
 }
 
-fn C.LoadFontData(&byte, int, int, &int, int, int) &CharInfo
+fn C.LoadFontData(&byte, int, int, &int, int, int) &GlyphInfo
 [inline]
-pub fn load_font_data(fileData &byte, dataSize int, fontSize int, fontChars &int, charsCount int, @type int) &CharInfo {
-	return C.LoadFontData(fileData, dataSize, fontSize, fontChars, charsCount, @type)
+pub fn load_font_data(fileData &byte, dataSize int, fontSize int, fontChars &int, glyphCount int, @type int) &GlyphInfo {
+	return C.LoadFontData(fileData, dataSize, fontSize, fontChars, glyphCount, @type)
 }
 
-fn C.GenImageFontAtlas(&CharInfo, &&Rectangle, int, int, int, int) Image
+fn C.GenImageFontAtlas(&GlyphInfo, &&Rectangle, int, int, int, int) Image
 [inline]
-pub fn gen_image_font_atlas(chars &CharInfo, recs &&Rectangle, charsCount int, fontSize int, padding int, packMethod int) Image {
-	return C.GenImageFontAtlas(chars, recs, charsCount, fontSize, padding, packMethod)
+pub fn gen_image_font_atlas(chars &GlyphInfo, recs &&Rectangle, glyphCount int, fontSize int, padding int, packMethod int) Image {
+	return C.GenImageFontAtlas(chars, recs, glyphCount, fontSize, padding, packMethod)
 }
 
-fn C.UnloadFontData(&CharInfo, int)
+fn C.UnloadFontData(&GlyphInfo, int)
 [inline]
-pub fn unload_font_data(chars &CharInfo, charsCount int) {
-	C.UnloadFontData(chars, charsCount)
+pub fn unload_font_data(chars &GlyphInfo, glyphCount int) {
+	C.UnloadFontData(chars, glyphCount)
 }
 
 fn C.UnloadFont(Font)
@@ -2649,29 +2628,22 @@ pub fn draw_fps(posX int, posY int) {
 	C.DrawFPS(posX, posY)
 }
 
-fn C.DrawText(&char, int, int, int, Color)
+fn C.DrawText(&i8, int, int, int, Color)
 [inline]
-pub fn draw_text(text &char, posX int, posY int, fontSize int, color Color) {
+pub fn draw_text(text &i8, posX int, posY int, fontSize int, color Color) {
 	C.DrawText(text, posX, posY, fontSize, color)
 }
 
-fn C.DrawTextEx(Font, &char, Vector2, f32, f32, Color)
+fn C.DrawTextEx(Font, &i8, Vector2, f32, f32, Color)
 [inline]
-pub fn draw_text_ex(font Font, text &char, position Vector2, fontSize f32, spacing f32, tint Color) {
+pub fn draw_text_ex(font Font, text &i8, position Vector2, fontSize f32, spacing f32, tint Color) {
 	C.DrawTextEx(font, text, position, fontSize, spacing, tint)
 }
 
-fn C.DrawTextRec(Font, &char, Rectangle, f32, f32, bool, Color)
+fn C.DrawTextPro(Font, &i8, Vector2, Vector2, f32, f32, f32, Color)
 [inline]
-pub fn draw_text_rec(font Font, text &char, rec Rectangle, fontSize f32, spacing f32, wordWrap bool, tint Color) {
-	C.DrawTextRec(font, text, rec, fontSize, spacing, wordWrap, tint)
-}
-
-fn C.DrawTextRecEx(Font, &char, Rectangle, f32, f32, bool, Color, int, int, Color, Color)
-[inline]
-pub fn draw_text_rec_ex(font Font, text &char, rec Rectangle, fontSize f32, spacing f32, wordWrap bool, tint Color, selectStart int, selectLength int, selectTint Color, selectBackTint Color) {
-	C.DrawTextRecEx(font, text, rec, fontSize, spacing, wordWrap, tint, selectStart, selectLength,
-		selectTint, selectBackTint)
+pub fn draw_text_pro(font Font, text &i8, position Vector2, origin Vector2, rotation f32, fontSize f32, spacing f32, tint Color) {
+	C.DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint)
 }
 
 fn C.DrawTextCodepoint(Font, int, Vector2, f32, Color)
@@ -2680,15 +2652,15 @@ pub fn draw_text_codepoint(font Font, codepoint int, position Vector2, fontSize 
 	C.DrawTextCodepoint(font, codepoint, position, fontSize, tint)
 }
 
-fn C.MeasureText(&char, int) int
+fn C.MeasureText(&i8, int) int
 [inline]
-pub fn measure_text(text &char, fontSize int) int {
+pub fn measure_text(text &i8, fontSize int) int {
 	return C.MeasureText(text, fontSize)
 }
 
-fn C.MeasureTextEx(Font, &char, f32, f32) Vector2
+fn C.MeasureTextEx(Font, &i8, f32, f32) Vector2
 [inline]
-pub fn measure_text_ex(font Font, text &char, fontSize f32, spacing f32) Vector2 {
+pub fn measure_text_ex(font Font, text &i8, fontSize f32, spacing f32) Vector2 {
 	return C.MeasureTextEx(font, text, fontSize, spacing)
 }
 
@@ -2698,124 +2670,136 @@ pub fn get_glyph_index(font Font, codepoint int) int {
 	return C.GetGlyphIndex(font, codepoint)
 }
 
-fn C.TextCopy(&char, &char) int
+fn C.GetGlyphInfo(Font, int) GlyphInfo
 [inline]
-pub fn text_copy(dst &char, src &char) int {
+pub fn get_glyph_info(font Font, codepoint int) GlyphInfo {
+	return C.GetGlyphInfo(font, codepoint)
+}
+
+fn C.GetGlyphAtlasRec(Font, int) Rectangle
+[inline]
+pub fn get_glyph_atlas_rec(font Font, codepoint int) Rectangle {
+	return C.GetGlyphAtlasRec(font, codepoint)
+}
+
+fn C.LoadCodepoints(&i8, &int) &int
+[inline]
+pub fn load_codepoints(text &i8, count &int) &int {
+	return C.LoadCodepoints(text, count)
+}
+
+fn C.UnloadCodepoints(&int)
+[inline]
+pub fn unload_codepoints(codepoints &int) {
+	C.UnloadCodepoints(codepoints)
+}
+
+fn C.GetCodepointCount(&i8) int
+[inline]
+pub fn get_codepoint_count(text &i8) int {
+	return C.GetCodepointCount(text)
+}
+
+fn C.GetCodepoint(&i8, &int) int
+[inline]
+pub fn get_codepoint(text &i8, bytesProcessed &int) int {
+	return C.GetCodepoint(text, bytesProcessed)
+}
+
+fn C.CodepointToUTF8(int, &int) &i8
+[inline]
+pub fn codepoint_to_utf8(codepoint int, byteSize &int) &i8 {
+	return C.CodepointToUTF8(codepoint, byteSize)
+}
+
+fn C.TextCodepointsToUTF8(&int, int) &i8
+[inline]
+pub fn text_codepoints_to_utf8(codepoints &int, length int) &i8 {
+	return C.TextCodepointsToUTF8(codepoints, length)
+}
+
+fn C.TextCopy(&i8, &i8) int
+[inline]
+pub fn text_copy(dst &i8, src &i8) int {
 	return C.TextCopy(dst, src)
 }
 
-fn C.TextIsEqual(&char, &char) bool
+fn C.TextIsEqual(&i8, &i8) bool
 [inline]
-pub fn text_is_equal(text1 &char, text2 &char) bool {
+pub fn text_is_equal(text1 &i8, text2 &i8) bool {
 	return C.TextIsEqual(text1, text2)
 }
 
-fn C.TextLength(&char) u32
+fn C.TextLength(&i8) u32
 [inline]
-pub fn text_length(text &char) u32 {
+pub fn text_length(text &i8) u32 {
 	return C.TextLength(text)
 }
 
-fn C.TextFormat(&char, ...&char) &char
+fn C.TextSubtext(&i8, int, int) &i8
 [inline]
-pub fn text_format(text &char, variadic ...&char) &char {
-	return C.TextFormat(text, ...variadic)
-}
-
-fn C.TextSubtext(&char, int, int) &char
-[inline]
-pub fn text_subtext(text &char, position int, length int) &char {
+pub fn text_subtext(text &i8, position int, length int) &i8 {
 	return C.TextSubtext(text, position, length)
 }
 
-fn C.TextReplace(&char, &char, &char) &char
+fn C.TextReplace(&i8, &i8, &i8) &i8
 [inline]
-pub fn text_replace(text &char, replace &char, by &char) &char {
+pub fn text_replace(text &i8, replace &i8, by &i8) &i8 {
 	return C.TextReplace(text, replace, by)
 }
 
-fn C.TextInsert(&char, &char, int) &char
+fn C.TextInsert(&i8, &i8, int) &i8
 [inline]
-pub fn text_insert(text &char, insert &char, position int) &char {
+pub fn text_insert(text &i8, insert &i8, position int) &i8 {
 	return C.TextInsert(text, insert, position)
 }
 
-fn C.TextJoin(&&char, int, &char) &char
+fn C.TextJoin(&&i8, int, &i8) &i8
 [inline]
-pub fn text_join(textList &&char, count int, delimiter &char) &char {
+pub fn text_join(textList &&i8, count int, delimiter &i8) &i8 {
 	return C.TextJoin(textList, count, delimiter)
 }
 
-fn C.TextSplit(&char, char, &int) &&char
+fn C.TextSplit(&i8, i8, &int) &&i8
 [inline]
-pub fn text_split(text &char, delimiter char, count &int) &&char {
+pub fn text_split(text &i8, delimiter i8, count &int) &&i8 {
 	return C.TextSplit(text, delimiter, count)
 }
 
-fn C.TextAppend(&char, &char, &int)
+fn C.TextAppend(&i8, &i8, &int)
 [inline]
-pub fn text_append(text &char, append &char, position &int) {
+pub fn text_append(text &i8, append &i8, position &int) {
 	C.TextAppend(text, append, position)
 }
 
-fn C.TextFindIndex(&char, &char) int
+fn C.TextFindIndex(&i8, &i8) int
 [inline]
-pub fn text_find_index(text &char, find &char) int {
+pub fn text_find_index(text &i8, find &i8) int {
 	return C.TextFindIndex(text, find)
 }
 
-fn C.TextToUpper(&char) &char
+fn C.TextToUpper(&i8) &i8
 [inline]
-pub fn text_to_upper(text &char) &char {
+pub fn text_to_upper(text &i8) &i8 {
 	return C.TextToUpper(text)
 }
 
-fn C.TextToLower(&char) &char
+fn C.TextToLower(&i8) &i8
 [inline]
-pub fn text_to_lower(text &char) &char {
+pub fn text_to_lower(text &i8) &i8 {
 	return C.TextToLower(text)
 }
 
-fn C.TextToPascal(&char) &char
+fn C.TextToPascal(&i8) &i8
 [inline]
-pub fn text_to_pascal(text &char) &char {
+pub fn text_to_pascal(text &i8) &i8 {
 	return C.TextToPascal(text)
 }
 
-fn C.TextToInteger(&char) int
+fn C.TextToInteger(&i8) int
 [inline]
-pub fn text_to_integer(text &char) int {
+pub fn text_to_integer(text &i8) int {
 	return C.TextToInteger(text)
-}
-
-fn C.TextToUtf8(&int, int) &char
-[inline]
-pub fn text_to_utf8(codepoints &int, length int) &char {
-	return C.TextToUtf8(codepoints, length)
-}
-
-fn C.GetCodepoints(&char, &int) &int
-[inline]
-pub fn get_codepoints(text &char, count &int) &int {
-	return C.GetCodepoints(text, count)
-}
-
-fn C.GetCodepointsCount(&char) int
-[inline]
-pub fn get_codepoints_count(text &char) int {
-	return C.GetCodepointsCount(text)
-}
-
-fn C.GetNextCodepoint(&char, &int) int
-[inline]
-pub fn get_next_codepoint(text &char, bytesProcessed &int) int {
-	return C.GetNextCodepoint(text, bytesProcessed)
-}
-
-fn C.CodepointToUtf8(int, &int) &char
-[inline]
-pub fn codepoint_to_utf8(codepoint int, byteLength &int) &char {
-	return C.CodepointToUtf8(codepoint, byteLength)
 }
 
 fn C.DrawLine3D(Vector3, Vector3, Color)
@@ -2844,8 +2828,8 @@ pub fn draw_triangle3_d(v1 Vector3, v2 Vector3, v3 Vector3, color Color) {
 
 fn C.DrawTriangleStrip3D(&Vector3, int, Color)
 [inline]
-pub fn draw_triangle_strip3_d(points &Vector3, pointsCount int, color Color) {
-	C.DrawTriangleStrip3D(points, pointsCount, color)
+pub fn draw_triangle_strip3_d(points &Vector3, pointCount int, color Color) {
+	C.DrawTriangleStrip3D(points, pointCount, color)
 }
 
 fn C.DrawCube(Vector3, f32, f32, f32, Color)
@@ -2878,6 +2862,12 @@ pub fn draw_cube_texture(texture Texture2D, position Vector3, width f32, height 
 	C.DrawCubeTexture(texture, position, width, height, length, color)
 }
 
+fn C.DrawCubeTextureRec(Texture2D, Rectangle, Vector3, f32, f32, f32, Color)
+[inline]
+pub fn draw_cube_texture_rec(texture Texture2D, source Rectangle, position Vector3, width f32, height f32, length f32, color Color) {
+	C.DrawCubeTextureRec(texture, source, position, width, height, length, color)
+}
+
 fn C.DrawSphere(Vector3, f32, Color)
 [inline]
 pub fn draw_sphere(centerPos Vector3, radius f32, color Color) {
@@ -2902,10 +2892,22 @@ pub fn draw_cylinder(position Vector3, radiusTop f32, radiusBottom f32, height f
 	C.DrawCylinder(position, radiusTop, radiusBottom, height, slices, color)
 }
 
+fn C.DrawCylinderEx(Vector3, Vector3, f32, f32, int, Color)
+[inline]
+pub fn draw_cylinder_ex(startPos Vector3, endPos Vector3, startRadius f32, endRadius f32, sides int, color Color) {
+	C.DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color)
+}
+
 fn C.DrawCylinderWires(Vector3, f32, f32, f32, int, Color)
 [inline]
 pub fn draw_cylinder_wires(position Vector3, radiusTop f32, radiusBottom f32, height f32, slices int, color Color) {
 	C.DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color)
+}
+
+fn C.DrawCylinderWiresEx(Vector3, Vector3, f32, f32, int, Color)
+[inline]
+pub fn draw_cylinder_wires_ex(startPos Vector3, endPos Vector3, startRadius f32, endRadius f32, sides int, color Color) {
+	C.DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)
 }
 
 fn C.DrawPlane(Vector3, Vector2, Color)
@@ -2926,9 +2928,9 @@ pub fn draw_grid(slices int, spacing f32) {
 	C.DrawGrid(slices, spacing)
 }
 
-fn C.LoadModel(&char) Model
+fn C.LoadModel(&i8) Model
 [inline]
-pub fn load_model(fileName &char) Model {
+pub fn load_model(fileName &i8) Model {
 	return C.LoadModel(fileName)
 }
 
@@ -2950,6 +2952,61 @@ pub fn unload_model_keep_meshes(model Model) {
 	C.UnloadModelKeepMeshes(model)
 }
 
+fn C.GetModelBoundingBox(Model) BoundingBox
+[inline]
+pub fn get_model_bounding_box(model Model) BoundingBox {
+	return C.GetModelBoundingBox(model)
+}
+
+fn C.DrawModel(Model, Vector3, f32, Color)
+[inline]
+pub fn draw_model(model Model, position Vector3, scale f32, tint Color) {
+	C.DrawModel(model, position, scale, tint)
+}
+
+fn C.DrawModelEx(Model, Vector3, Vector3, f32, Vector3, Color)
+[inline]
+pub fn draw_model_ex(model Model, position Vector3, rotationAxis Vector3, rotationAngle f32, scale Vector3, tint Color) {
+	C.DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+}
+
+fn C.DrawModelWires(Model, Vector3, f32, Color)
+[inline]
+pub fn draw_model_wires(model Model, position Vector3, scale f32, tint Color) {
+	C.DrawModelWires(model, position, scale, tint)
+}
+
+fn C.DrawModelWiresEx(Model, Vector3, Vector3, f32, Vector3, Color)
+[inline]
+pub fn draw_model_wires_ex(model Model, position Vector3, rotationAxis Vector3, rotationAngle f32, scale Vector3, tint Color) {
+	C.DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)
+}
+
+fn C.DrawBoundingBox(BoundingBox, Color)
+[inline]
+pub fn draw_bounding_box(box BoundingBox, color Color) {
+	C.DrawBoundingBox(box, color)
+}
+
+fn C.DrawBillboard(Camera, Texture2D, Vector3, f32, Color)
+[inline]
+pub fn draw_billboard(camera Camera, texture Texture2D, position Vector3, size f32, tint Color) {
+	C.DrawBillboard(camera, texture, position, size, tint)
+}
+
+fn C.DrawBillboardRec(Camera, Texture2D, Rectangle, Vector3, Vector2, Color)
+[inline]
+pub fn draw_billboard_rec(camera Camera, texture Texture2D, source Rectangle, position Vector3, size Vector2, tint Color) {
+	C.DrawBillboardRec(camera, texture, source, position, size, tint)
+}
+
+fn C.DrawBillboardPro(Camera, Texture2D, Rectangle, Vector3, Vector3, Vector2, Vector2, f32, Color)
+[inline]
+pub fn draw_billboard_pro(camera Camera, texture Texture2D, source Rectangle, position Vector3, up Vector3, size Vector2, origin Vector2, rotation f32, tint Color) {
+	C.DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation,
+		tint)
+}
+
 fn C.UploadMesh(&Mesh, bool)
 [inline]
 pub fn upload_mesh(mesh &Mesh, dynamic bool) {
@@ -2960,6 +3017,12 @@ fn C.UpdateMeshBuffer(Mesh, int, voidptr, int, int)
 [inline]
 pub fn update_mesh_buffer(mesh Mesh, index int, data voidptr, dataSize int, offset int) {
 	C.UpdateMeshBuffer(mesh, index, data, dataSize, offset)
+}
+
+fn C.UnloadMesh(Mesh)
+[inline]
+pub fn unload_mesh(mesh Mesh) {
+	C.UnloadMesh(mesh)
 }
 
 fn C.DrawMesh(Mesh, Material, Matrix)
@@ -2974,76 +3037,28 @@ pub fn draw_mesh_instanced(mesh Mesh, material Material, transforms &Matrix, ins
 	C.DrawMeshInstanced(mesh, material, transforms, instances)
 }
 
-fn C.UnloadMesh(Mesh)
+fn C.ExportMesh(Mesh, &i8) bool
 [inline]
-pub fn unload_mesh(mesh Mesh) {
-	C.UnloadMesh(mesh)
-}
-
-fn C.ExportMesh(Mesh, &char) bool
-[inline]
-pub fn export_mesh(mesh Mesh, fileName &char) bool {
+pub fn export_mesh(mesh Mesh, fileName &i8) bool {
 	return C.ExportMesh(mesh, fileName)
 }
 
-fn C.LoadMaterials(&char, &int) &Material
+fn C.GetMeshBoundingBox(Mesh) BoundingBox
 [inline]
-pub fn load_materials(fileName &char, materialCount &int) &Material {
-	return C.LoadMaterials(fileName, materialCount)
+pub fn get_mesh_bounding_box(mesh Mesh) BoundingBox {
+	return C.GetMeshBoundingBox(mesh)
 }
 
-fn C.LoadMaterialDefault() Material
+fn C.GenMeshTangents(&Mesh)
 [inline]
-pub fn load_material_default() Material {
-	return C.LoadMaterialDefault()
+pub fn gen_mesh_tangents(mesh &Mesh) {
+	C.GenMeshTangents(mesh)
 }
 
-fn C.UnloadMaterial(Material)
+fn C.GenMeshBinormals(&Mesh)
 [inline]
-pub fn unload_material(material Material) {
-	C.UnloadMaterial(material)
-}
-
-fn C.SetMaterialTexture(&Material, int, Texture2D)
-[inline]
-pub fn set_material_texture(material &Material, mapType int, texture Texture2D) {
-	C.SetMaterialTexture(material, mapType, texture)
-}
-
-fn C.SetModelMeshMaterial(&Model, int, int)
-[inline]
-pub fn set_model_mesh_material(model &Model, meshId int, materialId int) {
-	C.SetModelMeshMaterial(model, meshId, materialId)
-}
-
-fn C.LoadModelAnimations(&char, &int) &ModelAnimation
-[inline]
-pub fn load_model_animations(fileName &char, animsCount &int) &ModelAnimation {
-	return C.LoadModelAnimations(fileName, animsCount)
-}
-
-fn C.UpdateModelAnimation(Model, ModelAnimation, int)
-[inline]
-pub fn update_model_animation(model Model, anim ModelAnimation, frame int) {
-	C.UpdateModelAnimation(model, anim, frame)
-}
-
-fn C.UnloadModelAnimation(ModelAnimation)
-[inline]
-pub fn unload_model_animation(anim ModelAnimation) {
-	C.UnloadModelAnimation(anim)
-}
-
-fn C.UnloadModelAnimations(&ModelAnimation, u32)
-[inline]
-pub fn unload_model_animations(animations &ModelAnimation, count u32) {
-	C.UnloadModelAnimations(animations, count)
-}
-
-fn C.IsModelAnimationValid(Model, ModelAnimation) bool
-[inline]
-pub fn is_model_animation_valid(model Model, anim ModelAnimation) bool {
-	return C.IsModelAnimationValid(model, anim)
+pub fn gen_mesh_binormals(mesh &Mesh) {
+	C.GenMeshBinormals(mesh)
 }
 
 fn C.GenMeshPoly(int, f32) Mesh
@@ -3082,6 +3097,12 @@ pub fn gen_mesh_cylinder(radius f32, height f32, slices int) Mesh {
 	return C.GenMeshCylinder(radius, height, slices)
 }
 
+fn C.GenMeshCone(f32, f32, int) Mesh
+[inline]
+pub fn gen_mesh_cone(radius f32, height f32, slices int) Mesh {
+	return C.GenMeshCone(radius, height, slices)
+}
+
 fn C.GenMeshTorus(f32, f32, int, int) Mesh
 [inline]
 pub fn gen_mesh_torus(radius f32, size f32, radSeg int, sides int) Mesh {
@@ -3106,64 +3127,64 @@ pub fn gen_mesh_cubicmap(cubicmap Image, cubeSize Vector3) Mesh {
 	return C.GenMeshCubicmap(cubicmap, cubeSize)
 }
 
-fn C.MeshBoundingBox(Mesh) BoundingBox
+fn C.LoadMaterials(&i8, &int) &Material
 [inline]
-pub fn mesh_bounding_box(mesh Mesh) BoundingBox {
-	return C.MeshBoundingBox(mesh)
+pub fn load_materials(fileName &i8, materialCount &int) &Material {
+	return C.LoadMaterials(fileName, materialCount)
 }
 
-fn C.MeshTangents(&Mesh)
+fn C.LoadMaterialDefault() Material
 [inline]
-pub fn mesh_tangents(mesh &Mesh) {
-	C.MeshTangents(mesh)
+pub fn load_material_default() Material {
+	return C.LoadMaterialDefault()
 }
 
-fn C.MeshBinormals(&Mesh)
+fn C.UnloadMaterial(Material)
 [inline]
-pub fn mesh_binormals(mesh &Mesh) {
-	C.MeshBinormals(mesh)
+pub fn unload_material(material Material) {
+	C.UnloadMaterial(material)
 }
 
-fn C.DrawModel(Model, Vector3, f32, Color)
+fn C.SetMaterialTexture(&Material, int, Texture2D)
 [inline]
-pub fn draw_model(model Model, position Vector3, scale f32, tint Color) {
-	C.DrawModel(model, position, scale, tint)
+pub fn set_material_texture(material &Material, mapType int, texture Texture2D) {
+	C.SetMaterialTexture(material, mapType, texture)
 }
 
-fn C.DrawModelEx(Model, Vector3, Vector3, f32, Vector3, Color)
+fn C.SetModelMeshMaterial(&Model, int, int)
 [inline]
-pub fn draw_model_ex(model Model, position Vector3, rotationAxis Vector3, rotationAngle f32, scale Vector3, tint Color) {
-	C.DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+pub fn set_model_mesh_material(model &Model, meshId int, materialId int) {
+	C.SetModelMeshMaterial(model, meshId, materialId)
 }
 
-fn C.DrawModelWires(Model, Vector3, f32, Color)
+fn C.LoadModelAnimations(&i8, &u32) &ModelAnimation
 [inline]
-pub fn draw_model_wires(model Model, position Vector3, scale f32, tint Color) {
-	C.DrawModelWires(model, position, scale, tint)
+pub fn load_model_animations(fileName &i8, animCount &u32) &ModelAnimation {
+	return C.LoadModelAnimations(fileName, animCount)
 }
 
-fn C.DrawModelWiresEx(Model, Vector3, Vector3, f32, Vector3, Color)
+fn C.UpdateModelAnimation(Model, ModelAnimation, int)
 [inline]
-pub fn draw_model_wires_ex(model Model, position Vector3, rotationAxis Vector3, rotationAngle f32, scale Vector3, tint Color) {
-	C.DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)
+pub fn update_model_animation(model Model, anim ModelAnimation, frame int) {
+	C.UpdateModelAnimation(model, anim, frame)
 }
 
-fn C.DrawBoundingBox(BoundingBox, Color)
+fn C.UnloadModelAnimation(ModelAnimation)
 [inline]
-pub fn draw_bounding_box(box BoundingBox, color Color) {
-	C.DrawBoundingBox(box, color)
+pub fn unload_model_animation(anim ModelAnimation) {
+	C.UnloadModelAnimation(anim)
 }
 
-fn C.DrawBillboard(Camera, Texture2D, Vector3, f32, Color)
+fn C.UnloadModelAnimations(&ModelAnimation, u32)
 [inline]
-pub fn draw_billboard(camera Camera, texture Texture2D, center Vector3, size f32, tint Color) {
-	C.DrawBillboard(camera, texture, center, size, tint)
+pub fn unload_model_animations(animations &ModelAnimation, count u32) {
+	C.UnloadModelAnimations(animations, count)
 }
 
-fn C.DrawBillboardRec(Camera, Texture2D, Rectangle, Vector3, f32, Color)
+fn C.IsModelAnimationValid(Model, ModelAnimation) bool
 [inline]
-pub fn draw_billboard_rec(camera Camera, texture Texture2D, source Rectangle, center Vector3, size f32, tint Color) {
-	C.DrawBillboardRec(camera, texture, source, center, size, tint)
+pub fn is_model_animation_valid(model Model, anim ModelAnimation) bool {
+	return C.IsModelAnimationValid(model, anim)
 }
 
 fn C.CheckCollisionSpheres(Vector3, f32, Vector3, f32) bool
@@ -3184,46 +3205,40 @@ pub fn check_collision_box_sphere(box BoundingBox, center Vector3, radius f32) b
 	return C.CheckCollisionBoxSphere(box, center, radius)
 }
 
-fn C.CheckCollisionRaySphere(Ray, Vector3, f32) bool
+fn C.GetRayCollisionSphere(Ray, Vector3, f32) RayCollision
 [inline]
-pub fn check_collision_ray_sphere(ray Ray, center Vector3, radius f32) bool {
-	return C.CheckCollisionRaySphere(ray, center, radius)
+pub fn get_ray_collision_sphere(ray Ray, center Vector3, radius f32) RayCollision {
+	return C.GetRayCollisionSphere(ray, center, radius)
 }
 
-fn C.CheckCollisionRaySphereEx(Ray, Vector3, f32, &Vector3) bool
+fn C.GetRayCollisionBox(Ray, BoundingBox) RayCollision
 [inline]
-pub fn check_collision_ray_sphere_ex(ray Ray, center Vector3, radius f32, collisionPoint &Vector3) bool {
-	return C.CheckCollisionRaySphereEx(ray, center, radius, collisionPoint)
+pub fn get_ray_collision_box(ray Ray, box BoundingBox) RayCollision {
+	return C.GetRayCollisionBox(ray, box)
 }
 
-fn C.CheckCollisionRayBox(Ray, BoundingBox) bool
+fn C.GetRayCollisionModel(Ray, Model) RayCollision
 [inline]
-pub fn check_collision_ray_box(ray Ray, box BoundingBox) bool {
-	return C.CheckCollisionRayBox(ray, box)
+pub fn get_ray_collision_model(ray Ray, model Model) RayCollision {
+	return C.GetRayCollisionModel(ray, model)
 }
 
-fn C.GetCollisionRayMesh(Ray, Mesh, Matrix) RayHitInfo
+fn C.GetRayCollisionMesh(Ray, Mesh, Matrix) RayCollision
 [inline]
-pub fn get_collision_ray_mesh(ray Ray, mesh Mesh, transform Matrix) RayHitInfo {
-	return C.GetCollisionRayMesh(ray, mesh, transform)
+pub fn get_ray_collision_mesh(ray Ray, mesh Mesh, transform Matrix) RayCollision {
+	return C.GetRayCollisionMesh(ray, mesh, transform)
 }
 
-fn C.GetCollisionRayModel(Ray, Model) RayHitInfo
+fn C.GetRayCollisionTriangle(Ray, Vector3, Vector3, Vector3) RayCollision
 [inline]
-pub fn get_collision_ray_model(ray Ray, model Model) RayHitInfo {
-	return C.GetCollisionRayModel(ray, model)
+pub fn get_ray_collision_triangle(ray Ray, p1 Vector3, p2 Vector3, p3 Vector3) RayCollision {
+	return C.GetRayCollisionTriangle(ray, p1, p2, p3)
 }
 
-fn C.GetCollisionRayTriangle(Ray, Vector3, Vector3, Vector3) RayHitInfo
+fn C.GetRayCollisionQuad(Ray, Vector3, Vector3, Vector3, Vector3) RayCollision
 [inline]
-pub fn get_collision_ray_triangle(ray Ray, p1 Vector3, p2 Vector3, p3 Vector3) RayHitInfo {
-	return C.GetCollisionRayTriangle(ray, p1, p2, p3)
-}
-
-fn C.GetCollisionRayGround(Ray, f32) RayHitInfo
-[inline]
-pub fn get_collision_ray_ground(ray Ray, groundHeight f32) RayHitInfo {
-	return C.GetCollisionRayGround(ray, groundHeight)
+pub fn get_ray_collision_quad(ray Ray, p1 Vector3, p2 Vector3, p3 Vector3, p4 Vector3) RayCollision {
+	return C.GetRayCollisionQuad(ray, p1, p2, p3, p4)
 }
 
 fn C.InitAudioDevice()
@@ -3250,21 +3265,21 @@ pub fn set_master_volume(volume f32) {
 	C.SetMasterVolume(volume)
 }
 
-fn C.LoadWave(&char) Wave
+fn C.LoadWave(&i8) Wave
 [inline]
-pub fn load_wave(fileName &char) Wave {
+pub fn load_wave(fileName &i8) Wave {
 	return C.LoadWave(fileName)
 }
 
-fn C.LoadWaveFromMemory(&char, &byte, int) Wave
+fn C.LoadWaveFromMemory(&i8, &byte, int) Wave
 [inline]
-pub fn load_wave_from_memory(fileType &char, fileData &byte, dataSize int) Wave {
+pub fn load_wave_from_memory(fileType &i8, fileData &byte, dataSize int) Wave {
 	return C.LoadWaveFromMemory(fileType, fileData, dataSize)
 }
 
-fn C.LoadSound(&char) Sound
+fn C.LoadSound(&i8) Sound
 [inline]
-pub fn load_sound(fileName &char) Sound {
+pub fn load_sound(fileName &i8) Sound {
 	return C.LoadSound(fileName)
 }
 
@@ -3276,8 +3291,8 @@ pub fn load_sound_from_wave(wave Wave) Sound {
 
 fn C.UpdateSound(Sound, voidptr, int)
 [inline]
-pub fn update_sound(sound Sound, data voidptr, samplesCount int) {
-	C.UpdateSound(sound, data, samplesCount)
+pub fn update_sound(sound Sound, data voidptr, sampleCount int) {
+	C.UpdateSound(sound, data, sampleCount)
 }
 
 fn C.UnloadWave(Wave)
@@ -3292,15 +3307,15 @@ pub fn unload_sound(sound Sound) {
 	C.UnloadSound(sound)
 }
 
-fn C.ExportWave(Wave, &char) bool
+fn C.ExportWave(Wave, &i8) bool
 [inline]
-pub fn export_wave(wave Wave, fileName &char) bool {
+pub fn export_wave(wave Wave, fileName &i8) bool {
 	return C.ExportWave(wave, fileName)
 }
 
-fn C.ExportWaveAsCode(Wave, &char) bool
+fn C.ExportWaveAsCode(Wave, &i8) bool
 [inline]
-pub fn export_wave_as_code(wave Wave, fileName &char) bool {
+pub fn export_wave_as_code(wave Wave, fileName &i8) bool {
 	return C.ExportWaveAsCode(wave, fileName)
 }
 
@@ -3394,15 +3409,15 @@ pub fn unload_wave_samples(samples &f32) {
 	C.UnloadWaveSamples(samples)
 }
 
-fn C.LoadMusicStream(&char) Music
+fn C.LoadMusicStream(&i8) Music
 [inline]
-pub fn load_music_stream(fileName &char) Music {
+pub fn load_music_stream(fileName &i8) Music {
 	return C.LoadMusicStream(fileName)
 }
 
-fn C.LoadMusicStreamFromMemory(&char, &byte, int) Music
+fn C.LoadMusicStreamFromMemory(&i8, &byte, int) Music
 [inline]
-pub fn load_music_stream_from_memory(fileType &char, data &byte, dataSize int) Music {
+pub fn load_music_stream_from_memory(fileType &i8, data &byte, dataSize int) Music {
 	return C.LoadMusicStreamFromMemory(fileType, data, dataSize)
 }
 
@@ -3418,10 +3433,10 @@ pub fn play_music_stream(music Music) {
 	C.PlayMusicStream(music)
 }
 
-fn C.IsMusicPlaying(Music) bool
+fn C.IsMusicStreamPlaying(Music) bool
 [inline]
-pub fn is_music_playing(music Music) bool {
-	return C.IsMusicPlaying(music)
+pub fn is_music_stream_playing(music Music) bool {
+	return C.IsMusicStreamPlaying(music)
 }
 
 fn C.UpdateMusicStream(Music)
@@ -3448,6 +3463,12 @@ pub fn resume_music_stream(music Music) {
 	C.ResumeMusicStream(music)
 }
 
+fn C.SeekMusicStream(Music, f32)
+[inline]
+pub fn seek_music_stream(music Music, position f32) {
+	C.SeekMusicStream(music, position)
+}
+
 fn C.SetMusicVolume(Music, f32)
 [inline]
 pub fn set_music_volume(music Music, volume f32) {
@@ -3472,22 +3493,22 @@ pub fn get_music_time_played(music Music) f32 {
 	return C.GetMusicTimePlayed(music)
 }
 
-fn C.InitAudioStream(u32, u32, u32) AudioStream
+fn C.LoadAudioStream(u32, u32, u32) AudioStream
 [inline]
-pub fn init_audio_stream(sampleRate u32, sampleSize u32, channels u32) AudioStream {
-	return C.InitAudioStream(sampleRate, sampleSize, channels)
+pub fn load_audio_stream(sampleRate u32, sampleSize u32, channels u32) AudioStream {
+	return C.LoadAudioStream(sampleRate, sampleSize, channels)
+}
+
+fn C.UnloadAudioStream(AudioStream)
+[inline]
+pub fn unload_audio_stream(stream AudioStream) {
+	C.UnloadAudioStream(stream)
 }
 
 fn C.UpdateAudioStream(AudioStream, voidptr, int)
 [inline]
-pub fn update_audio_stream(stream AudioStream, data voidptr, samplesCount int) {
-	C.UpdateAudioStream(stream, data, samplesCount)
-}
-
-fn C.CloseAudioStream(AudioStream)
-[inline]
-pub fn close_audio_stream(stream AudioStream) {
-	C.CloseAudioStream(stream)
+pub fn update_audio_stream(stream AudioStream, data voidptr, frameCount int) {
+	C.UpdateAudioStream(stream, data, frameCount)
 }
 
 fn C.IsAudioStreamProcessed(AudioStream) bool
