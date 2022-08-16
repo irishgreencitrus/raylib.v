@@ -2,6 +2,33 @@ module raylibv
 
 // start enums
 pub const (
+	// Builtin colors
+	lightgray  = Color{200, 200, 200, 255}
+	gray       = Color{130, 130, 130, 255}
+	darkgray   = Color{80, 80, 80, 255}
+	yellow     = Color{253, 249, 0, 255}
+	gold       = Color{255, 203, 0, 255}
+	orange     = Color{255, 161, 0, 255}
+	pink       = Color{255, 109, 194, 255}
+	red        = Color{230, 41, 55, 255}
+	maroon     = Color{190, 33, 55, 255}
+	green      = Color{0, 228, 48, 255}
+	lime       = Color{0, 158, 47, 255}
+	darkgreen  = Color{0, 117, 44, 255}
+	skyblue    = Color{102, 191, 255, 255}
+	blue       = Color{0, 121, 241, 255}
+	darkblue   = Color{0, 82, 172, 255}
+	purple     = Color{200, 122, 255, 255}
+	violet     = Color{135, 60, 190, 255}
+	darkpurple = Color{112, 31, 126, 255}
+	beige      = Color{211, 176, 131, 255}
+	brown      = Color{127, 106, 79, 255}
+	darkbrown  = Color{76, 63, 47, 255}
+	white      = Color{255, 255, 255, 255}
+	black      = Color{0, 0, 0, 255}
+	blank      = Color{0, 0, 0, 0}
+	magenta    = Color{255, 0, 255, 255}
+	raywhite   = Color{245, 245, 245, 255}
 	// ConfigFlags
 	flag_vsync_hint                       = 64
 	flag_fullscreen_mode                  = 2
