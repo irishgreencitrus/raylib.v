@@ -16,7 +16,7 @@ pass -d wayland.
 \********************************************************/
 module main
 
-import raylibv as r
+import irishgreencitrus.raylibv as r
 
 const (
 	screen_width  = 800

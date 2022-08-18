@@ -1,8 +1,7 @@
 # raylib.v for raylib v4.2.0
 ![raylib.v icon](icon.png)
 
-
-## NOT CURRENTLY WORKING ON WINDOWS. SEE https://github.com/irishgreencitrus/raylib.v/issues/1
+Have a problem? raylib.v currently requires the `master` branch of V, so please run `v up` before filing any issues.
 
 Not a fork! This isn't a fork of vraylib but a wrapper built from the ground up with cross compatibility in mind.
 raylib.v is a binding for raylib in V with an aim for 100% parity with the C library.

@@ -1,17 +1,19 @@
 module raylibv
 
+#preinclude "@VMODROOT/include/pre.h"
+
 $if x64 {
 	#flag -lraylib
 	$if !override_default_lib ? {
 		#include "@VMODROOT/include/raylib.h"
 		#flag -I"@VMODROOT/include/"
-		#flag -L"@VMODROOT/include/"
 	}
 	$if prod {
 		#flag -O2
 		#flag -s
 	}
 	$if windows {
+		#flag -L"@VMODROOT/include/windows"
 		#flag -lopengl32
 		#flag -lgdi32
 		#flag -lwinmm
@@ -19,6 +21,7 @@ $if x64 {
 		#flag -lpthread
 		#flag -DPLATFORM_DESKTOP
 	} $else $if linux {
+		#flag -L"@VMODROOT/include/linux"
 		#flag -lGL
 		#flag -lm
 		#flag -lpthread
