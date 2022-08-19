@@ -2,8 +2,11 @@ module raylibv
 
 #preinclude "@VMODROOT/include/pre.h"
 
-$if x64 {
+$if debug {
 	$compile_warn('If you get errors refer to https://github.com/irishgreencitrus/raylib.v for instructions on how to setup the library')
+}
+
+$if x64 {
 	#flag -lraylib
 	$if !override_default_lib ? {
 		#flag -L"@VMODROOT/include/"
