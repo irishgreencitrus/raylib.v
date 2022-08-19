@@ -9,9 +9,9 @@ $if debug {
 $if x64 {
 	#flag -lraylib
 	$if !override_default_lib ? {
-		#flag -L"@VMODROOT/include/"
+		#flag -L@VMODROOT/include/
 		#include "@VMODROOT/include/raylib.h"
-		#flag -I"@VMODROOT/include/"
+		#flag -I@VMODROOT/include/
 	}
 	$if prod {
 		#flag -O2
