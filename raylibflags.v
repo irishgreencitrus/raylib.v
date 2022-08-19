@@ -3,8 +3,10 @@ module raylibv
 #preinclude "@VMODROOT/include/pre.h"
 
 $if x64 {
+	$compile_warn('If you get errors refer to https://github.com/irishgreencitrus/raylib.v for instructions on how to setup the library')
 	#flag -lraylib
 	$if !override_default_lib ? {
+		#flag -L"@VMODROOT/include/"
 		#include "@VMODROOT/include/raylib.h"
 		#flag -I"@VMODROOT/include/"
 	}
@@ -13,7 +15,6 @@ $if x64 {
 		#flag -s
 	}
 	$if windows {
-		#flag -L"@VMODROOT/include/windows"
 		#flag -lopengl32
 		#flag -lgdi32
 		#flag -lwinmm
@@ -21,7 +22,6 @@ $if x64 {
 		#flag -lpthread
 		#flag -DPLATFORM_DESKTOP
 	} $else $if linux {
-		#flag -L"@VMODROOT/include/linux"
 		#flag -lGL
 		#flag -lm
 		#flag -lpthread

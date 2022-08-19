@@ -10,7 +10,15 @@ This probably suffices most uses for raylib at the moment, however some more adv
 If you need said functionality, open an issue to prioritize it and bring it to my attention!
 
 ## Installation
-Just do `v install irishgreencitrus.raylibv`
+Do `v install irishgreencitrus.raylibv`
+
+Followed by `v show irishgreencitrus.raylibv`
+
+This displays the location of the library.
+
+`cd` to this location and run `v run installraylib.vsh`
+
+Now you should be able to run the examples! (If you cannot, create an issue)
 ## Examples
 See the `examples/` folder for some examples.
 ## Roadmap

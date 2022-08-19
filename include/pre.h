@@ -54,23 +54,23 @@ typedef struct tagMSG *LPMSG;
 #include <windows.h>
 
 // Type required by some unused function...
-typedef struct tagBITMAPINFOHEADER {
-  DWORD biSize;
-  LONG  biWidth;
-  LONG  biHeight;
-  WORD  biPlanes;
-  WORD  biBitCount;
-  DWORD biCompression;
-  DWORD biSizeImage;
-  LONG  biXPelsPerMeter;
-  LONG  biYPelsPerMeter;
-  DWORD biClrUsed;
-  DWORD biClrImportant;
-} BITMAPINFOHEADER, *PBITMAPINFOHEADER;
+// typedef struct tagBITMAPINFOHEADER {
+//   DWORD biSize;
+//   LONG  biWidth;
+//   LONG  biHeight;
+//   WORD  biPlanes;
+//   WORD  biBitCount;
+//   DWORD biCompression;
+//   DWORD biSizeImage;
+//   LONG  biXPelsPerMeter;
+//   LONG  biYPelsPerMeter;
+//   DWORD biClrUsed;
+//   DWORD biClrImportant;
+// } BITMAPINFOHEADER, *PBITMAPINFOHEADER;
 
-#include <objbase.h>
-#include <mmreg.h>
-#include <mmsystem.h>
+// #include <objbase.h>
+// #include <mmreg.h>
+// #include <mmsystem.h>
 
 // Some required types defined for MSVC/TinyC compiler
 #if defined(_MSC_VER) || defined(__TINYC__)
