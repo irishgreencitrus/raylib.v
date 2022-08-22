@@ -51,7 +51,12 @@ if ccinclude != '' {
 chdir('$raylibdir/src')?
 for file in ['raudio', 'rcore', 'rmodels', 'rshapes', 'rtext', 'rtextures', 'rglfw', 'utils'] {
 	println('Building ${file}...')
-	compile_command := '${quoted_path(ccpath)} -Wall -D_DEFAULT_SOURCE -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -Wno-missing-braces -Werror=pointer-arith -fno-strict-aliasing  -std=c99 -fPIC -O1 -Werror=implicit-function-declaration -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw $ccinclude -c ${file}.c'
+	mut compile_command := ''
+	$if macos {
+		compile_command = '${quoted_path(ccpath)} -Wall -D_DEFAULT_SOURCE -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -Wno-missing-braces -Werror=pointer-arith -fno-strict-aliasing  -std=c99 -x objective-c -fPIC -O1 -Werror=implicit-function-declaration -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw $ccinclude -c ${file}.c'
+	} $else {
+		compile_command = '${quoted_path(ccpath)} -Wall -D_DEFAULT_SOURCE -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -Wno-missing-braces -Werror=pointer-arith -fno-strict-aliasing  -std=c99 -fPIC -O1 -Werror=implicit-function-declaration -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw $ccinclude -c ${file}.c'
+	}
 	comp_out := verbose_execute(compile_command)
 	if comp_out.exit_code != 0 {
 		eprintln(comp_out.output)
