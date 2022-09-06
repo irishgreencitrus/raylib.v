@@ -41,7 +41,7 @@ if cc == prebuilt_tcc_name {
 	ccinclude = '${@VEXEROOT}/thirdparty/tcc/lib/tcc/include'
 	$if windows {
 		ccpath = ccpath.replace('/', '\\')
-		ccinclude = ccpath.replace('/', '\\')
+		ccinclude = ccinclude.replace('/', '\\')
 	}
 }
 if ccinclude != '' {
