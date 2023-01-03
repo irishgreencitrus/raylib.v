@@ -1322,15 +1322,15 @@ pub fn set_trace_log_level(logLevel int) {
 	C.SetTraceLogLevel(logLevel)
 }
 
-fn C.MemAlloc(size int) voidptr
+fn C.MemAlloc(size u32) voidptr
 [inline]
-pub fn mem_alloc(size int) voidptr {
+pub fn mem_alloc(size u32) voidptr {
 	return C.MemAlloc(size)
 }
 
-fn C.MemRealloc(ptr voidptr, size int) voidptr
+fn C.MemRealloc(ptr voidptr, size u32) voidptr
 [inline]
-pub fn mem_realloc(ptr voidptr, size int) voidptr {
+pub fn mem_realloc(ptr voidptr, size u32) voidptr {
 	return C.MemRealloc(ptr, size)
 }
 
@@ -2127,6 +2127,12 @@ pub fn check_collision_point_triangle(point Vector2, p1 Vector2, p2 Vector2, p3 
 	return C.CheckCollisionPointTriangle(point, p1, p2, p3)
 }
 
+fn C.CheckCollisionPointPoly(point Vector2, points voidptr, pointCount int) bool
+[inline]
+pub fn check_collision_point_poly(point Vector2, points []Vector2) bool {
+	return C.CheckCollisionPointPoly(point, points.data, points.len)
+}
+
 fn C.CheckCollisionLines(startPos1 Vector2, endPos1 Vector2, startPos2 Vector2, endPos2 Vector2, collisionPoint &Vector2) bool
 [inline]
 pub fn check_collision_lines(startPos1 Vector2, endPos1 Vector2, startPos2 Vector2, endPos2 Vector2, collisionPoint &Vector2) bool {
@@ -2233,6 +2239,12 @@ fn C.GenImageWhiteNoise(width int, height int, factor f32) Image
 [inline]
 pub fn gen_image_white_noise(width int, height int, factor f32) Image {
 	return C.GenImageWhiteNoise(width, height, factor)
+}
+
+fn C.GenImagePerlinNoise(width int, height int, offsetX int, offsetY int, scale f32) Image
+[inline]
+pub fn gen_image_perlin_noise(width int, height int, offsetX int, offsetY int, scale f32) Image {
+	return C.GenImagePerlinNoise(width, height, offsetX, offsetY, scale)
 }
 
 fn C.GenImageCellular(width int, height int, tileSize int) Image
@@ -2473,6 +2485,18 @@ fn C.ImageDrawCircleV(dst &Image, center Vector2, radius int, color Color)
 [inline]
 pub fn image_draw_circle_v(dst &Image, center Vector2, radius int, color Color) {
 	C.ImageDrawCircleV(dst, center, radius, color)
+}
+
+fn C.ImageDrawCircleLines(dst &Image, centerX int, centerY int, radius int, color Color)
+[inline]
+pub fn image_draw_circle_lines(dst &Image, centerX int, centerY int, radius int, color Color) {
+	C.ImageDrawCircleLines(dst, centerX, centerY, radius, color)
+}
+
+fn C.ImageDrawCircleLinesV(dst &Image, center Vector2, radius int, color Color)
+[inline]
+pub fn image_draw_circle_lines_v(dst &Image, center Vector2, radius int, color Color) {
+	C.ImageDrawCircleLinesV(dst, center, radius, color)
 }
 
 fn C.ImageDrawRectangle(dst &Image, posX int, posY int, width int, height int, color Color)
@@ -2835,6 +2859,15 @@ pub fn get_glyph_atlas_rec(font Font, codepoint int) Rectangle {
 	return C.GetGlyphAtlasRec(font, codepoint)
 }
 
+fn C.LoadUTF8(codepoints &int, length int) &char
+[inline]
+pub fn load_utf8(codepoints &int, length int) &char {
+	return C.LoadUTF8(codepoints, length)
+}
+
+fn C.UnloadUTF8(text &char)
+// todo
+
 fn C.LoadCodepoints(text &i8, count &int) &int
 [inline]
 pub fn load_codepoints(text &i8, count &int) &int {
@@ -2847,29 +2880,28 @@ pub fn unload_codepoints(codepoints &int) {
 	C.UnloadCodepoints(codepoints)
 }
 
-fn C.GetCodepointCount(text &i8) int
+fn C.GetCodepointCount(text &char) int
 [inline]
-pub fn get_codepoint_count(text &i8) int {
+pub fn get_codepoint_count(text &char) int {
 	return C.GetCodepointCount(text)
 }
 
-fn C.GetCodepoint(text &i8, bytesProcessed &int) int
+fn C.GetCodepoint(text &i8, codepointSize &int) int
 [inline]
-pub fn get_codepoint(text &i8, bytesProcessed &int) int {
-	return C.GetCodepoint(text, bytesProcessed)
+pub fn get_codepoint(text &i8, codepointSize &int) int {
+	return C.GetCodepoint(text, codepointSize)
 }
 
-fn C.CodepointToUTF8(codepoint int, byteSize &int) &i8
-[inline]
-pub fn codepoint_to_utf_8(codepoint int, byteSize &int) &i8 {
-	return C.CodepointToUTF8(codepoint, byteSize)
-}
+fn C.GetCodepointNext(text &i8, codepointSize &int) int
+// todo
+fn C.GetCodepointPrevious(text &i8, codepointSize &int) int
+// todo
 
-//fn C.TextCodepointsToUTF8(codepoints &int, length int) &i8
-//[inline]
-//pub fn text_codepoints_to_utf_8(codepoints &int, length int) &i8 {
-//	return C.TextCodepointsToUTF8(codepoints, length)
-//}
+fn C.CodepointToUTF8(codepoint int, utf8Size &int) &i8
+[inline]
+pub fn codepoint_to_utf_8(codepoint int, utf8Size &int) &i8 {
+	return C.CodepointToUTF8(codepoint, utf8Size)
+}
 
 fn C.TextCopy(dst &i8, src &i8) int
 [inline]
