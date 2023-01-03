@@ -2865,11 +2865,11 @@ pub fn codepoint_to_utf_8(codepoint int, byteSize &int) &i8 {
 	return C.CodepointToUTF8(codepoint, byteSize)
 }
 
-fn C.TextCodepointsToUTF8(codepoints &int, length int) &i8
-[inline]
-pub fn text_codepoints_to_utf_8(codepoints &int, length int) &i8 {
-	return C.TextCodepointsToUTF8(codepoints, length)
-}
+//fn C.TextCodepointsToUTF8(codepoints &int, length int) &i8
+//[inline]
+//pub fn text_codepoints_to_utf_8(codepoints &int, length int) &i8 {
+//	return C.TextCodepointsToUTF8(codepoints, length)
+//}
 
 fn C.TextCopy(dst &i8, src &i8) int
 [inline]

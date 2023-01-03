@@ -1,6 +1,7 @@
 # Binaries for programs and plugins
 main
 raylib
+installraylib
 *.exe
 *.exe~
 *.so
