@@ -2127,11 +2127,11 @@ pub fn check_collision_point_triangle(point Vector2, p1 Vector2, p2 Vector2, p3 
 	return C.CheckCollisionPointTriangle(point, p1, p2, p3)
 }
 
-fn C.CheckCollisionPointPoly(point Vector2, points voidptr, pointCount int) bool
+/*fn C.CheckCollisionPointPoly(point Vector2, points voidptr, pointCount int) bool
 [inline]
 pub fn check_collision_point_poly(point Vector2, points []Vector2) bool {
 	return C.CheckCollisionPointPoly(point, points.data, points.len)
-}
+}*/
 
 fn C.CheckCollisionLines(startPos1 Vector2, endPos1 Vector2, startPos2 Vector2, endPos2 Vector2, collisionPoint &Vector2) bool
 [inline]
@@ -2241,11 +2241,11 @@ pub fn gen_image_white_noise(width int, height int, factor f32) Image {
 	return C.GenImageWhiteNoise(width, height, factor)
 }
 
-fn C.GenImagePerlinNoise(width int, height int, offsetX int, offsetY int, scale f32) Image
+/*fn C.GenImagePerlinNoise(width int, height int, offsetX int, offsetY int, scale f32) Image
 [inline]
 pub fn gen_image_perlin_noise(width int, height int, offsetX int, offsetY int, scale f32) Image {
 	return C.GenImagePerlinNoise(width, height, offsetX, offsetY, scale)
-}
+}*/
 
 fn C.GenImageCellular(width int, height int, tileSize int) Image
 [inline]
@@ -2487,17 +2487,17 @@ pub fn image_draw_circle_v(dst &Image, center Vector2, radius int, color Color) 
 	C.ImageDrawCircleV(dst, center, radius, color)
 }
 
-fn C.ImageDrawCircleLines(dst &Image, centerX int, centerY int, radius int, color Color)
+/*fn C.ImageDrawCircleLines(dst &Image, centerX int, centerY int, radius int, color Color)
 [inline]
 pub fn image_draw_circle_lines(dst &Image, centerX int, centerY int, radius int, color Color) {
 	C.ImageDrawCircleLines(dst, centerX, centerY, radius, color)
-}
+}*/
 
-fn C.ImageDrawCircleLinesV(dst &Image, center Vector2, radius int, color Color)
+/*fn C.ImageDrawCircleLinesV(dst &Image, center Vector2, radius int, color Color)
 [inline]
 pub fn image_draw_circle_lines_v(dst &Image, center Vector2, radius int, color Color) {
 	C.ImageDrawCircleLinesV(dst, center, radius, color)
-}
+}*/
 
 fn C.ImageDrawRectangle(dst &Image, posX int, posY int, width int, height int, color Color)
 [inline]
@@ -2859,11 +2859,11 @@ pub fn get_glyph_atlas_rec(font Font, codepoint int) Rectangle {
 	return C.GetGlyphAtlasRec(font, codepoint)
 }
 
-fn C.LoadUTF8(codepoints &int, length int) &char
+/*fn C.LoadUTF8(codepoints &int, length int) &char
 [inline]
 pub fn load_utf8(codepoints &int, length int) &char {
 	return C.LoadUTF8(codepoints, length)
-}
+}*/
 
 fn C.UnloadUTF8(text &char)
 // todo
