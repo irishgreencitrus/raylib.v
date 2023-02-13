@@ -15,6 +15,9 @@ module raylibv
 #flag @VMODROOT/raylib/src/rtextures.o
 #flag @VMODROOT/raylib/src/utils.o
 #flag @VMODROOT/raylib/src/rglfw.o
+$if tinyc {
+    #flag -I @VMODROOT/include/tcc
+}
 
 $if windows {
 	#flag -I @VMODROOT/raylib/src/external/glfw/deps/mingw

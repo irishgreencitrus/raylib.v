@@ -7,14 +7,26 @@ Not a fork! This isn't a fork of vraylib but a wrapper built from the ground up 
 raylib.v is a binding for raylib in V with an aim for 100% parity with the C library.
 This probably suffices most uses for raylib at the moment, however some more advanced functionality is currently missing.
 
-If you need said functionality, open an issue to prioritize it and bring it to my attention!
+Any issues? Open a discussion.
 
 ## Installation
 Do `v install irishgreencitrus.raylibv`
 
-Now you should be able to run the examples! (If you cannot, create an issue)
 ## Examples
 See the `examples/` folder for some examples.
+
+TinyCC support is still in the works!
+You may need to switch to a different compiler to compile examples.
+> For example, to run the `core_basic_window.v` example, you will need to use the command:
+> 
+> `v -cc gcc run core_basic_window.v`
+> 
+> to run using gcc, or:
+> 
+> `v -cc clang run core_basic_window.v`
+> 
+> to run using clang
+
 ## Roadmap
 ### Priorities
 - [x] Support most common raylib.h functions
