@@ -2,13 +2,6 @@
 
 Example raylibv program.
 Feel free to use this as a starting point for your game.
-If you want to change the location of the raylib included,
-pass -d override_default_lib and add these lines, obviously
-paths replacing as appropriate
----
-#include "/replace/this/path/raylib.h"
-#flag -I/replace/this/path/libraylib.a
----
 
 If you want to compile for the wayland windowing system,
 pass -d wayland.

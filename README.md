@@ -12,16 +12,6 @@ If you need said functionality, open an issue to prioritize it and bring it to m
 ## Installation
 Do `v install irishgreencitrus.raylibv`
 
-Followed by `v show irishgreencitrus.raylibv`
-
-This displays the location of the library.
-
-`cd` to this location and run `v run installraylib.vsh`
-
-> Don't want to use `tcc`? Set the `CC` environment variable when running the
-> script in order to configure which C compiler is being used.
-> The `VERBOSE` environment variable can also be used here if you're looking to track down a bug.
-
 Now you should be able to run the examples! (If you cannot, create an issue)
 ## Examples
 See the `examples/` folder for some examples.
