@@ -30,9 +30,9 @@ fn main() {
 	mut brush_size := 20.0
 	mut mouse_was_pressed := false
 	mut btn_save_rect := r.Rectangle{750.0, 10.0, 40.0, 30.0}
-	btn_save_mouse_hover := false
-	show_save_message := false
-	save_message_counter := 0
+	mut btn_save_mouse_hover := false
+	mut show_save_message := false
+	mut save_message_counter := 0
 
 	target := r.load_render_texture(screen_width, screen_height)
 
@@ -43,10 +43,6 @@ fn main() {
 
 	for !r.window_should_close() {
 		mousepos := r.get_mouse_position()
-		r.begin_drawing()
-		r.clear_background(colors[0])
-		r.end_drawing()
-
 		if r.is_key_pressed(r.key_right) {
 			color_selected++
 		} else if r.is_key_pressed(r.key_left) {
@@ -110,6 +106,28 @@ fn main() {
 			mouse_was_pressed = false
 		}
 
+        if r.check_collision_point_rec(mousepos, btn_save_rect) {
+            btn_save_mouse_hover = true
+        } else {
+            btn_save_mouse_hover = false
+        }
+
+        if (btn_save_mouse_hover && r.is_mouse_button_released(r.mouse_button_left)) || r.is_key_pressed(r.key_s) {
+            image := r.load_image_from_texture(r.Texture2D(target.texture))
+            r.image_flip_vertical(&image)
+            r.export_image(image, "my_amazing_texture_painting.png".str)
+            r.unload_image(image)
+            show_save_message = true
+        }
+
+        if show_save_message {
+            save_message_counter++
+            if save_message_counter > 240 {
+                show_save_message = false
+                save_message_counter = 0
+            }
+        }
+
 		r.begin_drawing()
 		r.clear_background(r.raywhite)
 
@@ -133,6 +151,36 @@ fn main() {
             r.draw_rectangle_rec(color_recs[i], colors[i])
         }
         r.draw_rectangle_lines(10,10,30,30,r.lightgray)
+        if color_mouse_hover >= 0 {
+            r.draw_rectangle_rec(color_recs[color_mouse_hover], r.fade(r.white, 0.6))
+        }
+        r.draw_rectangle_lines_ex(
+            r.Rectangle{
+                color_recs[color_selected].x - 2,
+                color_recs[color_selected].y - 2,
+                color_recs[color_selected].width + 4,
+                color_recs[color_selected].height + 4,
+            }, 2, r.black
+        )
+
+        r.draw_rectangle_lines_ex(
+            btn_save_rect,
+            2,
+            if btn_save_mouse_hover {r.red} else {r.black}
+        )
+        r.draw_text(
+            "SAVE!".str,
+            755,
+            20,
+            10,
+            if btn_save_mouse_hover {r.red} else {r.black}
+        )
+        if show_save_message {
+            r.draw_rectangle(0,0,r.get_screen_width(),r.get_screen_height(), r.fade(r.raywhite, 0.8))
+            r.draw_rectangle(0,150,r.get_screen_width(),80, r.black)
+            r.draw_text("IMAGE SAVED: my_amazing_texture_painting.png".str,150,180,20,r.raywhite)
+        }
+
 		r.end_drawing()
 	}
     r.unload_render_texture(target)
