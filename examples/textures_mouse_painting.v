@@ -106,83 +106,71 @@ fn main() {
 			mouse_was_pressed = false
 		}
 
-        if r.check_collision_point_rec(mousepos, btn_save_rect) {
-            btn_save_mouse_hover = true
-        } else {
-            btn_save_mouse_hover = false
-        }
+		if r.check_collision_point_rec(mousepos, btn_save_rect) {
+			btn_save_mouse_hover = true
+		} else {
+			btn_save_mouse_hover = false
+		}
 
-        if (btn_save_mouse_hover && r.is_mouse_button_released(r.mouse_button_left)) || r.is_key_pressed(r.key_s) {
-            image := r.load_image_from_texture(r.Texture2D(target.texture))
-            r.image_flip_vertical(&image)
-            r.export_image(image, "my_amazing_texture_painting.png".str)
-            r.unload_image(image)
-            show_save_message = true
-        }
+		if (btn_save_mouse_hover && r.is_mouse_button_released(r.mouse_button_left))
+			|| r.is_key_pressed(r.key_s) {
+			image := r.load_image_from_texture(r.Texture2D(target.texture))
+			r.image_flip_vertical(&image)
+			r.export_image(image, 'my_amazing_texture_painting.png'.str)
+			r.unload_image(image)
+			show_save_message = true
+		}
 
-        if show_save_message {
-            save_message_counter++
-            if save_message_counter > 240 {
-                show_save_message = false
-                save_message_counter = 0
-            }
-        }
+		if show_save_message {
+			save_message_counter++
+			if save_message_counter > 240 {
+				show_save_message = false
+				save_message_counter = 0
+			}
+		}
 
 		r.begin_drawing()
 		r.clear_background(r.raywhite)
 
 		r.draw_texture_rec(r.Texture2D(target.texture), r.Rectangle{0.0, 0.0, f32(target.texture.width), f32(-target.texture.height)},
 			r.Vector2{0.0, 0.0}, r.white)
-        if mousepos.y > 50.0 {
-            if r.is_mouse_button_down(r.mouse_button_right) {
-                r.draw_circle_lines(
-                    int(mousepos.x),
-                    int(mousepos.y),
-                    f32(brush_size),
-                    r.gray
-                )
-            } else {
-                r.draw_circle(r.get_mouse_x(), r.get_mouse_y(), f32(brush_size), colors[color_selected])
-            }
-        }
-        r.draw_rectangle(0,0,r.get_screen_width(),50,r.raywhite)
-        r.draw_line(0,50,r.get_screen_width(),50, r.lightgray)
-        for i in 0..max_colors_count {
-            r.draw_rectangle_rec(color_recs[i], colors[i])
-        }
-        r.draw_rectangle_lines(10,10,30,30,r.lightgray)
-        if color_mouse_hover >= 0 {
-            r.draw_rectangle_rec(color_recs[color_mouse_hover], r.fade(r.white, 0.6))
-        }
-        r.draw_rectangle_lines_ex(
-            r.Rectangle{
-                color_recs[color_selected].x - 2,
-                color_recs[color_selected].y - 2,
-                color_recs[color_selected].width + 4,
-                color_recs[color_selected].height + 4,
-            }, 2, r.black
-        )
+		if mousepos.y > 50.0 {
+			if r.is_mouse_button_down(r.mouse_button_right) {
+				r.draw_circle_lines(int(mousepos.x), int(mousepos.y), f32(brush_size),
+					r.gray)
+			} else {
+				r.draw_circle(r.get_mouse_x(), r.get_mouse_y(), f32(brush_size), colors[color_selected])
+			}
+		}
+		r.draw_rectangle(0, 0, r.get_screen_width(), 50, r.raywhite)
+		r.draw_line(0, 50, r.get_screen_width(), 50, r.lightgray)
+		for i in 0 .. max_colors_count {
+			r.draw_rectangle_rec(color_recs[i], colors[i])
+		}
+		r.draw_rectangle_lines(10, 10, 30, 30, r.lightgray)
+		if color_mouse_hover >= 0 {
+			r.draw_rectangle_rec(color_recs[color_mouse_hover], r.fade(r.white, 0.6))
+		}
+		r.draw_rectangle_lines_ex(r.Rectangle{color_recs[color_selected].x - 2, color_recs[color_selected].y - 2,
+			color_recs[color_selected].width + 4, color_recs[color_selected].height + 4},
+			2, r.black)
 
-        r.draw_rectangle_lines_ex(
-            btn_save_rect,
-            2,
-            if btn_save_mouse_hover {r.red} else {r.black}
-        )
-        r.draw_text(
-            "SAVE!".str,
-            755,
-            20,
-            10,
-            if btn_save_mouse_hover {r.red} else {r.black}
-        )
-        if show_save_message {
-            r.draw_rectangle(0,0,r.get_screen_width(),r.get_screen_height(), r.fade(r.raywhite, 0.8))
-            r.draw_rectangle(0,150,r.get_screen_width(),80, r.black)
-            r.draw_text("IMAGE SAVED: my_amazing_texture_painting.png".str,150,180,20,r.raywhite)
-        }
+		r.draw_rectangle_lines_ex(btn_save_rect, 2, if btn_save_mouse_hover {
+			r.red
+		} else {
+			r.black
+		})
+		r.draw_text('SAVE!'.str, 755, 20, 10, if btn_save_mouse_hover { r.red } else { r.black })
+		if show_save_message {
+			r.draw_rectangle(0, 0, r.get_screen_width(), r.get_screen_height(), r.fade(r.raywhite,
+				0.8))
+			r.draw_rectangle(0, 150, r.get_screen_width(), 80, r.black)
+			r.draw_text('IMAGE SAVED: my_amazing_texture_painting.png'.str, 150, 180,
+				20, r.raywhite)
+		}
 
 		r.end_drawing()
 	}
-    r.unload_render_texture(target)
-    r.close_window()
+	r.unload_render_texture(target)
+	r.close_window()
 }

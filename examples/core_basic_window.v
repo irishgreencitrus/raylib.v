@@ -22,7 +22,8 @@ fn main() {
 	for !r.window_should_close() {
 		r.begin_drawing()
 		r.clear_background(r.Color{ r: 245, g: 245, b: 245, a: 255 })
-		r.draw_text('Congrats! You created your first window in V!'.str, 190, 200, 20, r.Color{
+		r.draw_text('Congrats! You created your first window in V!'.str, 190, 200, 20,
+			r.Color{
 			r: 0
 			g: 0
 			b: 0
