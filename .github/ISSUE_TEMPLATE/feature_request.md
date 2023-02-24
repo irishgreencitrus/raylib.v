@@ -4,8 +4,11 @@ about: Suggest an idea for raylib.v
 title: ''
 labels: enhancement
 assignees: ''
-
 ---
+<!--
+DO NOT IGNORE THIS TEMPLATE!
+Ignoring the issue template will lead to your issue being closed and ignored
+-->
 
 **Relevant problem**
 <!-- Please tag the relevant bug report here. If this is not related to an issue, please remove this section -->
