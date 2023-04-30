@@ -2631,18 +2631,6 @@ pub fn draw_texture_rec(texture Texture2D, source Rectangle, position Vector2, t
 	C.DrawTextureRec(texture, source, position, tint)
 }
 
-fn C.DrawTextureQuad(texture Texture2D, tiling Vector2, offset Vector2, quad Rectangle, tint Color)
-[inline]
-pub fn draw_texture_quad(texture Texture2D, tiling Vector2, offset Vector2, quad Rectangle, tint Color) {
-	C.DrawTextureQuad(texture, tiling, offset, quad, tint)
-}
-
-fn C.DrawTextureTiled(texture Texture2D, source Rectangle, dest Rectangle, origin Vector2, rotation f32, scale f32, tint Color)
-[inline]
-pub fn draw_texture_tiled(texture Texture2D, source Rectangle, dest Rectangle, origin Vector2, rotation f32, scale f32, tint Color) {
-	C.DrawTextureTiled(texture, source, dest, origin, rotation, scale, tint)
-}
-
 fn C.DrawTexturePro(texture Texture2D, source Rectangle, dest Rectangle, origin Vector2, rotation f32, tint Color)
 [inline]
 pub fn draw_texture_pro(texture Texture2D, source Rectangle, dest Rectangle, origin Vector2, rotation f32, tint Color) {
@@ -2653,12 +2641,6 @@ fn C.DrawTextureNPatch(texture Texture2D, nPatchInfo NPatchInfo, dest Rectangle,
 [inline]
 pub fn draw_texture_n_patch(texture Texture2D, nPatchInfo NPatchInfo, dest Rectangle, origin Vector2, rotation f32, tint Color) {
 	C.DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)
-}
-
-fn C.DrawTexturePoly(texture Texture2D, center Vector2, points &Vector2, texcoords &Vector2, pointCount int, tint Color)
-[inline]
-pub fn draw_texture_poly(texture Texture2D, center Vector2, points &Vector2, texcoords &Vector2, pointCount int, tint Color) {
-	C.DrawTexturePoly(texture, center, points, texcoords, pointCount, tint)
 }
 
 fn C.Fade(color Color, alpha f32) Color
@@ -2886,10 +2868,10 @@ pub fn get_codepoint_count(text &char) int {
 	return C.GetCodepointCount(text)
 }
 
-fn C.GetCodepoint(text &i8, codepointSize &int) int
+fn C.GetCodepointNext(text &i8, codepointSize &int) int
 [inline]
-pub fn get_codepoint(text &i8, codepointSize &int) int {
-	return C.GetCodepoint(text, codepointSize)
+pub fn get_codepoint_next(text &i8, codepointSize &int) int {
+	return C.GetCodepointNext(text, codepointSize)
 }
 
 fn C.GetCodepointNext(text &i8, codepointSize &int) int
@@ -3041,18 +3023,6 @@ pub fn draw_cube_wires_v(position Vector3, size Vector3, color Color) {
 	C.DrawCubeWiresV(position, size, color)
 }
 
-fn C.DrawCubeTexture(texture Texture2D, position Vector3, width f32, height f32, length f32, color Color)
-[inline]
-pub fn draw_cube_texture(texture Texture2D, position Vector3, width f32, height f32, length f32, color Color) {
-	C.DrawCubeTexture(texture, position, width, height, length, color)
-}
-
-fn C.DrawCubeTextureRec(texture Texture2D, source Rectangle, position Vector3, width f32, height f32, length f32, color Color)
-[inline]
-pub fn draw_cube_texture_rec(texture Texture2D, source Rectangle, position Vector3, width f32, height f32, length f32, color Color) {
-	C.DrawCubeTextureRec(texture, source, position, width, height, length, color)
-}
-
 fn C.DrawSphere(centerPos Vector3, radius f32, color Color)
 [inline]
 pub fn draw_sphere(centerPos Vector3, radius f32, color Color) {
@@ -3129,12 +3099,6 @@ fn C.UnloadModel(model Model)
 [inline]
 pub fn unload_model(model Model) {
 	C.UnloadModel(model)
-}
-
-fn C.UnloadModelKeepMeshes(model Model)
-[inline]
-pub fn unload_model_keep_meshes(model Model) {
-	C.UnloadModelKeepMeshes(model)
 }
 
 fn C.GetModelBoundingBox(model Model) BoundingBox
@@ -3514,18 +3478,6 @@ fn C.ResumeSound(sound Sound)
 [inline]
 pub fn resume_sound(sound Sound) {
 	C.ResumeSound(sound)
-}
-
-fn C.PlaySoundMulti(sound Sound)
-[inline]
-pub fn play_sound_multi(sound Sound) {
-	C.PlaySoundMulti(sound)
-}
-
-fn C.StopSoundMulti()
-[inline]
-pub fn stop_sound_multi() {
-	C.StopSoundMulti()
 }
 
 fn C.GetSoundsPlaying() int
