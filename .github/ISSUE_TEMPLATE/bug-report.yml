@@ -35,10 +35,10 @@ body:
     validations:
       required: false
   - type: input
+    id: hash
     attributes:
       label: raylib.v commit hash
       description: Supply the commit hash here
-      placeholder: ""
     validations:
       required: true
   - type: textarea
