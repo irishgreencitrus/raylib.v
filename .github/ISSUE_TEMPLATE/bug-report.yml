@@ -11,7 +11,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: expected
+    id: reproduce_steps
     attributes:
       label: Steps to Reproduce
       description: What steps caused your issue?
