@@ -15,6 +15,16 @@ module raylibv
 #flag @VMODROOT/raylib/src/rtextures.o
 #flag @VMODROOT/raylib/src/utils.o
 #flag @VMODROOT/raylib/src/rglfw.o
+$if tinyc && !accept_broken? {
+    $compile_error('
+		TCC is unsupported.
+		Please switch to GCC or Clang in order to compile programs for raylib.v
+		If you can help with changing this, please go to https://github.com/irishgreencitrus/raylib.v
+
+		If you wish to remove this error pass "-d accept_broken" to your V compiler.
+		No support will be provided for those using "-d accept_broken".
+	')
+}
 $if tinyc {
     #flag -I @VMODROOT/include/tcc
 }
