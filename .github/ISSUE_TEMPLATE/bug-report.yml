@@ -1,0 +1,50 @@
+name: Bug Report
+description: Report a bug
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Describe the bug, clearly and consisely, but don't miss out on important details
+      placeholder: If I do X, it causes Y, but it should cause Z instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce_steps
+    attributes:
+      label: Steps to Reproduce
+      description: What steps caused your issue?
+      placeholder: First, I did X, then...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Intended Behaviour
+      description: What did you expect to happen?
+      placeholder: It should have done X
+    validations:
+      required: true
+  - type: textarea
+    id: workarounds
+    attributes:
+      label: Known Workarounds (if any)
+      description: Is there any way to fix this behaviour at the moment
+      placeholder: You can...
+    validations:
+      required: false
+  - type: input
+    id: hash
+    attributes:
+      label: raylib.v commit hash
+      description: Supply the commit hash here
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details (OS name and version, etc.)
+      description: You can use `v doctor` to fill up this section.
+    validations:
+      required: true
