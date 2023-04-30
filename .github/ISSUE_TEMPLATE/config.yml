@@ -1,0 +1,9 @@
+blank_issues_enabled: true
+
+contact_links:
+  - name: Help with using the library
+    url: https://github.com/irishgreencitrus/raylib.v/discussions/new?category=q-a
+    about: Can't work something? Ask a question and I'll try help!
+  - name: Other questions
+    url: https://github.com/irishgreencitrus/raylib.v/discussions/new
+    about: Anything else probably fits somewhere over here

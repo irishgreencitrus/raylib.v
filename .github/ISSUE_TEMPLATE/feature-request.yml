@@ -1,0 +1,28 @@
+name: Feature request
+description: Request a feature for the library
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: Describe the feature, clearly and consisely, but don't miss out on important details
+      placeholder: I want X, because Y and Z.
+    validations:
+      required: true
+  - type: textarea
+    id: justification
+    attributes:
+      label: Reasons for Inclusion
+      description: Can this feature be added in V programs themselves? Is it necessary for inclusion?
+      placeholder: This should be included because...
+    validations:
+      required: true
+  - type: textarea
+    id: related
+    attributes:
+      label: Related Issue (if any)
+      description: Tag the related issue and explain it here.
+      placeholder: "This feature will fix issue #WXYZ"
+    validations:
+      required: false
