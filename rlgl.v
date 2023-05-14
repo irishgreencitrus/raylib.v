@@ -615,11 +615,10 @@ pub fn rl_disable_stereo_render() {
 	C.rlDisableStereoRender()
 }
 
-// TODO: FIXME
-fn C.rlIsStereoRenderEnabled()
+fn C.rlIsStereoRenderEnabled() bool
 [inline]
-pub fn rl_clearcolor(r u8, g u8, b u8, a u8) {
-	C.rlIsStereoRenderEnabled()
+pub fn rl_is_stereo_render_enabled() bool {
+	return C.rlIsStereoRenderEnabled()
 }
 
 fn C.rlClearScreenBuffers()
@@ -746,6 +745,12 @@ fn C.rlDrawRenderBatchActive()
 [inline]
 pub fn rl_draw_render_batch_active() {
 	C.rlDrawRenderBatchActive()
+}
+
+fn C.rlCheckRenderBatchLimit(vcount int) bool
+[inline]
+pub fn rl_check_render_batch_limit(vcount int) bool {
+	return C.rlCheckRenderBatchLimit(vcount)
 }
 
 fn C.rlSetTexture(id u32)
