@@ -2,6 +2,7 @@ module raylibv
 
 #preinclude "@VMODROOT/include/pre.h"
 #include "@VMODROOT/raylib/src/raylib.h"
+#include "@VMODROOT/raylib/src/rlgl.h"
 
 #flag -DPLATFORM_DESKTOP
 
