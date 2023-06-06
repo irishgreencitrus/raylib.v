@@ -848,6 +848,12 @@ pub fn set_window_icon(image Image) {
 	C.SetWindowIcon(image)
 }
 
+fn C.SetWindowIcons(images &Image, count int)
+[inline]
+pub fn set_window_icons(images &Image, count int) {
+        C.SetWindowIcons(images, count)
+}
+
 fn C.SetWindowTitle(title &i8)
 [inline]
 pub fn set_window_title(title &i8) {
@@ -1826,40 +1832,16 @@ pub fn get_gesture_pinch_angle() f32 {
 	return C.GetGesturePinchAngle()
 }
 
-fn C.SetCameraMode(camera Camera, mode int)
+fn C.UpdateCamera(camera &Camera, mode int)
 [inline]
-pub fn set_camera_mode(camera Camera, mode int) {
-	C.SetCameraMode(camera, mode)
+pub fn update_camera(camera &Camera, mode int) {
+	C.UpdateCamera(camera, mode)
 }
 
-fn C.UpdateCamera(camera &Camera)
+fn C.UpdateCameraPro(camera &Camera, movement Vector3, rotation Vector3, zoom f32)
 [inline]
-pub fn update_camera(camera &Camera) {
-	C.UpdateCamera(camera)
-}
-
-fn C.SetCameraPanControl(keyPan int)
-[inline]
-pub fn set_camera_pan_control(keyPan int) {
-	C.SetCameraPanControl(keyPan)
-}
-
-fn C.SetCameraAltControl(keyAlt int)
-[inline]
-pub fn set_camera_alt_control(keyAlt int) {
-	C.SetCameraAltControl(keyAlt)
-}
-
-fn C.SetCameraSmoothZoomControl(keySmoothZoom int)
-[inline]
-pub fn set_camera_smooth_zoom_control(keySmoothZoom int) {
-	C.SetCameraSmoothZoomControl(keySmoothZoom)
-}
-
-fn C.SetCameraMoveControls(keyFront int, keyBack int, keyRight int, keyLeft int, keyUp int, keyDown int)
-[inline]
-pub fn set_camera_move_controls(keyFront int, keyBack int, keyRight int, keyLeft int, keyUp int, keyDown int) {
-	C.SetCameraMoveControls(keyFront, keyBack, keyRight, keyLeft, keyUp, keyDown)
+pub fn update_camera_pro(camera &Camera, movement Vector3, rotation Vector3, zoom f32) {
+	C.UpdateCameraPro(camera, movement, rotation, zoom)
 }
 
 fn C.SetShapesTexture(texture Texture2D, source Rectangle)
@@ -2241,16 +2223,22 @@ pub fn gen_image_white_noise(width int, height int, factor f32) Image {
 	return C.GenImageWhiteNoise(width, height, factor)
 }
 
-/*fn C.GenImagePerlinNoise(width int, height int, offsetX int, offsetY int, scale f32) Image
+fn C.GenImagePerlinNoise(width int, height int, offsetX int, offsetY int, scale f32) Image
 [inline]
 pub fn gen_image_perlin_noise(width int, height int, offsetX int, offsetY int, scale f32) Image {
 	return C.GenImagePerlinNoise(width, height, offsetX, offsetY, scale)
-}*/
+}
 
 fn C.GenImageCellular(width int, height int, tileSize int) Image
 [inline]
 pub fn gen_image_cellular(width int, height int, tileSize int) Image {
 	return C.GenImageCellular(width, height, tileSize)
+}
+
+fn C.GenImageText(width int, height int, text &i8) Image
+[inline]
+pub fn gen_image_text(width int, height int, text &i8) Image {
+        return C.GenImageText(width, height, text)
 }
 
 fn C.ImageCopy(image Image) Image
@@ -2317,6 +2305,12 @@ fn C.ImageAlphaPremultiply(image &Image)
 [inline]
 pub fn image_alpha_premultiply(image &Image) {
 	C.ImageAlphaPremultiply(image)
+}
+
+fn C.ImageBlurGaussian(image &Image, blurSize int)
+[inline]
+pub fn image_blur_gaussian(image &Image, blurSize int) {
+        C.ImageBlurGaussian(image, blurSize)
 }
 
 fn C.ImageResize(image &Image, newWidth int, newHeight int)
@@ -2868,10 +2862,10 @@ pub fn get_codepoint_count(text &char) int {
 	return C.GetCodepointCount(text)
 }
 
-fn C.GetCodepointNext(text &i8, codepointSize &int) int
+fn C.GetCodepoint(text &i8, codepointSize &int) int
 [inline]
-pub fn get_codepoint_next(text &i8, codepointSize &int) int {
-	return C.GetCodepointNext(text, codepointSize)
+pub fn get_codepoint(text &i8, codepointSize &int) int {
+	return C.GetCodepoint(text, codepointSize)
 }
 
 fn C.GetCodepointNext(text &i8, codepointSize &int) int
@@ -3063,6 +3057,18 @@ fn C.DrawCylinderWiresEx(startPos Vector3, endPos Vector3, startRadius f32, endR
 [inline]
 pub fn draw_cylinder_wires_ex(startPos Vector3, endPos Vector3, startRadius f32, endRadius f32, sides int, color Color) {
 	C.DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)
+}
+
+fn C.DrawCapsule(startPos Vector3, endPos Vector3, radius f32, slices int, rings int, color Color)
+[inline]
+pub fn draw_capsule(startPos Vector3, endPos Vector3, radius f32, slices int, rings int, color Color) {
+        C.DrawCapsule(startPos, endPos, radius, slices, rings, color)
+}
+
+fn C.DrawCapsuleWires(startPos Vector3, endPos Vector3, radius f32, slices int, rings int, color Color)
+[inline]
+pub fn draw_capsule_wires(startPos Vector3, endPos Vector3, radius f32, slices int, rings int, color Color) {
+        C.DrawCapsuleWires(startPos, endPos, radius, slices, rings, color)
 }
 
 fn C.DrawPlane(centerPos Vector3, size Vector2, color Color)
@@ -3480,12 +3486,6 @@ pub fn resume_sound(sound Sound) {
 	C.ResumeSound(sound)
 }
 
-fn C.GetSoundsPlaying() int
-[inline]
-pub fn get_sounds_playing() int {
-	return C.GetSoundsPlaying()
-}
-
 fn C.IsSoundPlaying(sound Sound) bool
 [inline]
 pub fn is_sound_playing(sound Sound) bool {
@@ -3568,6 +3568,72 @@ fn C.IsMusicStreamPlaying(music Music) bool
 [inline]
 pub fn is_music_stream_playing(music Music) bool {
 	return C.IsMusicStreamPlaying(music)
+}
+
+fn C.IsMusicReady(music Music) bool
+[inline]
+pub fn is_music_ready(music Music) bool {
+        return C.IsMusicReady(music)
+}
+
+fn C.IsSoundReady(sound Sound) bool
+[inline]
+pub fn is_sound_ready(sound Sound) bool {
+        return C.IsSoundReady(sound)
+}
+
+fn C.IsFontReady(font Font) bool
+[inline]
+pub fn is_font_ready(font Font) bool {
+        return C.IsFontReady(font)
+}
+
+fn C.IsTextureReady(texture Texture) bool
+[inline]
+pub fn is_texture_ready(texture Texture) bool {
+        return C.IsTextureReady(texture)
+}
+
+fn C.IsRenderTextureReady(target RenderTexture2D) bool
+[inline]
+pub fn is_render_texture_ready(target RenderTexture2D) bool {
+        return C.IsRenderTextureReady(target)
+}
+
+fn C.IsWaveReady(wave Wave) bool
+[inline]
+pub fn is_wave_ready(wave Wave) bool {
+        return C.IsWaveReady(wave)
+}
+
+fn C.IsMaterialReady(material Material) bool
+[inline]
+pub fn is_material_ready(material Material) bool {
+        return C.IsMaterialReady(material)
+}
+
+fn C.IsModelReady(model Model) bool
+[inline]
+pub fn is_model_ready(model Model) bool {
+        return C.IsModelReady(model)
+}
+
+fn C.IsAudioStreamReady(stream AudioStream) bool
+[inline]
+pub fn is_audio_stream_ready(stream AudioStream) bool {
+        return C.IsAudioStreamReady(stream)
+}
+
+fn C.IsImageReady(image Image) bool
+[inline]
+pub fn is_image_ready(image Image) bool {
+        return C.IsImageReady(image)
+}
+
+fn C.IsShaderReady(shader Shader) bool
+[inline]
+pub fn is_shader_ready(shader Shader) bool {
+        return C.IsShaderReady(shader)
 }
 
 fn C.UpdateMusicStream(music Music)
@@ -3724,6 +3790,18 @@ fn C.DetachAudioStreamProcessor(stream AudioStream, processor voidptr)
 [inline]
 pub fn detach_audio_stream_processor(stream AudioStream, processor voidptr) {
 	C.DetachAudioStreamProcessor(stream, processor)
+}
+
+fn C.AttachAudioMixedProcessor(processor voidptr)
+[inline]
+pub fn attach_audio_mixed_processor(processor voidptr) {
+        C.AttachAudioMixedProcessor(processor)
+}
+
+fn C.DetachAudioMixedProcessor(processor voidptr)
+[inline]
+pub fn detach_audio_mixed_processor(processor voidptr) {
+        C.DetachAudioMixedProcessor(processor)
 }
 
 // end functions
