@@ -223,6 +223,8 @@ pub const (
 	material_map_irradiance               = 8
 	material_map_prefilter                = 9
 	material_map_brdf                     = 10
+	material_map_diffuse                  = 0
+	material_map_specular                 = 1
 	// ShaderLocationIndex
 	shader_loc_vertex_position            = 0
 	shader_loc_vertex_texcoord01          = 1
