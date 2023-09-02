@@ -1366,21 +1366,24 @@ pub fn set_load_file_data_callback(callback voidptr) {
 	C.SetLoadFileDataCallback(callback)
 }
 
-fn C.SetSaveFileDataCallback(callback voidptr)
+pub type SaveFileDataCallback = fn (fileName &i8, data voidptr, bytesToWrite u32)
+pub type LoadFileTextCallback = fn (fileName &i8)
+
+fn C.SetSaveFileDataCallback(callback SaveFileDataCallback)
 [inline]
-pub fn set_save_file_data_callback(callback voidptr) {
+pub fn set_save_file_data_callback(callback SaveFileDataCallback) {
 	C.SetSaveFileDataCallback(callback)
 }
 
-fn C.SetLoadFileTextCallback(callback voidptr)
+fn C.SetLoadFileTextCallback(callback LoadFileTextCallback)
 [inline]
-pub fn set_load_file_text_callback(callback voidptr) {
+pub fn set_load_file_text_callback(callback LoadFileTextCallback) {
 	C.SetLoadFileTextCallback(callback)
 }
 
-fn C.SetSaveFileTextCallback(callback voidptr)
+fn C.SetSaveFileTextCallback(callback SaveFileDataCallback)
 [inline]
-pub fn set_save_file_text_callback(callback voidptr) {
+pub fn set_save_file_text_callback(callback SaveFileDataCallback) {
 	C.SetSaveFileTextCallback(callback)
 }
 
@@ -3776,21 +3779,23 @@ pub fn set_audio_stream_buffer_size_default(size int) {
 	C.SetAudioStreamBufferSizeDefault(size)
 }
 
-fn C.SetAudioStreamCallback(stream AudioStream, callback voidptr)
+pub type AudioCallback = fn (buffer_data voidptr, frames u32)
+
+fn C.SetAudioStreamCallback(stream AudioStream, callback AudioCallback)
 [inline]
-pub fn set_audio_stream_callback(stream AudioStream, callback voidptr) {
+pub fn set_audio_stream_callback(stream AudioStream, callback AudioCallback) {
 	C.SetAudioStreamCallback(stream, callback)
 }
 
-fn C.AttachAudioStreamProcessor(stream AudioStream, processor voidptr)
+fn C.AttachAudioStreamProcessor(stream AudioStream, processor AudioCallback)
 [inline]
-pub fn attach_audio_stream_processor(stream AudioStream, processor voidptr) {
+pub fn attach_audio_stream_processor(stream AudioStream, processor AudioCallback) {
 	C.AttachAudioStreamProcessor(stream, processor)
 }
 
-fn C.DetachAudioStreamProcessor(stream AudioStream, processor voidptr)
+fn C.DetachAudioStreamProcessor(stream AudioStream, processor AudioCallback)
 [inline]
-pub fn detach_audio_stream_processor(stream AudioStream, processor voidptr) {
+pub fn detach_audio_stream_processor(stream AudioStream, processor AudioCallback) {
 	C.DetachAudioStreamProcessor(stream, processor)
 }
 
