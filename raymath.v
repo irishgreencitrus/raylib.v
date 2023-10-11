@@ -2,20 +2,20 @@ module raylibv
 
 // start structs
 [typedef]
-struct C.Float3 {
+struct C.float3 {
 pub mut:
 	v [3]f32
 }
 
-pub type Float3 = C.Float3
+pub type Float3 = C.float3
 
 [typedef]
-struct C.Float16 {
+struct C.float16 {
 pub mut:
 	v [16]f32
 }
 
-pub type Float16 = C.Float16
+pub type Float16 = C.float16
 
 fn C.Clamp(value f32, min f32, max f32) f32
 [inline]
@@ -47,9 +47,9 @@ pub fn wrap(value f32, min f32, max f32) f32 {
 	return C.Wrap(value, min, max)
 }
 
-fn C.FloatEquals(x f32, y f32) int
+fn C.FloatEquals(x f32, y f32) i32
 [inline]
-pub fn float_equals(x f32, y f32) int {
+pub fn float_equals(x f32, y f32) i32 {
 	return C.FloatEquals(x, y)
 }
 
@@ -209,9 +209,9 @@ pub fn vector2_clamp_value(v Vector2, min f32, max f32) Vector2 {
 	return C.Vector2ClampValue(v, min, max)
 }
 
-fn C.Vector2Equals(p Vector2, q Vector2) int
+fn C.Vector2Equals(p Vector2, q Vector2) i32
 [inline]
-pub fn vector2_equals(p Vector2, q Vector2) int {
+pub fn vector2_equals(p Vector2, q Vector2) i32 {
 	return C.Vector2Equals(p, q)
 }
 
@@ -413,9 +413,9 @@ pub fn vector3_clamp_value(v Vector3, min f32, max f32) Vector3 {
 	return C.Vector3ClampValue(v, min, max)
 }
 
-fn C.Vector3Equals(p Vector3, q Vector3) int
+fn C.Vector3Equals(p Vector3, q Vector3) i32
 [inline]
-pub fn vector3_equals(p Vector3, q Vector3) int {
+pub fn vector3_equals(p Vector3, q Vector3) i32 {
 	return C.Vector3Equals(p, q)
 }
 
@@ -683,8 +683,8 @@ pub fn quaternion_transform(q Quaternion, mat Matrix) Quaternion {
 	return C.QuaternionTransform(q, mat)
 }
 
-fn C.QuaternionEquals(p Quaternion, q Quaternion) int
+fn C.QuaternionEquals(p Quaternion, q Quaternion) i32
 [inline]
-pub fn quaternion_equals(p Quaternion, q Quaternion) int {
+pub fn quaternion_equals(p Quaternion, q Quaternion) i32 {
 	return C.QuaternionEquals(p, q)
 }

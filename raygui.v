@@ -390,15 +390,15 @@ pub fn gui_fade(alpha f32) {
 	C.GuiFade(alpha)
 }
 
-fn C.GuiSetState(state int)
+fn C.GuiSetState(state i32)
 [inline]
-pub fn gui_set_state(state int) {
+pub fn gui_set_state(state i32) {
 	C.GuiSetState(state)
 }
 
-fn C.GuiGetState() int
+fn C.GuiGetState() i32
 [inline]
-pub fn gui_get_state() int {
+pub fn gui_get_state() i32 {
 	return C.GuiGetState()
 }
 
@@ -414,15 +414,15 @@ pub fn gui_get_font() Font {
 	return C.GuiGetFont()
 }
 
-fn C.GuiSetStyle(control int, property int, value int)
+fn C.GuiSetStyle(control i32, property i32, value i32)
 [inline]
-pub fn gui_set_style(control int, property int, value int){
+pub fn gui_set_style(control i32, property i32, value i32){
 	C.GuiSetStyle(control, property, value)
 }
 
-fn C.GuiGetStyle(control int, property int) int
+fn C.GuiGetStyle(control i32, property i32) i32
 [inline]
-pub fn gui_get_style(control int, property int) int {
+pub fn gui_get_style(control i32, property i32) i32 {
 	return C.GuiGetStyle(control, property)
 }
 
@@ -450,9 +450,9 @@ pub fn gui_panel(bounds Rectangle, text &i8) {
 	C.GuiPanel(bounds, text)
 }
 
-fn C.GuiTabBar(bounds Rectangle, text &&u8, count int, active &int) int
+fn C.GuiTabBar(bounds Rectangle, text &&u8, count i32, active &i32) i32
 [inline]
-pub fn gui_tab_bar(bounds Rectangle, text &&u8, count int, active &int) int {
+pub fn gui_tab_bar(bounds Rectangle, text &&u8, count i32, active &i32) i32 {
 	return C.GuiTabBar(bounds, text, count, active)
 }
 
@@ -486,9 +486,9 @@ pub fn gui_toggle(bounds Rectangle, text &i8, active bool) bool {
 	return C.GuiToggle(bounds, text, active)
 }
 
-fn C.GuiToggleGroup(bounds Rectangle, text &i8, active int) int
+fn C.GuiToggleGroup(bounds Rectangle, text &i8, active i32) i32
 [inline]
-pub fn gui_toggle_group(bounds Rectangle, text &i8, active int) int {
+pub fn gui_toggle_group(bounds Rectangle, text &i8, active i32) i32 {
 	return C.GuiToggleGroup(bounds, text, active)
 }
 
@@ -498,9 +498,9 @@ pub fn gui_check_box(bounds Rectangle, text &i8, checked bool) bool {
 	return C.GuiCheckBox(bounds, text, checked) 
 }
 
-fn C.GuiComboBox(bounds Rectangle, text &i8, active int) int
+fn C.GuiComboBox(bounds Rectangle, text &i8, active i32) i32
 [inline]
-pub fn gui_combo_box(bounds Rectangle, text &i8, active int) int {
+pub fn gui_combo_box(bounds Rectangle, text &i8, active i32) i32 {
 	return C.GuiComboBox(bounds, text, active)
 }
 
@@ -558,33 +558,33 @@ pub fn gui_dummy_rec(bounds Rectangle, text &i8) {
 	C.GuiDummyRec(bounds, text)
 }
 
-fn C.GuiGrid(bounds Rectangle, text &i8, spacing f32, subdivs int) Vector2
+fn C.GuiGrid(bounds Rectangle, text &i8, spacing f32, subdivs i32) Vector2
 [inline]
-pub fn gui_grid(bounds Rectangle, text &i8, spacing f32, subdivs int) Vector2 {
+pub fn gui_grid(bounds Rectangle, text &i8, spacing f32, subdivs i32) Vector2 {
 	return C.GuiGrid(bounds, text, spacing, subdivs)
 }
 
-fn C.GuiListView(bounds Rectangle, text &i8, scrollindex &int, active int) int
+fn C.GuiListView(bounds Rectangle, text &i8, scrollindex &i32, active i32) i32
 [inline]
-pub fn gui_list_view(bounds Rectangle, text &i8, scrollindex &int, active int) int {
+pub fn gui_list_view(bounds Rectangle, text &i8, scrollindex &i32, active i32) i32 {
 	return C.GuiListView(bounds, text, scrollindex, active)
 }
 
-fn C.GuiListViewEx(bounds Rectangle, text &&u8, count int, focus &int, scrollindex &int, active int) int
+fn C.GuiListViewEx(bounds Rectangle, text &&u8, count i32, focus &i32, scrollindex &i32, active i32) i32
 [inline]
-pub fn gui_list_view_ex(bounds Rectangle, text &&u8, count int, focus &int, scrollindex &int, active int) int {
+pub fn gui_list_view_ex(bounds Rectangle, text &&u8, count i32, focus &i32, scrollindex &i32, active i32) i32 {
 	return C.GuiListViewEx(bounds, text, count, focus, scrollindex, active)
 }
 
-fn C.GuiMessageBox(bounds Rectangle, title &i8, message &i8, buttons &i8) int
+fn C.GuiMessageBox(bounds Rectangle, title &i8, message &i8, buttons &i8) i32
 [inline]
-pub fn gui_message_box(bounds Rectangle, title &i8, message &i8, buttons &i8) int {
+pub fn gui_message_box(bounds Rectangle, title &i8, message &i8, buttons &i8) i32 {
 	return C.GuiMessageBox(bounds, title, message, buttons)
 }
 
-fn C.GuiTextInputBox(bounds Rectangle, title &i8, message &i8, buttons &i8, text &i8, textmaxsize int, secretviewactive &int) int
+fn C.GuiTextInputBox(bounds Rectangle, title &i8, message &i8, buttons &i8, text &i8, textmaxsize i32, secretviewactive &i32) i32
 [inline]
-pub fn gui_text_input_box(bounds Rectangle, title &i8, message &i8, buttons &i8, text &i8, textmaxsize int, secretviewactive &int) int {
+pub fn gui_text_input_box(bounds Rectangle, title &i8, message &i8, buttons &i8, text &i8, textmaxsize i32, secretviewactive &i32) i32 {
 	return C.GuiTextInputBox(bounds, title, message, buttons, text, textmaxsize, secretviewactive)
 }
 
@@ -641,15 +641,15 @@ pub fn gui_set_tooltip(tooltip &i8) {
 	C.GuiSetTooltip(tooltip)
 }
 
-fn C.GuiIconText(iconid int, text &i8) &i8
+fn C.GuiIconText(iconid i32, text &i8) &i8
 [inline]
-pub fn gui_icon_text(iconid int, text &i8) &i8 {
+pub fn gui_icon_text(iconid i32, text &i8) &i8 {
 	return C.GuiIconText(iconid, text)
 }
 
-fn C.GuiSetIconScale(scale int)
+fn C.GuiSetIconScale(scale i32)
 [inline]
-pub fn gui_set_icon_scale(scale int) {
+pub fn gui_set_icon_scale(scale i32) {
 	C.GuiSetIconScale(scale)
 }
 
@@ -665,9 +665,9 @@ pub fn gui_load_icons(filename &i8, loadiconsname bool) &&u8 {
 	return C.GuiLoadIcons(filename, loadiconsname)
 }
 
-fn C.GuiDrawIcon(iconid int, posx int, posy int, pixelsize int, color Color)
+fn C.GuiDrawIcon(iconid i32, posx i32, posy i32, pixelsize i32, color Color)
 [inline]
-pub fn gui_draw_icon(iconid int, posx int, posy int, pixelsize int, color Color) {
+pub fn gui_draw_icon(iconid i32, posx i32, posy i32, pixelsize i32, color Color) {
 	C.GuiDrawIcon(iconid, posx, posy, pixelsize, color)
 }
 

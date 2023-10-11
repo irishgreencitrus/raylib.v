@@ -95,7 +95,7 @@ fn draw_sphere_basic(color r.Color) {
 	rings := 16
 	slices := 16
 
-	r.rl_check_render_batch_limit((rings + 2)*slices*6)
+	r.rl_check_render_batch_limit(i32((rings + 2)*slices*6))
 
 	r.rl_begin(r.rl_triangles)
 	r.rl_color4ub(color.r, color.g, color.b, color.a)
