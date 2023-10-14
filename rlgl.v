@@ -220,7 +220,7 @@ pub const (
 [typedef]
 struct C.rlVertexBuffer {
 pub mut:
-	elementCount int
+	elementCount i32
 	vertices     &f32
 	texcoords    &f32
 	colors       &u8
@@ -234,9 +234,9 @@ pub type RlVertexBuffer = C.rlVertexBuffer
 [typedef]
 struct C.rlDrawCall {
 pub mut:
-	mode            int
-	vertexCount     int
-	vertexAlignment int
+	mode            i32
+	vertexCount     i32
+	vertexAlignment i32
 	textureId       u32
 }
 
@@ -245,19 +245,19 @@ pub type RlDrawCall = C.rlDrawCall
 [typedef]
 struct C.rlRenderBatch {
 pub mut:
-	bufferCount   int
-	currentBuffer int
+	bufferCount   i32
+	currentBuffer i32
 	vertexBuffer  &RlVertexBuffer
 	draws         &RlDrawCall
-	drawCounter   int
+	drawCounter   i32
 	currentDepth  f32
 }
 
 pub type RlRenderBatch = C.rlRenderBatch
 
-fn C.rlMatrixMode(mode int)
+fn C.rlMatrixMode(mode i32)
 [inline]
-pub fn rl_matrix_mode(mode int) {
+pub fn rl_matrix_mode(mode i32) {
 	C.rlMatrixMode(mode)
 }
 
@@ -315,15 +315,15 @@ pub fn rl_ortho(left f64, right f64, bottom f64, top f64, znear f64, zfar f64) {
 	C.rlOrtho(left, right, bottom, top, znear, zfar)
 }
 
-fn C.rlViewport(x int, y int, width int, height int)
+fn C.rlViewport(x i32, y i32, width i32, height i32)
 [inline]
-pub fn rl_viewport(x int, y int, width int, height int) {
+pub fn rl_viewport(x i32, y i32, width i32, height i32) {
 	C.rlViewport(x, y, width, height)
 }
 
-fn C.rlBegin(mode int)
+fn C.rlBegin(mode i32)
 [inline]
-pub fn rl_begin(mode int) {
+pub fn rl_begin(mode i32) {
 	C.rlBegin(mode)
 }
 
@@ -333,9 +333,9 @@ pub fn rl_end() {
 	C.rlEnd()
 }
 
-fn C.rlVertex2i(x int, y int)
+fn C.rlVertex2i(x i32, y i32)
 [inline]
-pub fn rl_vertex2i(x int, y int) {
+pub fn rl_vertex2i(x i32, y i32) {
 	C.rlVertex2i(x, y)
 }
 
@@ -423,9 +423,9 @@ pub fn rl_disable_vertex_attribute(index u32) {
 	C.rlDisableVertexAttribute(index)
 }
 
-fn C.rlActiveTextureSlot(slot int)
+fn C.rlActiveTextureSlot(slot i32)
 [inline]
-pub fn rl_active_texture_slot(slot int) {
+pub fn rl_active_texture_slot(slot i32) {
 	C.rlActiveTextureSlot(slot)
 }
 
@@ -453,15 +453,15 @@ pub fn rl_disable_texture_cubemap() {
 	C.rlDisableTextureCubemap()
 }
 
-fn C.rlTextureParameters(id u32, param int, value int)
+fn C.rlTextureParameters(id u32, param i32, value i32)
 [inline]
-pub fn rl_texture_parameters(id u32, param int, value int) {
+pub fn rl_texture_parameters(id u32, param i32, value i32) {
 	C.rlTextureParameters(id, param, value)
 }
 
-fn C.rlCubemapParameters(id u32, param int, value int)
+fn C.rlCubemapParameters(id u32, param i32, value i32)
 [inline]
-pub fn rl_cubemap_parameters(id u32, param int, value int) {
+pub fn rl_cubemap_parameters(id u32, param i32, value i32) {
 	C.rlCubemapParameters(id, param, value)
 }
 
@@ -489,9 +489,9 @@ pub fn rl_disable_frame_buffer() {
 	C.rlDisableFramebuffer()
 }
 
-fn C.rlActiveDrawBuffers(count int)
+fn C.rlActiveDrawBuffers(count i32)
 [inline]
-pub fn rl_active_draw_buffers(count int) {
+pub fn rl_active_draw_buffers(count i32) {
 	C.rlActiveDrawBuffers(count)
 }
 
@@ -543,9 +543,9 @@ pub fn rl_disable_backface_culling() {
 	C.rlDisableBackfaceCulling()
 }
 
-fn C.rlSetCullFace(mode int)
+fn C.rlSetCullFace(mode i32)
 [inline]
-pub fn rl_set_cull_face(mode int) {
+pub fn rl_set_cull_face(mode i32) {
 	C.rlSetCullFace(mode)
 }
 
@@ -561,9 +561,9 @@ pub fn rl_disable_scissor_test() {
 	C.rlDisableScissorTest()
 }
 
-fn C.rlScissor(x int, y int, width int, height int)
+fn C.rlScissor(x i32, y i32, width i32, height i32)
 [inline]
-pub fn rl_scissor(x int, y int, width int, height int) {
+pub fn rl_scissor(x i32, y i32, width i32, height i32) {
 	C.rlScissor(x, y, width, height)
 }
 
@@ -633,27 +633,27 @@ pub fn rl_check_errors() {
 	C.rlCheckErrors()
 }
 
-fn C.rlSetBlendMode(mode int)
+fn C.rlSetBlendMode(mode i32)
 [inline]
-pub fn rl_set_blend_mode(mode int) {
+pub fn rl_set_blend_mode(mode i32) {
 	C.rlSetBlendMode(mode)
 }
 
-fn C.rlSetBlendFactors(glsrcfactor int, gldstfactor int, glequation int)
+fn C.rlSetBlendFactors(glsrcfactor i32, gldstfactor i32, glequation i32)
 [inline]
-pub fn rl_set_blend_factors(glsrcfactor int, gldstfactor int, glequation int) {
+pub fn rl_set_blend_factors(glsrcfactor i32, gldstfactor i32, glequation i32) {
 	C.rlSetBlendFactors(glsrcfactor, gldstfactor, glequation)
 }
 
-fn C.rlSetBlendFactorsSeparate(glsrcrgb int, gldstrgb int, glsrcalpha int, gldstalpha int, gleqrgb int, gleqalpha int)
+fn C.rlSetBlendFactorsSeparate(glsrcrgb i32, gldstrgb i32, glsrcalpha i32, gldstalpha i32, gleqrgb i32, gleqalpha i32)
 [inline]
-pub fn rl_set_blend_factors_separate(glsrcrgb int, gldstrgb int, glsrcalpha int, gldstalpha int, gleqrgb int, gleqalpha int) {
+pub fn rl_set_blend_factors_separate(glsrcrgb i32, gldstrgb i32, glsrcalpha i32, gldstalpha i32, gleqrgb i32, gleqalpha i32) {
 	C.rlSetBlendFactorsSeparate(glsrcrgb, gldstrgb, glsrcalpha, gldstalpha, gleqrgb, gleqalpha)
 }
 
-fn C.rlglInit(width int, height int)
+fn C.rlglInit(width i32, height i32)
 [inline]
-pub fn rlgl_init(width int, height int) {
+pub fn rlgl_init(width i32, height i32) {
 	C.rlglInit(width, height)
 }
 
@@ -669,33 +669,33 @@ pub fn rl_load_extensions(loader voidptr) {
 	C.rlLoadExtensions(loader)
 }
 
-fn C.rlGetVersion() int
+fn C.rlGetVersion() i32
 [inline]
-pub fn rl_get_version() int {
+pub fn rl_get_version() i32 {
 	return C.rlGetVersion()
 }
 
-fn C.rlSetFramebufferWidth(width int)
+fn C.rlSetFramebufferWidth(width i32)
 [inline]
-pub fn rl_set_framebuffer_width(width int) {
+pub fn rl_set_framebuffer_width(width i32) {
 	C.rlSetFramebufferWidth(width)
 }
 
-fn C.rlGetFramebufferWidth() int
+fn C.rlGetFramebufferWidth() i32
 [inline]
-pub fn rl_get_framebuffer_width() int {
+pub fn rl_get_framebuffer_width() i32 {
 	return C.rlGetFramebufferWidth()
 }
 
-fn C.rlSetFramebufferHeight(height int)
+fn C.rlSetFramebufferHeight(height i32)
 [inline]
-pub fn rl_set_framebuffer_height(height int) {
+pub fn rl_set_framebuffer_height(height i32) {
 	C.rlSetFramebufferHeight(height)
 }
 
-fn C.rlGetFramebufferHeight() int
+fn C.rlGetFramebufferHeight() i32
 [inline]
-pub fn rl_get_framebuffer_height() int {
+pub fn rl_get_framebuffer_height() i32 {
 	return C.rlGetFramebufferHeight()
 }
 
@@ -711,15 +711,15 @@ pub fn rl_get_shader_id_default() u32 {
 	return C.rlGetShaderIdDefault()
 }
 
-fn C.rlGetShaderLocsDefault() &int
+fn C.rlGetShaderLocsDefault() &i32
 [inline]
-pub fn rl_get_shader_locs_default() &int {
+pub fn rl_get_shader_locs_default() &i32 {
 	return C.rlGetShaderLocsDefault()
 }
 
-fn C.rlLoadRenderBatch(numbuffers int, bufferelements int) RlRenderBatch
+fn C.rlLoadRenderBatch(numbuffers i32, bufferelements i32) RlRenderBatch
 [inline]
-pub fn rl_load_render_batch(numbuffers int, bufferelements int) RlRenderBatch {
+pub fn rl_load_render_batch(numbuffers i32, bufferelements i32) RlRenderBatch {
 	return C.rlLoadRenderBatch(numbuffers, bufferelements)
 }
 
@@ -747,9 +747,9 @@ pub fn rl_draw_render_batch_active() {
 	C.rlDrawRenderBatchActive()
 }
 
-fn C.rlCheckRenderBatchLimit(vcount int) bool
+fn C.rlCheckRenderBatchLimit(vcount i32) bool
 [inline]
-pub fn rl_check_render_batch_limit(vcount int) bool {
+pub fn rl_check_render_batch_limit(vcount i32) bool {
 	return C.rlCheckRenderBatchLimit(vcount)
 }
 
@@ -765,27 +765,27 @@ pub fn rl_load_vertex_array() u32 {
 	return C.rlLoadVertexArray()
 }
 
-fn C.rlLoadVertexBuffer(buffer voidptr, size int, dynamic bool) u32
+fn C.rlLoadVertexBuffer(buffer voidptr, size i32, dynamic bool) u32
 [inline]
-pub fn rl_load_vertex_buffer(buffer voidptr, size int, dynamic bool) u32 {
+pub fn rl_load_vertex_buffer(buffer voidptr, size i32, dynamic bool) u32 {
 	return C.rlLoadVertexBuffer(buffer, size, dynamic)
 }
 
-fn C.rlLoadVertexBufferElement(buffer voidptr, size int, dynamic bool) u32
+fn C.rlLoadVertexBufferElement(buffer voidptr, size i32, dynamic bool) u32
 [inline]
-pub fn rl_load_vertex_buffer_element(buffer voidptr, size int, dynamic bool) u32 {
+pub fn rl_load_vertex_buffer_element(buffer voidptr, size i32, dynamic bool) u32 {
 	return C.rlLoadVertexBufferElement(buffer, size, dynamic)
 }
 
-fn C.rlUpdateVertexBuffer(bufferid u32, data voidptr, datasize int, offset int)
+fn C.rlUpdateVertexBuffer(bufferid u32, data voidptr, datasize i32, offset i32)
 [inline]
-pub fn rl_update_vertex_buffer(bufferid u32, data voidptr, datasize int, offset int) {
+pub fn rl_update_vertex_buffer(bufferid u32, data voidptr, datasize i32, offset i32) {
 	C.rlUpdateVertexBuffer(bufferid, data, datasize, offset)
 }
 
-fn C.rlUpdateVertexBufferElements(id u32, data voidptr, datasize int, offset int)
+fn C.rlUpdateVertexBufferElements(id u32, data voidptr, datasize i32, offset i32)
 [inline]
-pub fn rl_update_vertex_buffer_elements(id u32, data voidptr, datasize int, offset int) {
+pub fn rl_update_vertex_buffer_elements(id u32, data voidptr, datasize i32, offset i32) {
 	C.rlUpdateVertexBufferElements(id, data, datasize, offset)
 }
 
@@ -801,75 +801,75 @@ pub fn rl_unload_vertex_buffer(vboid u32) {
 	C.rlUnloadVertexBuffer(vboid)
 }
 
-fn C.rlSetVertexAttribute(index u32, compsize int, type_ int, normalized bool, stride int, pointer voidptr)
+fn C.rlSetVertexAttribute(index u32, compsize i32, type_ i32, normalized bool, stride i32, pointer voidptr)
 [inline]
-pub fn rl_set_vertex_attribute(index u32, compsize int, type_ int, normalized bool, stride int, pointer voidptr) {
+pub fn rl_set_vertex_attribute(index u32, compsize i32, type_ i32, normalized bool, stride i32, pointer voidptr) {
 	C.rlSetVertexAttribute(index, compsize, type_, normalized, stride, pointer)
 }
 
-fn C.rlSetVertexAttributeDivisor(index u32, divisor int)
+fn C.rlSetVertexAttributeDivisor(index u32, divisor i32)
 [inline]
-pub fn rl_set_vertex_attribute_divisor(index u32, divisor int) {
+pub fn rl_set_vertex_attribute_divisor(index u32, divisor i32) {
 	C.rlSetVertexAttributeDivisor(index, divisor)
 }
 
-fn C.rlSetVertexAttributeDefault(locindex int, value voidptr, attribtype int, count int)
+fn C.rlSetVertexAttributeDefault(locindex i32, value voidptr, attribtype i32, count i32)
 [inline]
-pub fn rl_set_vertex_attribute_default(locindex int, value voidptr, attribtype int, count int) {
+pub fn rl_set_vertex_attribute_default(locindex i32, value voidptr, attribtype i32, count i32) {
 	C.rlSetVertexAttributeDefault(locindex, value, attribtype, count)
 }
 
-fn C.rlDrawVertexArray(offset int, count int)
+fn C.rlDrawVertexArray(offset i32, count i32)
 [inline]
-pub fn rl_draw_vertex_array(offset int, count int) {
+pub fn rl_draw_vertex_array(offset i32, count i32) {
 	C.rlDrawVertexArray(offset, count)
 }
 
-fn C.rlDrawVertexArrayElements(offset int, count int, buffer voidptr)
+fn C.rlDrawVertexArrayElements(offset i32, count i32, buffer voidptr)
 [inline]
-pub fn rl_draw_vertex_array_elements(offset int, count int, buffer voidptr) {
+pub fn rl_draw_vertex_array_elements(offset i32, count i32, buffer voidptr) {
 	C.rlDrawVertexArrayElements(offset, count, buffer)
 }
 
-fn C.rlDrawVertexArrayInstanced(offset int, count int, instances int)
+fn C.rlDrawVertexArrayInstanced(offset i32, count i32, instances i32)
 [inline]
-pub fn rl_draw_vertex_array_instanced(offset int, count int, instances int) {
+pub fn rl_draw_vertex_array_instanced(offset i32, count i32, instances i32) {
 	C.rlDrawVertexArrayInstanced(offset, count, instances)
 }
 
-fn C.rlDrawVertexArrayElementsInstanced(offset int, count int, buffer voidptr, instances int)
+fn C.rlDrawVertexArrayElementsInstanced(offset i32, count i32, buffer voidptr, instances i32)
 [inline]
-pub fn rl_draw_vertex_array_elements_instanced(offset int, count int, buffer voidptr, instances int) {
+pub fn rl_draw_vertex_array_elements_instanced(offset i32, count i32, buffer voidptr, instances i32) {
 	C.rlDrawVertexArrayElementsInstanced(offset, count, buffer, instances)
 }
 
-fn C.rlLoadTexture(data voidptr, width int, height int, format int, mipmapcount int) u32
+fn C.rlLoadTexture(data voidptr, width i32, height i32, format i32, mipmapcount i32) u32
 [inline]
-pub fn rl_load_texture(data voidptr, width int, height int, format int, mipmapcount int) u32 {
+pub fn rl_load_texture(data voidptr, width i32, height i32, format i32, mipmapcount i32) u32 {
 	return C.rlLoadTexture(data, width, height, format, mipmapcount)
 }
 
-fn C.rlLoadTextureDepth(width int, height int, userenderbuffer bool) u32
+fn C.rlLoadTextureDepth(width i32, height i32, userenderbuffer bool) u32
 [inline]
-pub fn rl_load_texture_depth(width int, height int, userenderbuffer bool) u32 {
+pub fn rl_load_texture_depth(width i32, height i32, userenderbuffer bool) u32 {
 	return C.rlLoadTextureDepth(width, height, userenderbuffer)
 }
 
-fn C.rlLoadTextureCubemap(data voidptr, size int, format int) u32
+fn C.rlLoadTextureCubemap(data voidptr, size i32, format i32) u32
 [inline]
-pub fn rl_load_texture_cubemap(data voidptr, size int, format int) u32 {
+pub fn rl_load_texture_cubemap(data voidptr, size i32, format i32) u32 {
 	return C.rlLoadTextureCubemap(data, size, format)
 }
 
-fn C.rlUpdateTexture(id u32, offsetx int, offsety int, width int, height int, format int, data voidptr)
+fn C.rlUpdateTexture(id u32, offsetx i32, offsety i32, width i32, height i32, format i32, data voidptr)
 [inline]
-pub fn rl_update_texture(id u32, offsetx int, offsety int, width int, height int, format int, data voidptr) {
+pub fn rl_update_texture(id u32, offsetx i32, offsety i32, width i32, height i32, format i32, data voidptr) {
 	C.rlUpdateTexture(id, offsetx, offsety, width, height, format, data)
 }
 
-fn C.rlGetGlTextureFormats(format int, glinternalformat &u32, glformat &u32, gltype &u32)
+fn C.rlGetGlTextureFormats(format i32, glinternalformat &u32, glformat &u32, gltype &u32)
 [inline]
-pub fn rl_get_gl_texture_formats(format int, glinternalformat &u32, glformat &u32, gltype &u32) {
+pub fn rl_get_gl_texture_formats(format i32, glinternalformat &u32, glformat &u32, gltype &u32) {
 	C.rlGetGlTextureFormats(format, glinternalformat, glformat, gltype)
 }
 
@@ -885,33 +885,33 @@ pub fn rl_unload_texture(id u32) {
 	C.rlUnloadTexture(id)
 }
 
-fn C.rlGenTextureMipmaps(id u32, width int, height int, format int, mipmaps &int)
+fn C.rlGenTextureMipmaps(id u32, width i32, height i32, format i32, mipmaps &i32)
 [inline]
-pub fn rl_gen_texture_mipmaps(id u32, width int, height int, format int, mipmaps &int) {
+pub fn rl_gen_texture_mipmaps(id u32, width i32, height i32, format i32, mipmaps &i32) {
 	C.rlGenTextureMipmaps(id, width, height, format, mipmaps)
 }
 
-fn C.rlReadTexturePixels(id u32, width int, height int, format int) voidptr
+fn C.rlReadTexturePixels(id u32, width i32, height i32, format i32) voidptr
 [inline]
-pub fn rl_read_texture_pixels(id u32, width int, height int, format int) voidptr {
+pub fn rl_read_texture_pixels(id u32, width i32, height i32, format i32) voidptr {
 	return C.rlReadTexturePixels(id, width, height, format)
 }
 
-fn C.rlReadScreenPixels(width int, height int) &u8
+fn C.rlReadScreenPixels(width i32, height i32) &u8
 [inline]
-pub fn rl_read_screen_pixels(width int, height int) &u8 {
+pub fn rl_read_screen_pixels(width i32, height i32) &u8 {
 	return C.rlReadScreenPixels(width, height)
 }
 
-fn C.rlLoadFramebuffer(width int, height int) u32
+fn C.rlLoadFramebuffer(width i32, height i32) u32
 [inline]
-pub fn rl_load_frame_buffer(width int, height int) u32 {
+pub fn rl_load_frame_buffer(width i32, height i32) u32 {
 	return C.rlLoadFramebuffer(width, height)
 }
 
-fn C.rlFramebufferAttach(fboid u32, texid u32, attachtype int, textype int, miplevel int)
+fn C.rlFramebufferAttach(fboid u32, texid u32, attachtype i32, textype i32, miplevel i32)
 [inline]
-pub fn rl_frame_buffer_attach(fboid u32, texid u32, attachtype int, textype int, miplevel int) {
+pub fn rl_frame_buffer_attach(fboid u32, texid u32, attachtype i32, textype i32, miplevel i32) {
 	C.rlFramebufferAttach(fboid, texid, attachtype, textype, miplevel)
 }
 
@@ -927,9 +927,9 @@ pub fn rl_load_shader_code(vscode &i8, fscode &i8) u32 {
 	return C.rlLoadShaderCode(vscode, fscode)
 }
 
-fn C.rlCompileShader(shadercode &i8, type_ int) u32
+fn C.rlCompileShader(shadercode &i8, type_ i32) u32
 [inline]
-pub fn rl_compile_shader(shadercode &i8, type_ int) u32 {
+pub fn rl_compile_shader(shadercode &i8, type_ i32) u32 {
 	return C.rlCompileShader(shadercode, type_)
 }
 
@@ -945,39 +945,39 @@ pub fn rl_unload_shader_program(id u32) {
 	C.rlUnloadShaderProgram(id)
 }
 
-fn C.rlGetLocationUniform(shaderid u32, uniformname &i8) int
+fn C.rlGetLocationUniform(shaderid u32, uniformname &i8) i32
 [inline]
-pub fn rl_get_location_uniform(shaderid u32, uniformname &i8) int {
+pub fn rl_get_location_uniform(shaderid u32, uniformname &i8) i32 {
 	return C.rlGetLocationUniform(shaderid, uniformname)
 }
 
-fn C.rlGetLocationAttrib(shaderid u32, attribname &i8) int
+fn C.rlGetLocationAttrib(shaderid u32, attribname &i8) i32
 [inline]
-pub fn rl_get_location_attrib(shaderid u32, attribname &i8) int {
+pub fn rl_get_location_attrib(shaderid u32, attribname &i8) i32 {
 	return C.rlGetLocationAttrib(shaderid, attribname)
 }
 
-fn C.rlSetUniform(locindex int, value voidptr, uniformtype int, count int)
+fn C.rlSetUniform(locindex i32, value voidptr, uniformtype i32, count i32)
 [inline]
-pub fn rl_set_uniform(locindex int, value voidptr, uniformtype int, count int) {
+pub fn rl_set_uniform(locindex i32, value voidptr, uniformtype i32, count i32) {
 	C.rlSetUniform(locindex, value, uniformtype, count)
 }
 
-fn C.rlSetUniformMatrix(locindex int, mat Matrix)
+fn C.rlSetUniformMatrix(locindex i32, mat Matrix)
 [inline]
-pub fn rl_set_uniform_matrix(locindex int, mat Matrix) {
+pub fn rl_set_uniform_matrix(locindex i32, mat Matrix) {
 	C.rlSetUniformMatrix(locindex, mat)
 }
 
-fn C.rlSetUniformSampler(locindex int, textureid u32)
+fn C.rlSetUniformSampler(locindex i32, textureid u32)
 [inline]
-pub fn rl_set_uniform_sampler(locindex int, textureid u32) {
+pub fn rl_set_uniform_sampler(locindex i32, textureid u32) {
 	C.rlSetUniformSampler(locindex, textureid)
 }
 
-fn C.rlSetShader(id u32, locs &int)
+fn C.rlSetShader(id u32, locs &i32)
 [inline]
-pub fn rl_set_shader(id u32, locs &int) {
+pub fn rl_set_shader(id u32, locs &i32) {
 	C.rlSetShader(id, locs)
 }
 
@@ -993,9 +993,9 @@ pub fn rl_compute_shader_dispatch(groupx u32, groupy u32, groupz u32) {
 	C.rlComputeShaderDispatch(groupx, groupy, groupz)
 }
 
-fn C.rlLoadShaderBuffer(size u32, data voidptr, usagehint int) u32
+fn C.rlLoadShaderBuffer(size u32, data voidptr, usagehint i32) u32
 [inline]
-pub fn rl_load_shader_buffer(size u32, data voidptr, usagehint int) u32 {
+pub fn rl_load_shader_buffer(size u32, data voidptr, usagehint i32) u32 {
 	return C.rlLoadShaderBuffer(size, data, usagehint)
 }
 
@@ -1037,7 +1037,7 @@ pub fn rl_get_shader_buffer_size(id u32) u32 {
 
 fn C.rlBindImageTexture(id u32, index u32, format u32, readonly bool)
 [inline]
-pub fn rl_bind_image_texture(id u32, index u32, format int, readonly bool) {
+pub fn rl_bind_image_texture(id u32, index u32, format i32, readonly bool) {
 	C.rlBindImageTexture(id, index, format, readonly)
 }
 
@@ -1059,15 +1059,15 @@ pub fn rl_get_matrix_transform() Matrix {
 	return C.rlGetMatrixTransform()
 }
 
-fn C.rlGetMatrixProjectionStereo(eye int) Matrix
+fn C.rlGetMatrixProjectionStereo(eye i32) Matrix
 [inline]
-pub fn rl_get_matrix_projection_stereo(eye int) Matrix {
+pub fn rl_get_matrix_projection_stereo(eye i32) Matrix {
 	return C.rlGetMatrixProjectionStereo(eye)
 }
 
-fn C.rlGetMatrixViewOffsetStereo(eye int) Matrix
+fn C.rlGetMatrixViewOffsetStereo(eye i32) Matrix
 [inline]
-pub fn rl_get_matrix_view_offset_stereo(eye int) Matrix {
+pub fn rl_get_matrix_view_offset_stereo(eye i32) Matrix {
 	return C.rlGetMatrixViewOffsetStereo(eye)
 }
 

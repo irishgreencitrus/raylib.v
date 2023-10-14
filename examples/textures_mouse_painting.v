@@ -85,7 +85,7 @@ fn main() {
 			|| (r.get_gesture_detected() == r.gesture_drag) {
 			r.begin_texture_mode(target)
 			if mousepos.y > 50.0 {
-				r.draw_circle(int(mousepos.x), int(mousepos.y), f32(brush_size), colors[color_selected])
+				r.draw_circle(i32(mousepos.x), i32(mousepos.y), f32(brush_size), colors[color_selected])
 			}
 			r.end_texture_mode()
 		}
@@ -98,7 +98,7 @@ fn main() {
 			mouse_was_pressed = true
 			r.begin_texture_mode(target)
 			if mousepos.y > 50.0 {
-				r.draw_circle(int(mousepos.x), int(mousepos.y), f32(brush_size), colors[0])
+				r.draw_circle(i32(mousepos.x), i32(mousepos.y), f32(brush_size), colors[0])
 			}
 			r.end_texture_mode()
 		} else if r.is_mouse_button_released(r.mouse_button_right) && mouse_was_pressed {
@@ -136,7 +136,7 @@ fn main() {
 			r.Vector2{0.0, 0.0}, r.white)
 		if mousepos.y > 50.0 {
 			if r.is_mouse_button_down(r.mouse_button_right) {
-				r.draw_circle_lines(int(mousepos.x), int(mousepos.y), f32(brush_size),
+				r.draw_circle_lines(i32(mousepos.x), i32(mousepos.y), f32(brush_size),
 					r.gray)
 			} else {
 				r.draw_circle(r.get_mouse_x(), r.get_mouse_y(), f32(brush_size), colors[color_selected])
