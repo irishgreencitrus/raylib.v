@@ -2,10 +2,15 @@ module raylibv
 
 #preinclude "@VMODROOT/include/pre.h"
 #include "@VMODROOT/raylib/src/raylib.h"
+#include "@VMODROOT/raylib/src/rlgl.h"
+#include "@VMODROOT/raylib/src/raymath.h"
+#include "@VMODROOT/raygui/src/raygui.h"
 
 #flag -DPLATFORM_DESKTOP
+#flag -DRAYGUI_IMPLEMENTATION
 
 #flag -I @VMODROOT/raylib/src/external/glfw/include
+#flag -I @VMODROOT/raylib/src/
 
 #flag @VMODROOT/raylib/src/raudio.o
 #flag @VMODROOT/raylib/src/rcore.o
@@ -35,6 +40,7 @@ $if windows {
 	#flag -lgdi32
 	#flag -lopengl32
 } $else $if linux {
+	#flag -D_GNU_SOURCE
 	#flag -lGL
 	#flag -lm
 	#flag -lpthread

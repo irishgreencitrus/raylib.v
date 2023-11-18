@@ -16,12 +16,12 @@ fn main() {
 	}
 	mut cube_position := r.Vector3{0.0, 0.0, 0.0}
 
-	r.set_camera_mode(camera, r.camera_free)
+	r.disable_cursor()
 
 	r.set_target_fps(60)
 
 	for !r.window_should_close() {
-		r.update_camera(&camera)
+		r.update_camera(&camera, r.camera_free)
 
 		if r.is_key_down(r.key_z) {
 			camera.target = r.Vector3{0.0, 0.0, 0.0}
