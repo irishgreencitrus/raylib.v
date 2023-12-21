@@ -29,6 +29,11 @@ $if tinyc {
     #flag -I @VMODROOT/include/tcc
 }
 
+$if prod {
+	#flag -O3
+	#flag -flto
+}
+
 $if windows {
 	#flag -I @VMODROOT/raylib/src/external/glfw/deps/mingw
 	#flag -lwinmm
@@ -40,11 +45,13 @@ $if windows {
 	#flag -lpthread
 	#flag -ldl
 	#flag -lrt
+	#flag -D_GNU_SOURCE
 	$if wayland ? {
 		#flag -lwayland-client
 		#flag -lwayland-cursor
 		#flag -lwayland-egl
 		#flag -lxkbcommon
+		#flag -DUSE_WAYLAND_DISPLAY
 	} $else {
 		#flag -lX11
 	}
