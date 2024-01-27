@@ -15,8 +15,8 @@ module raylibv
 #flag @VMODROOT/raylib/src/rtextures.o
 #flag @VMODROOT/raylib/src/utils.o
 #flag @VMODROOT/raylib/src/rglfw.o
-$if tinyc && !accept_broken? {
-    $compile_error('
+$if tinyc && !accept_broken ? {
+	$compile_error('
 		TCC is unsupported.
 		Please switch to GCC or Clang in order to compile programs for raylib.v
 		If you can help with changing this, please go to https://github.com/irishgreencitrus/raylib.v
@@ -26,7 +26,7 @@ $if tinyc && !accept_broken? {
 	')
 }
 $if tinyc {
-    #flag -I @VMODROOT/include/tcc
+	#flag -I @VMODROOT/include/tcc
 }
 
 $if windows {
@@ -48,7 +48,7 @@ $if windows {
 	} $else {
 		#flag -lX11
 	}
-} $else $if	freebsd || openbsd || netbsd || dragonfly {
+} $else $if freebsd || openbsd || netbsd || dragonfly {
 	#flag -lGL
 	#flag -lrt
 	#flag -ldl
@@ -66,7 +66,7 @@ $if windows {
 	#flag -framework Cocoa
 	#flag -framework IOKit
 } $else {
-	$compile_error("Unsupported OS")
+	$compile_error('Unsupported OS')
 }
 
 $if windows && prod && !debug {

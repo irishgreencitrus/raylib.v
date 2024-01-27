@@ -1,9 +1,7 @@
 import irishgreencitrus.raylibv as r
 
-const (
-	screen_width  = 800
-	screen_height = 450
-)
+const screen_width = 800
+const screen_height = 450
 
 fn main() {
 	r.init_window(screen_width, screen_height, 'raylib.v [core] example - 3D camera free'.str)

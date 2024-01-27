@@ -1,9 +1,7 @@
 import irishgreencitrus.raylibv as r
 
-const (
-	screen_width  = 800
-	screen_height = 450
-)
+const screen_width = 800
+const screen_height = 450
 
 fn main() {
 	r.init_window(screen_width, screen_height, 'raylib.v [shapes] example - bouncing ball'.str)
@@ -23,12 +21,12 @@ fn main() {
 		if !paused {
 			ball_position.x += ball_speed.x
 			ball_position.y += ball_speed.y
-			if (ball_position.x >= (r.get_screen_width() - ball_radius))
-				|| (ball_position.x <= ball_radius) {
+			if ball_position.x >= (r.get_screen_width() - ball_radius)
+				|| ball_position.x <= ball_radius {
 				ball_speed.x *= -1.0
 			}
-			if (ball_position.y >= (r.get_screen_height() - ball_radius))
-				|| (ball_position.y <= ball_radius) {
+			if ball_position.y >= (r.get_screen_height() - ball_radius)
+				|| ball_position.y <= ball_radius {
 				ball_speed.y *= -1.0
 			}
 		} else {
@@ -42,7 +40,7 @@ fn main() {
 		r.draw_text('Press SPACE to PAUSE BALL MOVEMENT'.str, 10, r.get_screen_height() - 25,
 			20, r.lightgray)
 
-		if paused && (((frame_counter / 30) % 2) == 1) {
+		if paused && ((frame_counter / 30) % 2) == 1 {
 			r.draw_text('PAUSED'.str, 350, 200, 30, r.gray)
 		}
 		r.draw_fps(10, 10)
