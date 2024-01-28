@@ -2,11 +2,9 @@ module main
 
 import irishgreencitrus.raylibv as r
 
-const (
-	max_colors_count = 23
-	screen_width     = 800
-	screen_height    = 450
-)
+const max_colors_count = 23
+const screen_width = 800
+const screen_height = 450
 
 fn main() {
 	r.init_window(screen_width, screen_height, 'raylib.v [textures] example - mouse painting'.str)
@@ -62,7 +60,7 @@ fn main() {
 				color_mouse_hover = -1
 			}
 		}
-		if (color_mouse_hover >= 0) && r.is_mouse_button_pressed(r.mouse_button_left) {
+		if color_mouse_hover >= 0 && r.is_mouse_button_pressed(r.mouse_button_left) {
 			color_selected = color_mouse_hover
 			previous_color_selected = color_selected
 		}
@@ -81,8 +79,7 @@ fn main() {
 			r.end_texture_mode()
 		}
 
-		if r.is_mouse_button_down(r.mouse_button_left)
-			|| (r.get_gesture_detected() == r.gesture_drag) {
+		if r.is_mouse_button_down(r.mouse_button_left) || r.get_gesture_detected() == r.gesture_drag {
 			r.begin_texture_mode(target)
 			if mousepos.y > 50.0 {
 				r.draw_circle(int(mousepos.x), int(mousepos.y), f32(brush_size), colors[color_selected])
